@@ -1,0 +1,143 @@
+##IAR Ninja build file
+
+
+#Rules
+rule COMPILER_XCL
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\XclFileGenerator.exe" $xclcommand -f "$rspfile_name"
+  description = IAR_NEW_TOOL+++COMPILER_XCL+++$in
+  rspfile = $rspfile_name
+  rspfile_content = $flags
+
+rule INDEXER
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\SourceIndexer.exe" $flags
+  depfile = $out.dep
+  description = IAR_NEW_TOOL+++INDEXER+++$out
+
+rule MAKEBROWSE
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\makeBrowseData.exe" $flags
+  description = IAR_NEW_TOOL+++MAKEBROWSE+++$out
+
+rule PDBLINK
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\PbdLink.exe" $flags
+  description = IAR_NEW_TOOL+++PDBLINK+++$out
+
+
+
+#Build steps
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\clocks.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\clocks.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\display.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\display.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\init.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\init.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\interrupts.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\interrupts.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\main.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\main.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\motor_control.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\motor_control.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\ports.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\ports.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\switch.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\switch.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\Users\rache\Desktop\BareMetal_IoTCar\system.c -xcl_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.xcl -macro_file C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\bin\icc430.exe" -u8_wrapper "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\iarconvert.exe"
+  flags = C$:\Users\rache\Desktop\BareMetal_IoTCar\system.c -lC C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --debug -D__MSP430FR5739__ -e --double=32 --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X --data_model=small -On --multiplier=32 --hw_workaround=CPU40 --code_model=large --predef_macros C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.tmp
+  rspfile_name = C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.xcl.rsp
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\clocks.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\display.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\init.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\interrupts.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\main.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\motor_control.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\ports.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\switch.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.pbi : INDEXER C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.xcl |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\system.c
+  flags = -out=C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.pbi -f C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.xcl
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08.pbw : MAKEBROWSE C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08.pbd
+  flags = "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08.pbd" -output "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08.pbw"
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part0.pbi : PDBLINK C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.pbi |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.pbi $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.pbi
+  flags = -M "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part0.pbi" C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\clocks.pbi C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\display.pbi C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\init.pbi
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part1.pbi : PDBLINK C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.pbi |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.pbi $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.pbi
+  flags = -M "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part1.pbi" C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\interrupts.pbi C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\IOT.pbi C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\main.pbi
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part2.pbi : PDBLINK C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.pbi |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.pbi $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.pbi
+  flags = -M "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part2.pbi" C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\motor_control.pbi C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\ports.pbi C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\switch.pbi
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part3.pbi : PDBLINK C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.pbi
+  flags = -M "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part3.pbi" C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\system.pbi
+
+build C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08.pbd : PDBLINK C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part0.pbi |  $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part1.pbi $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part2.pbi $
+C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part3.pbi
+  flags = -M "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08.pbd" "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part0.pbi" "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part1.pbi" "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part2.pbi" "C$:\Users\rache\Desktop\BareMetal_IoTCar\Debug\BrowseInfo\Project$ 08_part3.pbi"
+

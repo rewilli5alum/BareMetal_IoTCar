@@ -1,0 +1,282 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# Copyright 1996-2023 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\switch.c
+#    Command line  =  
+#        -f C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\switch.r43.rsp
+#        (C:\Users\rache\Desktop\BareMetal_IoTCar\switch.c -lC
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=32 --hw_workaround=CPU40
+#        --code_model=large) --dependencies=n
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\switch.r43.iar_deps
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\switch.lst
+#    Object file   =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\switch.r43
+#
+###############################################################################
+
+C:\Users\rache\Desktop\BareMetal_IoTCar\switch.c
+      1          //******************************************************************************
+      2          //      Title: switch.c 
+      3          //      Description: This file contains code for handling switches 
+      4          //      Rachel Williams
+      5          //      September 2015
+      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      7          //******************************************************************************
+      8          
+      9          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x220
+   \   union <unnamed> _A_PBIN_L
+   \                     _A_PBIN_L:
+   \   000000                DS8 2
+     10          #include  "functions.h"
+     11          #include "macros.h"
+     12          
+     13          //******************************************************************************
+     14          //      Function name: Switches_Process
+     15          //      Description: Handles cases for SW1 and SW2  
+     16          //      Global variables: NONE
+     17          //      Local variables: NONE
+     18          //      Return: VOID
+     19          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     20          void Switches_Process(void){
+   \                     Switches_Process:
+     21            if (!(P4IN & SW1)){ 
+   \   000000   D2B32102     BIT.B   #0x1, &0x221
+   \   000004   1A2C         JC      ??Switches_Process_1
+     22              // menu type is a variable that determines which menu is called 
+     23              switch(menu_type){
+   \   000006   1F42....     MOV.W   &menu_type, R15
+   \   00000A   1F83         SUB.W   #0x1, R15
+   \   00000C   0524         JEQ     ??Switches_Process_2
+   \   00000E   1F83         SUB.W   #0x1, R15
+   \   000010   0924         JEQ     ??Switches_Process_3
+   \   000012   1F83         SUB.W   #0x1, R15
+   \   000014   0D24         JEQ     ??Switches_Process_4
+   \   000016   113C         JMP     ??Switches_Process_1
+     24              case POSIT_1: 
+     25                Five_Msec_Delay(POSIT_1);
+   \                     ??Switches_Process_2:
+   \   000018   1C43         MOV.W   #0x1, R12
+   \   00001A   ........     CALLA   #Five_Msec_Delay
+     26                IOT_config();
+   \   00001E   ........     CALLA   #IOT_config
+     27                break; 
+   \   000022   0B3C         JMP     ??Switches_Process_1
+     28              case POSIT_2:
+     29                Five_Msec_Delay(POSIT_1);
+   \                     ??Switches_Process_3:
+   \   000024   1C43         MOV.W   #0x1, R12
+   \   000026   ........     CALLA   #Five_Msec_Delay
+     30                Listen();   
+   \   00002A   ........     CALLA   #Listen
+     31                break; 
+   \   00002E   053C         JMP     ??Switches_Process_1
+     32              case POSIT_3: 
+     33                Five_Msec_Delay(POSIT_1); 
+   \                     ??Switches_Process_4:
+   \   000030   1C43         MOV.W   #0x1, R12
+   \   000032   ........     CALLA   #Five_Msec_Delay
+     34                Reconnect(); 
+   \   000036   ........     CALLA   #Reconnect
+     35                break; 
+     36              default: break; 
+     37              }
+     38            }
+     39            if (!(P4IN & SW2)) {
+   \                     ??Switches_Process_1:
+   \   00003A   E2B32102     BIT.B   #0x2, &0x221
+   \   00003E   6F2C         JC      ??Switches_Process_5
+     40              lcd_BIG_mid(); 
+   \   000040   ........     CALLA   #lcd_BIG_mid
+     41              Out_To_LCD(" ",POSIT_0," ",POSIT_0," ",POSIT_0," ",POSIT_0);
+   \   000044   0312         PUSH.W  #0x0
+   \   000046   3012....     PUSH.W  #`?<Constant " ">`
+   \   00004A   0312         PUSH.W  #0x0
+   \   00004C   3012....     PUSH.W  #`?<Constant " ">`
+   \   000050   0F43         MOV.W   #0x0, R15
+   \   000052   3E40....     MOV.W   #`?<Constant " ">`, R14
+   \   000056   0D43         MOV.W   #0x0, R13
+   \   000058   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   00005C   ........     CALLA   #Out_To_LCD
+     42              Display_Process(); 
+   \   000060   ........     CALLA   #Display_Process
+     43              Five_Msec_Delay(20); 
+   \   000064   3C401400     MOV.W   #0x14, R12
+   \   000068   ........     CALLA   #Five_Msec_Delay
+   \   00006C   A1000800     ADDA    #0x8, SP
+     44              
+     45              while((P4IN & SW1)){
+   \                     ??Switches_Process_0:
+   \   000070   D2B32102     BIT.B   #0x1, &0x221
+   \   000074   5428         JNC     ??Switches_Process_5
+     46                lcd_BIG_mid();
+   \   000076   ........     CALLA   #lcd_BIG_mid
+     47                
+     48                // going through ADC process to update thumb wheel 
+     49                ADC_Process();ADC_Process();ADC_Process();
+   \   00007A   ........     CALLA   #ADC_Process
+   \   00007E   ........     CALLA   #ADC_Process
+   \   000082   ........     CALLA   #ADC_Process
+     50                
+     51                if(ADC_Thumb <= (TEN23/POSIT_3)){
+   \   000086   B2905601.... CMP.W   #0x156, &ADC_Thumb
+   \   00008C   152C         JC      ??Switches_Process_6
+     52                  // displaying menu item 
+     53                  Out_To_LCD("Reset",POSIT_2,"IOT NCSU",POSIT_1,"Listen",POSIT_2," ",POSIT_0); 
+   \   00008E   0312         PUSH.W  #0x0
+   \   000090   3012....     PUSH.W  #`?<Constant " ">`
+   \   000094   2312         PUSH.W  #0x2
+   \   000096   3012....     PUSH.W  #`?<Constant "Listen">`
+   \   00009A   1F43         MOV.W   #0x1, R15
+   \   00009C   3E40....     MOV.W   #`?<Constant "IOT NCSU">`, R14
+   \   0000A0   2D43         MOV.W   #0x2, R13
+   \   0000A2   3C40....     MOV.W   #`?<Constant "Reset">`, R12
+   \   0000A6   ........     CALLA   #Out_To_LCD
+     54                  Display_Process();
+   \   0000AA   ........     CALLA   #Display_Process
+     55                  menu_type = POSIT_1;
+   \   0000AE   9243....     MOV.W   #0x1, &menu_type
+   \   0000B2   A1000800     ADDA    #0x8, SP
+   \   0000B6   DC3F         JMP     ??Switches_Process_0
+     56                } else if(ADC_Thumb <= ((TEN23/POSIT_3)*POSIT_2)){
+   \                     ??Switches_Process_6:
+   \   0000B8   B290AB02.... CMP.W   #0x2ab, &ADC_Thumb
+   \   0000BE   152C         JC      ??Switches_Process_7
+     57                  Out_To_LCD("IOT Ncsu",POSIT_1,"LISTEN",POSIT_2,"Reset",POSIT_2," ",POSIT_0); 
+   \   0000C0   0312         PUSH.W  #0x0
+   \   0000C2   3012....     PUSH.W  #`?<Constant " ">`
+   \   0000C6   2312         PUSH.W  #0x2
+   \   0000C8   3012....     PUSH.W  #`?<Constant "Reset">`
+   \   0000CC   2F43         MOV.W   #0x2, R15
+   \   0000CE   3E40....     MOV.W   #`?<Constant "LISTEN">`, R14
+   \   0000D2   1D43         MOV.W   #0x1, R13
+   \   0000D4   3C40....     MOV.W   #`?<Constant "IOT Ncsu">`, R12
+   \   0000D8   ........     CALLA   #Out_To_LCD
+     58                  Display_Process(); 
+   \   0000DC   ........     CALLA   #Display_Process
+     59                  menu_type = POSIT_2;
+   \   0000E0   A243....     MOV.W   #0x2, &menu_type
+   \   0000E4   A1000800     ADDA    #0x8, SP
+   \   0000E8   C33F         JMP     ??Switches_Process_0
+     60                } else if(ADC_Thumb <= ((TEN23/POSIT_3)*POSIT_3)){
+   \                     ??Switches_Process_7:
+   \   0000EA   B2900004.... CMP.W   #0x400, &ADC_Thumb
+   \   0000F0   BF2F         JC      ??Switches_Process_0
+     61                  Out_To_LCD("Listen",POSIT_2,"RESET",POSIT_2,"IOT Ncsu",POSIT_1," ",POSIT_0); 
+   \   0000F2   0312         PUSH.W  #0x0
+   \   0000F4   3012....     PUSH.W  #`?<Constant " ">`
+   \   0000F8   1312         PUSH.W  #0x1
+   \   0000FA   3012....     PUSH.W  #`?<Constant "IOT Ncsu">`
+   \   0000FE   2F43         MOV.W   #0x2, R15
+   \   000100   3E40....     MOV.W   #`?<Constant "RESET">`, R14
+   \   000104   2D43         MOV.W   #0x2, R13
+   \   000106   3C40....     MOV.W   #`?<Constant "Listen">`, R12
+   \   00010A   ........     CALLA   #Out_To_LCD
+     62                  Display_Process(); 
+   \   00010E   ........     CALLA   #Display_Process
+     63                  menu_type = POSIT_3;
+   \   000112   B2400300.... MOV.W   #0x3, &menu_type
+   \   000118   A1000800     ADDA    #0x8, SP
+   \   00011C   A93F         JMP     ??Switches_Process_0
+     64                }
+     65              }  
+     66            }
+     67          }     
+   \                     ??Switches_Process_5:
+   \   00011E   1001         RETA
+   \   000120                REQUIRE _A_PBIN_L
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant " ">`:
+   \   000000   2000         DC8 " "
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Reset">`:
+   \   000000   526573657400 DC8 "Reset"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "IOT NCSU">`:
+   \   000000   494F54204E43 DC8 "IOT NCSU"
+   \            535500      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Listen">`:
+   \   000000   4C697374656E DC8 "Listen"
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "IOT Ncsu">`:
+   \   000000   494F54204E63 DC8 "IOT Ncsu"
+   \            737500      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "LISTEN">`:
+   \   000000   4C495354454E DC8 "LISTEN"
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "RESET">`:
+   \   000000   524553455400 DC8 "RESET"
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     12   Switches_Process
+        4   -> ADC_Process
+       12   -> Display_Process
+       12   -> Five_Msec_Delay
+        4   -> Five_Msec_Delay
+        4   -> IOT_config
+        4   -> Listen
+       12   -> Out_To_LCD
+        4   -> Reconnect
+        4   -> lcd_BIG_mid
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ?<Constant " ">
+       9  ?<Constant "IOT NCSU">
+       9  ?<Constant "IOT Ncsu">
+       7  ?<Constant "LISTEN">
+       7  ?<Constant "Listen">
+       6  ?<Constant "RESET">
+       6  ?<Constant "Reset">
+     288  Switches_Process
+       2  _A_PBIN_L
+
+ 
+ 288 bytes in segment CODE
+   2 bytes in segment DATA16_AN
+  46 bytes in segment DATA16_C
+ 
+ 288 bytes of CODE  memory
+  46 bytes of CONST memory
+   0 bytes of DATA  memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: none

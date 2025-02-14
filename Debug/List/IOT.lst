@@ -1,0 +1,2979 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# Copyright 1996-2023 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
+#    Command line  =  
+#        -f C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\IOT.r43.rsp
+#        (C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c -lC
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=32 --hw_workaround=CPU40
+#        --code_model=large) --dependencies=n
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\IOT.r43.iar_deps
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\IOT.lst
+#    Object file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\IOT.r43
+#
+###############################################################################
+
+C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
+      1          //******************************************************************************
+      2          //      Title: IOT.c
+      3          //      Description: This file handles interaction with IOT 
+      4          //      Rachel Williams
+      5          //      November 2015
+      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      7          //******************************************************************************
+      8          
+      9          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x220
+   \   union <unnamed> _A_PBIN_L
+   \                     _A_PBIN_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x322
+   \   union <unnamed> _A_PJOUT_L
+   \                     _A_PJOUT_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5ce
+   \   union <unnamed> _A_UCA0TXBUF_L
+   \                     _A_UCA0TXBUF_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5ee
+   \   union <unnamed> _A_UCA1TXBUF_L
+   \                     _A_UCA1TXBUF_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5fa
+   \   union <unnamed> _A_UCA1IE_L
+   \                     _A_UCA1IE_L:
+   \   000000                DS8 2
+     10          #include  "functions.h"
+     11          #include "macros.h"
+     12          
+     13          //******************************************************************************
+     14          //      Function name: IOT_config
+     15          //      Description: Configuration for IOT device on ncsu wifi  
+     16          //      Global variables: IOT_Char_Rx[]
+     17          //      Local variables: i,j,k 
+     18          //      Return: VOID
+     19          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     20          void IOT_config(void){
+   \                     IOT_config:
+   \   000000   0A12         PUSH.W  R10
+     21            int i = POSIT_0;
+   \   000002   0A43         MOV.W   #0x0, R10
+     22            
+     23            Out_To_LCD(" ",POSIT_0," ",POSIT_0," ",POSIT_0," ",POSIT_0);
+   \   000004   0312         PUSH.W  #0x0
+   \   000006   3012....     PUSH.W  #`?<Constant " ">`
+   \   00000A   0312         PUSH.W  #0x0
+   \   00000C   3012....     PUSH.W  #`?<Constant " ">`
+   \   000010   0F43         MOV.W   #0x0, R15
+   \   000012   3E40....     MOV.W   #`?<Constant " ">`, R14
+   \   000016   0D43         MOV.W   #0x0, R13
+   \   000018   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   00001C   ........     CALLA   #Out_To_LCD
+     24            lcd_4line();
+   \   000020   ........     CALLA   #lcd_4line
+     25            Display_Process(); 
+   \   000024   ........     CALLA   #Display_Process
+     26            Five_Msec_Delay(20); 
+   \   000028   3C401400     MOV.W   #0x14, R12
+   \   00002C   ........     CALLA   #Five_Msec_Delay
+     27            
+     28            //----------Set SSID---------------------------------------------------------- 
+     29            Set_SSID(); 
+   \   000030   ........     CALLA   #Set_SSID
+   \   000034   A1000800     ADDA    #0x8, SP
+     30            
+     31            // Waiting until "OK" is received 
+     32            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_0:
+   \   000038   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   00003E   0224         JEQ     ??IOT_config_12
+   \   000040   1A53         ADD.W   #0x1, R10
+   \   000042   FA3F         JMP     ??IOT_config_0
+     33            i = POSIT_0;
+   \                     ??IOT_config_12:
+   \   000044   0A43         MOV.W   #0x0, R10
+     34            X_Seconds_Delay(POSIT_1);
+   \   000046   1C43         MOV.W   #0x1, R12
+   \   000048   ........     CALLA   #X_Seconds_Delay
+     35            
+     36            //----------Get SSID----------------------------------------------------------
+     37            Get_SSID(); 
+   \   00004C   ........     CALLA   #Get_SSID
+     38            
+     39            // Waiting until "OK" is received 
+     40            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_1:
+   \   000050   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   000056   0224         JEQ     ??IOT_config_13
+   \   000058   1A53         ADD.W   #0x1, R10
+   \   00005A   FA3F         JMP     ??IOT_config_1
+     41            i = POSIT_0;
+   \                     ??IOT_config_13:
+   \   00005C   0A43         MOV.W   #0x0, R10
+     42            X_Seconds_Delay(POSIT_1);
+   \   00005E   1C43         MOV.W   #0x1, R12
+   \   000060   ........     CALLA   #X_Seconds_Delay
+     43              
+     44            //----------Set host name----------------------------------------------------- 
+     45            Set_HostN(); 
+   \   000064   ........     CALLA   #Set_HostN
+     46            
+     47            // Waiting until "OK" is received 
+     48            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_2:
+   \   000068   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   00006E   0224         JEQ     ??IOT_config_14
+   \   000070   1A53         ADD.W   #0x1, R10
+   \   000072   FA3F         JMP     ??IOT_config_2
+     49            i = POSIT_0;
+   \                     ??IOT_config_14:
+   \   000074   0A43         MOV.W   #0x0, R10
+     50            X_Seconds_Delay(POSIT_1);
+   \   000076   1C43         MOV.W   #0x1, R12
+   \   000078   ........     CALLA   #X_Seconds_Delay
+     51            
+     52            //----------Get host name-----------------------------------------------------
+     53            Get_HostN(); 
+   \   00007C   ........     CALLA   #Get_HostN
+     54            
+     55            // Waiting until "OK" is received 
+     56            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_3:
+   \   000080   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   000086   0224         JEQ     ??IOT_config_15
+   \   000088   1A53         ADD.W   #0x1, R10
+   \   00008A   FA3F         JMP     ??IOT_config_3
+     57            i = POSIT_0;
+   \                     ??IOT_config_15:
+   \   00008C   0A43         MOV.W   #0x0, R10
+     58            X_Seconds_Delay(POSIT_1);
+   \   00008E   1C43         MOV.W   #0x1, R12
+   \   000090   ........     CALLA   #X_Seconds_Delay
+     59            
+     60            //----------Set network privacy mode------------------------------------------
+     61            Set_NetP(); 
+   \   000094   ........     CALLA   #Set_NetP
+     62            
+     63            // Waiting until "OK" is received 
+     64            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_4:
+   \   000098   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   00009E   0224         JEQ     ??IOT_config_16
+   \   0000A0   1A53         ADD.W   #0x1, R10
+   \   0000A2   FA3F         JMP     ??IOT_config_4
+     65            i = POSIT_0;
+   \                     ??IOT_config_16:
+   \   0000A4   0A43         MOV.W   #0x0, R10
+     66            X_Seconds_Delay(POSIT_1);
+   \   0000A6   1C43         MOV.W   #0x1, R12
+   \   0000A8   ........     CALLA   #X_Seconds_Delay
+     67            
+     68            //----------Get network privacy mode------------------------------------------ 
+     69            Get_NetP(); 
+   \   0000AC   ........     CALLA   #Get_NetP
+     70            
+     71            // Waiting until "OK" is received 
+     72            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_5:
+   \   0000B0   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   0000B6   0224         JEQ     ??IOT_config_17
+   \   0000B8   1A53         ADD.W   #0x1, R10
+   \   0000BA   FA3F         JMP     ??IOT_config_5
+     73            i = POSIT_0;
+   \                     ??IOT_config_17:
+   \   0000BC   0A43         MOV.W   #0x0, R10
+     74            X_Seconds_Delay(POSIT_1);
+   \   0000BE   1C43         MOV.W   #0x1, R12
+   \   0000C0   ........     CALLA   #X_Seconds_Delay
+     75            
+     76            //----------Set network mode-------------------------------------------------- 
+     77            Set_NetM(); 
+   \   0000C4   ........     CALLA   #Set_NetM
+     78            
+     79            // Waiting until "OK" is received 
+     80            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_6:
+   \   0000C8   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   0000CE   0224         JEQ     ??IOT_config_18
+   \   0000D0   1A53         ADD.W   #0x1, R10
+   \   0000D2   FA3F         JMP     ??IOT_config_6
+     81            i = POSIT_0;
+   \                     ??IOT_config_18:
+   \   0000D4   0A43         MOV.W   #0x0, R10
+     82            X_Seconds_Delay(POSIT_1); 
+   \   0000D6   1C43         MOV.W   #0x1, R12
+   \   0000D8   ........     CALLA   #X_Seconds_Delay
+     83            
+     84            //----------Get network mode-------------------------------------------------- 
+     85            Get_NetM(); 
+   \   0000DC   ........     CALLA   #Get_NetM
+     86            
+     87            // Waiting until "OK" is received 
+     88            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_7:
+   \   0000E0   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   0000E6   0224         JEQ     ??IOT_config_19
+   \   0000E8   1A53         ADD.W   #0x1, R10
+   \   0000EA   FA3F         JMP     ??IOT_config_7
+     89            i = POSIT_0;
+   \                     ??IOT_config_19:
+   \   0000EC   0A43         MOV.W   #0x0, R10
+     90            X_Seconds_Delay(POSIT_1); 
+   \   0000EE   1C43         MOV.W   #0x1, R12
+   \   0000F0   ........     CALLA   #X_Seconds_Delay
+     91            
+     92            //----------Save settings on flash module-------------------------------------
+     93            Save_All(); 
+   \   0000F4   ........     CALLA   #Save_All
+     94            
+     95            // Waiting until "OK" is received 
+     96            while(IOT_Char_Rx[i] != 'O')i++;
+   \                     ??IOT_config_8:
+   \   0000F8   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   0000FE   0224         JEQ     ??IOT_config_20
+   \   000100   1A53         ADD.W   #0x1, R10
+   \   000102   FA3F         JMP     ??IOT_config_8
+     97            i = POSIT_0;
+   \                     ??IOT_config_20:
+   \   000104   0A43         MOV.W   #0x0, R10
+     98            X_Seconds_Delay(POSIT_1); 
+   \   000106   1C43         MOV.W   #0x1, R12
+   \   000108   ........     CALLA   #X_Seconds_Delay
+     99            
+    100            //----------Reset module------------------------------------------------------
+    101            Reconnect(); 
+   \   00010C   ........     CALLA   #Reconnect
+    102            
+    103            //---------Ping lab computer-------------------------------------------------- 
+    104            Ping(); 
+   \   000110   ........     CALLA   #Ping
+    105            cpu_rx_ring_wr = POSIT_0;
+   \   000114   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    106            i = POSIT_0;
+   \   000118   0A43         MOV.W   #0x0, R10
+    107            X_Seconds_Delay(POSIT_1);
+   \   00011A   1C43         MOV.W   #0x1, R12
+   \   00011C   ........     CALLA   #X_Seconds_Delay
+    108            
+    109            // Waiting until "OK" has been received 
+    110            i = POSIT_0;
+   \   000120   0A43         MOV.W   #0x0, R10
+    111            while(IOT_Char_Rx[i] != 'O')i++; 
+   \                     ??IOT_config_9:
+   \   000122   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   000128   0224         JEQ     ??IOT_config_21
+   \   00012A   1A53         ADD.W   #0x1, R10
+   \   00012C   FA3F         JMP     ??IOT_config_9
+    112            X_Seconds_Delay(POSIT_1);
+   \                     ??IOT_config_21:
+   \   00012E   1C43         MOV.W   #0x1, R12
+   \   000130   ........     CALLA   #X_Seconds_Delay
+    113            i = POSIT_0;
+   \   000134   0A43         MOV.W   #0x0, R10
+    114            
+    115            //---------Opening Socket-Server Connection-----------------------------------
+    116            Socket(); 
+   \   000136   ........     CALLA   #Socket
+    117            
+    118            // Waiting until "OK" has been received 
+    119            i = POSIT_0;
+   \   00013A   0A43         MOV.W   #0x0, R10
+    120            while(IOT_Char_Rx[i] != 'O')i++; 
+   \                     ??IOT_config_10:
+   \   00013C   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   000142   0224         JEQ     ??IOT_config_22
+   \   000144   1A53         ADD.W   #0x1, R10
+   \   000146   FA3F         JMP     ??IOT_config_10
+    121            X_Seconds_Delay(POSIT_1);
+   \                     ??IOT_config_22:
+   \   000148   1C43         MOV.W   #0x1, R12
+   \   00014A   ........     CALLA   #X_Seconds_Delay
+    122            i = POSIT_0;
+   \   00014E   0A43         MOV.W   #0x0, R10
+    123            
+    124            while(!i){
+   \                     ??IOT_config_11:
+   \   000150   0A93         CMP.W   #0x0, R10
+   \   000152   0720         JNE     ??IOT_config_23
+    125              if (!(P4IN & SW2)){
+   \   000154   E2B32102     BIT.B   #0x2, &0x221
+   \   000158   FB2F         JC      ??IOT_config_11
+    126                i = POSIT_1; 
+   \   00015A   1A43         MOV.W   #0x1, R10
+    127                Switches_Process(); 
+   \   00015C   ........     CALLA   #Switches_Process
+   \   000160   F73F         JMP     ??IOT_config_11
+    128              }
+    129            }
+    130          }
+   \                     ??IOT_config_23:
+   \   000162   3A41         POP.W   R10
+   \   000164   1001         RETA
+   \   000166                REQUIRE _A_PBIN_L
+    131          
+    132          //******************************************************************************
+    133          //      Function name: Listen
+    134          //      Description: Configuration for IOT device on ncsu wifi  
+    135          //      Global variables: IOT_Char_Rx
+    136          //      Local variables: inc, i, j, time, t, result
+    137          //      Return: VOID
+    138          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+    139          void Listen(void){
+   \                     Listen:
+   \   000000   3B15         PUSHM.W #0x4, R11
+    140            int inc = POSIT_0;
+   \   000002   0A43         MOV.W   #0x0, R10
+    141            char j = '1'; 
+   \   000004   7B403100     MOV.B   #0x31, R11
+    142            unsigned int t; 
+    143            _Bool result = POSIT_0;
+   \   000008   4943         MOV.B   #0x0, R9
+    144            
+    145            while(!result){
+   \                     ??Listen_0:
+   \   00000A   4993         CMP.B   #0x0, R9
+   \   00000C   0820         JNE     ??Listen_12
+    146              // Checks if command sequence identifier is seen. If seen, returns 1, else 0
+    147              result = Check_Str();
+   \   00000E   ........     CALLA   #Check_Str
+   \   000012   0C93         CMP.W   #0x0, R12
+   \   000014   0224         JEQ     ??Listen_13
+   \   000016   5943         MOV.B   #0x1, R9
+   \   000018   F83F         JMP     ??Listen_0
+   \                     ??Listen_13:
+   \   00001A   4943         MOV.B   #0x0, R9
+   \   00001C   F63F         JMP     ??Listen_0
+    148            }
+    149            
+    150            Out_To_LCD("Waiting",POSIT_0,"For",POSIT_0,"Input...",POSIT_0," ",POSIT_0);
+   \                     ??Listen_12:
+   \   00001E   0312         PUSH.W  #0x0
+   \   000020   3012....     PUSH.W  #`?<Constant " ">`
+   \   000024   0312         PUSH.W  #0x0
+   \   000026   3012....     PUSH.W  #`?<Constant "Input...">`
+   \   00002A   0F43         MOV.W   #0x0, R15
+   \   00002C   3E40....     MOV.W   #`?<Constant "For">`, R14
+   \   000030   0D43         MOV.W   #0x0, R13
+   \   000032   3C40....     MOV.W   #`?<Constant "Waiting">`, R12
+   \   000036   ........     CALLA   #Out_To_LCD
+    151            Display_Process();
+   \   00003A   ........     CALLA   #Display_Process
+    152            Five_Msec_Delay(BIG_DELAY);
+   \   00003E   3C40F401     MOV.W   #0x1f4, R12
+   \   000042   ........     CALLA   #Five_Msec_Delay
+   \   000046   A1000800     ADDA    #0x8, SP
+    153            
+    154            // Continue to listen unless SW2 is pressed
+    155            while(P4IN & SW2){
+   \                     ??Listen_10:
+   \   00004A   E2B32102     BIT.B   #0x2, &0x221
+   \   00004E   2529         JNC     ??Listen_14
+    156              
+    157              // Turns off all motors (precaution) 
+    158              All_Off(); 
+   \   000050   ........     CALLA   #All_Off
+    159              
+    160              // re-initializing receive buffer
+    161              for(int j1=POSIT_0; j1<SMALL_RING_SIZE; j1++)IOT_Char_Rx[j1]='1';
+   \   000054   0F43         MOV.W   #0x0, R15
+   \                     ??Listen_1:
+   \   000056   3F902800     CMP.W   #0x28, R15
+   \   00005A   0534         JGE     ??Listen_15
+   \   00005C   FF403100.... MOV.B   #0x31, IOT_Char_Rx(R15)
+   \   000062   1F53         ADD.W   #0x1, R15
+   \   000064   F83F         JMP     ??Listen_1
+    162              
+    163              // default driving time for each command 
+    164              t = 65;
+   \                     ??Listen_15:
+   \   000066   38404100     MOV.W   #0x41, R8
+    165              
+    166              // re-initializing variables 
+    167              j = '1'; 
+   \   00006A   7B403100     MOV.B   #0x31, R11
+    168              inc = POSIT_0; 
+   \   00006E   0A43         MOV.W   #0x0, R10
+    169              
+    170              // going through array to find appropriate driving commands 
+    171              j = IOT_Char_Rx[inc];
+   \   000070   5B4A....     MOV.B   IOT_Char_Rx(R10), R11
+    172              
+    173              switch(j){
+   \   000074   4E4B         MOV.B   R11, R14
+   \   000076   7E804100     SUB.B   #0x41, R14
+   \   00007A   7424         JEQ     ??Listen_16
+   \   00007C   6E83         SUB.B   #0x2, R14
+   \   00007E   EA24         JEQ     ??Listen_17
+   \   000080   5E83         SUB.B   #0x1, R14
+   \   000082   4F24         JEQ     ??Listen_18
+   \   000084   5E83         SUB.B   #0x1, R14
+   \   000086   AC24         JEQ     ??Listen_19
+   \   000088   7E800C00     SUB.B   #0xc, R14
+   \   00008C   8C24         JEQ     ??Listen_20
+   \   00008E   6E83         SUB.B   #0x2, R14
+   \   000090   2724         JEQ     ??Listen_21
+   \   000092   6E82         SUB.B   #0x4, R14
+   \   000094   0424         JEQ     ??Listen_22
+   \   000096   7E800300     SUB.B   #0x3, R14
+   \   00009A   BF24         JEQ     ??Listen_23
+   \   00009C   F73C         JMP     ??Listen_11
+    174                
+    175              //---------Forward motion--------------------------------------------------- 
+    176              case 'W': 
+    177                Out_To_LCD(" ",POSIT_0,"Forward",POSIT_0," ",POSIT_0," ",POSIT_0);
+   \                     ??Listen_22:
+   \   00009E   0312         PUSH.W  #0x0
+   \   0000A0   3012....     PUSH.W  #`?<Constant " ">`
+   \   0000A4   0312         PUSH.W  #0x0
+   \   0000A6   3012....     PUSH.W  #`?<Constant " ">`
+   \   0000AA   0F43         MOV.W   #0x0, R15
+   \   0000AC   3E40....     MOV.W   #`?<Constant "Forward">`, R14
+   \   0000B0   0D43         MOV.W   #0x0, R13
+   \   0000B2   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   0000B6   ........     CALLA   #Out_To_LCD
+    178                Display_Process();
+   \   0000BA   ........     CALLA   #Display_Process
+    179                
+    180                // Reset timer for timer interrupt 
+    181                Time_Sequence = POSIT_0;
+   \   0000BE   8243....     MOV.W   #0x0, &Time_Sequence
+   \   0000C2   A1000800     ADDA    #0x8, SP
+    182                
+    183                // Count up to time unit 
+    184                while(Time_Sequence < t){  
+   \                     ??Listen_2:
+   \   0000C6   8298....     CMP.W   R8, &Time_Sequence
+   \   0000CA   052C         JC      ??Listen_24
+    185                  Left_Forward_On();
+   \   0000CC   ........     CALLA   #Left_Forward_On
+    186                  Right_Forward_On();
+   \   0000D0   ........     CALLA   #Right_Forward_On
+   \   0000D4   F83F         JMP     ??Listen_2
+    187                }
+    188                
+    189                // Turning off after reached time unit 
+    190                Left_Forward_Off();
+   \                     ??Listen_24:
+   \   0000D6   ........     CALLA   #Left_Forward_Off
+    191                Right_Forward_Off();
+   \   0000DA   ........     CALLA   #Right_Forward_Off
+    192                break; 
+   \   0000DE   D63C         JMP     ??Listen_11
+    193                
+    194              //---------Reverse motion--------------------------------------------------- 
+    195              case 'S':  
+    196                Out_To_LCD(" ",POSIT_0,"Reverse",POSIT_0," ",POSIT_0," ",POSIT_0);
+   \                     ??Listen_21:
+   \   0000E0   0312         PUSH.W  #0x0
+   \   0000E2   3012....     PUSH.W  #`?<Constant " ">`
+   \   0000E6   0312         PUSH.W  #0x0
+   \   0000E8   3012....     PUSH.W  #`?<Constant " ">`
+   \   0000EC   0F43         MOV.W   #0x0, R15
+   \   0000EE   3E40....     MOV.W   #`?<Constant "Reverse">`, R14
+   \   0000F2   0D43         MOV.W   #0x0, R13
+   \   0000F4   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   0000F8   ........     CALLA   #Out_To_LCD
+    197                Display_Process();
+   \   0000FC   ........     CALLA   #Display_Process
+    198                
+    199                // Reset timer for timer interrupt
+    200                Time_Sequence = POSIT_0;
+   \   000100   8243....     MOV.W   #0x0, &Time_Sequence
+   \   000104   A1000800     ADDA    #0x8, SP
+    201                
+    202                // Count up to time unit
+    203                while(Time_Sequence < t){
+   \                     ??Listen_3:
+   \   000108   8298....     CMP.W   R8, &Time_Sequence
+   \   00010C   052C         JC      ??Listen_25
+    204                  Left_Reverse_On();
+   \   00010E   ........     CALLA   #Left_Reverse_On
+    205                  Right_Reverse_On();
+   \   000112   ........     CALLA   #Right_Reverse_On
+   \   000116   F83F         JMP     ??Listen_3
+    206                }
+    207                
+    208                // Turning off after reached time unit
+    209                Left_Reverse_Off();
+   \                     ??Listen_25:
+   \   000118   ........     CALLA   #Left_Reverse_Off
+    210                Right_Reverse_Off();
+   \   00011C   ........     CALLA   #Right_Reverse_Off
+    211                break; 
+   \   000120   B53C         JMP     ??Listen_11
+    212                
+    213              //---------Clockwise motion-------------------------------------------------  
+    214              case 'D': 
+    215                Out_To_LCD(" ",POSIT_0,"CW",POSIT_0," ",POSIT_0," ",POSIT_0);
+   \                     ??Listen_18:
+   \   000122   0312         PUSH.W  #0x0
+   \   000124   3012....     PUSH.W  #`?<Constant " ">`
+   \   000128   0312         PUSH.W  #0x0
+   \   00012A   3012....     PUSH.W  #`?<Constant " ">`
+   \   00012E   0F43         MOV.W   #0x0, R15
+   \   000130   3E40....     MOV.W   #`?<Constant "CW">`, R14
+   \   000134   0D43         MOV.W   #0x0, R13
+   \   000136   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   00013A   ........     CALLA   #Out_To_LCD
+    216                Display_Process();
+   \   00013E   ........     CALLA   #Display_Process
+    217                
+    218                // Reset timer for timer interrupt
+    219                Time_Sequence = POSIT_0;
+   \   000142   8243....     MOV.W   #0x0, &Time_Sequence
+   \   000146   A1000800     ADDA    #0x8, SP
+    220                
+    221                // Count up to time unit
+    222                while(Time_Sequence < t){
+   \                     ??Listen_4:
+   \   00014A   8298....     CMP.W   R8, &Time_Sequence
+   \   00014E   052C         JC      ??Listen_26
+    223                  Left_Forward_On();
+   \   000150   ........     CALLA   #Left_Forward_On
+    224                  Right_Reverse_On();
+   \   000154   ........     CALLA   #Right_Reverse_On
+   \   000158   F83F         JMP     ??Listen_4
+    225                }
+    226                
+    227                // Turning off after reached time unit
+    228                Left_Forward_Off();
+   \                     ??Listen_26:
+   \   00015A   ........     CALLA   #Left_Forward_Off
+    229                Right_Reverse_Off();
+   \   00015E   ........     CALLA   #Right_Reverse_Off
+    230                break; 
+   \   000162   943C         JMP     ??Listen_11
+    231                
+    232              //---------Counterclockwise motion------------------------------------------        
+    233              case 'A':  
+    234                Out_To_LCD(" ",POSIT_0,"CCW",POSIT_0," ",POSIT_0," ",POSIT_0);
+   \                     ??Listen_16:
+   \   000164   0312         PUSH.W  #0x0
+   \   000166   3012....     PUSH.W  #`?<Constant " ">`
+   \   00016A   0312         PUSH.W  #0x0
+   \   00016C   3012....     PUSH.W  #`?<Constant " ">`
+   \   000170   0F43         MOV.W   #0x0, R15
+   \   000172   3E40....     MOV.W   #`?<Constant "CCW">`, R14
+   \   000176   0D43         MOV.W   #0x0, R13
+   \   000178   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   00017C   ........     CALLA   #Out_To_LCD
+    235                Display_Process();
+   \   000180   ........     CALLA   #Display_Process
+    236                
+    237                // Reset timer for timer interrupt
+    238                Time_Sequence = POSIT_0;
+   \   000184   8243....     MOV.W   #0x0, &Time_Sequence
+   \   000188   A1000800     ADDA    #0x8, SP
+    239                
+    240                // Count up to time unit
+    241                while(Time_Sequence < t){
+   \                     ??Listen_5:
+   \   00018C   8298....     CMP.W   R8, &Time_Sequence
+   \   000190   052C         JC      ??Listen_27
+    242                  Left_Reverse_On();
+   \   000192   ........     CALLA   #Left_Reverse_On
+    243                  Right_Forward_On();
+   \   000196   ........     CALLA   #Right_Forward_On
+   \   00019A   F83F         JMP     ??Listen_5
+    244                }
+    245                // Turning off after reached time unit
+    246                Left_Reverse_Off();
+   \                     ??Listen_27:
+   \   00019C   ........     CALLA   #Left_Reverse_Off
+    247                Right_Forward_Off();
+   \   0001A0   ........     CALLA   #Right_Forward_Off
+    248                break; 
+   \   0001A4   733C         JMP     ??Listen_11
+    249                
+    250              //--------Left Turn (forward)-----------------------------------------------       
+    251              case 'Q':  
+    252                Out_To_LCD(" ",POSIT_0,"Left",POSIT_0,"Turn",POSIT_0," ",POSIT_0);
+   \                     ??Listen_20:
+   \   0001A6   0312         PUSH.W  #0x0
+   \   0001A8   3012....     PUSH.W  #`?<Constant " ">`
+   \   0001AC   0312         PUSH.W  #0x0
+   \   0001AE   3012....     PUSH.W  #`?<Constant "Turn">`
+   \   0001B2   0F43         MOV.W   #0x0, R15
+   \   0001B4   3E40....     MOV.W   #`?<Constant "Left">`, R14
+   \   0001B8   0D43         MOV.W   #0x0, R13
+   \   0001BA   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   0001BE   ........     CALLA   #Out_To_LCD
+    253                Display_Process();
+   \   0001C2   ........     CALLA   #Display_Process
+    254                
+    255                // Reset timer for timer interrupt
+    256                Time_Sequence = POSIT_0;
+   \   0001C6   8243....     MOV.W   #0x0, &Time_Sequence
+   \   0001CA   A1000800     ADDA    #0x8, SP
+    257                
+    258                // Count up to time unit
+    259                while(Time_Sequence < t){
+   \                     ??Listen_6:
+   \   0001CE   8298....     CMP.W   R8, &Time_Sequence
+   \   0001D2   032C         JC      ??Listen_28
+    260                  Right_Forward_On();
+   \   0001D4   ........     CALLA   #Right_Forward_On
+   \   0001D8   FA3F         JMP     ??Listen_6
+    261                }
+    262                // Turning off after reached time unit
+    263                Right_Forward_Off();
+   \                     ??Listen_28:
+   \   0001DA   ........     CALLA   #Right_Forward_Off
+    264                break; 
+   \   0001DE   563C         JMP     ??Listen_11
+    265                
+    266              //---------Right Turn (forward)---------------------------------------------        
+    267              case 'E': 
+    268                Out_To_LCD(" ",POSIT_0,"Right",POSIT_0,"Turn",POSIT_0," ",POSIT_0);
+   \                     ??Listen_19:
+   \   0001E0   0312         PUSH.W  #0x0
+   \   0001E2   3012....     PUSH.W  #`?<Constant " ">`
+   \   0001E6   0312         PUSH.W  #0x0
+   \   0001E8   3012....     PUSH.W  #`?<Constant "Turn">`
+   \   0001EC   0F43         MOV.W   #0x0, R15
+   \   0001EE   3E40....     MOV.W   #`?<Constant "Right">`, R14
+   \   0001F2   0D43         MOV.W   #0x0, R13
+   \   0001F4   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   0001F8   ........     CALLA   #Out_To_LCD
+    269                Display_Process();
+   \   0001FC   ........     CALLA   #Display_Process
+    270                
+    271                // Reset timer for timer interrupt
+    272                Time_Sequence = POSIT_0;
+   \   000200   8243....     MOV.W   #0x0, &Time_Sequence
+   \   000204   A1000800     ADDA    #0x8, SP
+    273                
+    274                // Count up to time unit
+    275                while(Time_Sequence < t){
+   \                     ??Listen_7:
+   \   000208   8298....     CMP.W   R8, &Time_Sequence
+   \   00020C   032C         JC      ??Listen_29
+    276                  Left_Forward_On();
+   \   00020E   ........     CALLA   #Left_Forward_On
+   \   000212   FA3F         JMP     ??Listen_7
+    277                }
+    278                // Turning off after reached time unit
+    279                Left_Forward_Off();
+   \                     ??Listen_29:
+   \   000214   ........     CALLA   #Left_Forward_Off
+    280                break; 
+   \   000218   393C         JMP     ??Listen_11
+    281                
+    282              //---------Left Turn (backward)---------------------------------------------        
+    283              case 'Z': 
+    284                Out_To_LCD(" ",POSIT_0,"Left",POSIT_0,"Turn",POSIT_0,"R",POSIT_0);
+   \                     ??Listen_23:
+   \   00021A   0312         PUSH.W  #0x0
+   \   00021C   3012....     PUSH.W  #`?<Constant "R">`
+   \   000220   0312         PUSH.W  #0x0
+   \   000222   3012....     PUSH.W  #`?<Constant "Turn">`
+   \   000226   0F43         MOV.W   #0x0, R15
+   \   000228   3E40....     MOV.W   #`?<Constant "Left">`, R14
+   \   00022C   0D43         MOV.W   #0x0, R13
+   \   00022E   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   000232   ........     CALLA   #Out_To_LCD
+    285                Display_Process();
+   \   000236   ........     CALLA   #Display_Process
+    286                
+    287                // Reset timer for timer interrupt
+    288                Time_Sequence = POSIT_0;
+   \   00023A   8243....     MOV.W   #0x0, &Time_Sequence
+   \   00023E   A1000800     ADDA    #0x8, SP
+    289                
+    290                // Count up to time unit
+    291                while(Time_Sequence < t){
+   \                     ??Listen_8:
+   \   000242   8298....     CMP.W   R8, &Time_Sequence
+   \   000246   032C         JC      ??Listen_30
+    292                  Right_Reverse_On();
+   \   000248   ........     CALLA   #Right_Reverse_On
+   \   00024C   FA3F         JMP     ??Listen_8
+    293                }
+    294                // Turning off after reached time unit
+    295                Right_Reverse_Off();
+   \                     ??Listen_30:
+   \   00024E   ........     CALLA   #Right_Reverse_Off
+    296                break; 
+   \   000252   1C3C         JMP     ??Listen_11
+    297                
+    298              //---------Right Turn (backward)--------------------------------------------
+    299              case 'C': // Turn reverse right
+    300                Out_To_LCD(" ",POSIT_0,"Right",POSIT_0,"Turn",POSIT_0,"R",POSIT_0);
+   \                     ??Listen_17:
+   \   000254   0312         PUSH.W  #0x0
+   \   000256   3012....     PUSH.W  #`?<Constant "R">`
+   \   00025A   0312         PUSH.W  #0x0
+   \   00025C   3012....     PUSH.W  #`?<Constant "Turn">`
+   \   000260   0F43         MOV.W   #0x0, R15
+   \   000262   3E40....     MOV.W   #`?<Constant "Right">`, R14
+   \   000266   0D43         MOV.W   #0x0, R13
+   \   000268   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   00026C   ........     CALLA   #Out_To_LCD
+    301                Display_Process();
+   \   000270   ........     CALLA   #Display_Process
+    302                
+    303                // Reset timer for timer interrupt
+    304                Time_Sequence = POSIT_0;
+   \   000274   8243....     MOV.W   #0x0, &Time_Sequence
+   \   000278   A1000800     ADDA    #0x8, SP
+    305                
+    306                // Count up to time unit
+    307                while(Time_Sequence < t){
+   \                     ??Listen_9:
+   \   00027C   8298....     CMP.W   R8, &Time_Sequence
+   \   000280   032C         JC      ??Listen_31
+    308                  Left_Reverse_On();
+   \   000282   ........     CALLA   #Left_Reverse_On
+   \   000286   FA3F         JMP     ??Listen_9
+    309                }
+    310                // Turning off after reached time unit
+    311                Left_Reverse_Off();
+   \                     ??Listen_31:
+   \   000288   ........     CALLA   #Left_Reverse_Off
+    312                break; 
+    313              default: break; 
+    314              }
+    315              
+    316              if(inc == (SMALL_RING_SIZE-POSIT_1)){
+   \                     ??Listen_11:
+   \   00028C   3A902700     CMP.W   #0x27, R10
+   \   000290   0220         JNE     ??Listen_32
+    317                inc = POSIT_0;
+   \   000292   0A43         MOV.W   #0x0, R10
+   \   000294   DA3E         JMP     ??Listen_10
+    318              }else{
+    319                inc++;
+   \                     ??Listen_32:
+   \   000296   1A53         ADD.W   #0x1, R10
+   \   000298   D83E         JMP     ??Listen_10
+    320              } 
+    321            }
+    322          }
+   \                     ??Listen_14:
+   \   00029A   3817         POPM.W  #0x4, R11
+   \   00029C   1001         RETA
+   \   00029E                REQUIRE _A_PBIN_L
+    323          
+    324          //*****************************************************************************
+    325          //      Function name: Set_SSID 
+    326          //      Description: Setting SSID 
+    327          //      Global variables: 
+    328          //      Local variables:  
+    329          //      Return: VOID
+    330          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    331          void Set_SSID(void){
+   \                     Set_SSID:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    332            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    333            char sSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT=ncsu\r"; 
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SSIDTXT=ncsu\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    334            
+    335            // initializing receive buffer
+    336            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Set_SSID_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Set_SSID_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Set_SSID_0
+    337            
+    338            // Updating display 
+    339            Out_To_LCD("Set SSID", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Set_SSID_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Set SSID">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    340            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    341            
+    342            // Transmitting commands
+    343            while(ALWAYS){
+    344              UCA1TXBUF = UCA0TXBUF = sSSID[i]; 
+   \                     ??Set_SSID_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    345              if(sSSID[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Set_SSID_4
+    346              Five_Msec_Delay(POSIT_1); 
+    347              i++;
+    348            }
+    349            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    350          }
+   \   00006E   053C         JMP     ??Set_SSID_2
+   \                     ??Set_SSID_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Set_SSID_1
+   \                     ??Set_SSID_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    351          
+    352          //*****************************************************************************
+    353          //      Function name: Get_SSID
+    354          //      Description: Getting SSID 
+    355          //      Global variables: 
+    356          //      Local variables:  
+    357          //      Return: VOID
+    358          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    359          void Get_SSID(void){
+   \                     Get_SSID:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    360            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    361            char gSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT\r"; 
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SSIDTXT\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    362            
+    363            // initializing receive buffer
+    364            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Get_SSID_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Get_SSID_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Get_SSID_0
+    365            
+    366            // Updating display 
+    367            Out_To_LCD("Get SSID", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Get_SSID_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Get SSID">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    368            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    369            
+    370            // Transmitting commands 
+    371            while(ALWAYS){
+    372              UCA1TXBUF = UCA0TXBUF = gSSID[i]; 
+   \                     ??Get_SSID_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    373              if(gSSID[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0420         JNE     ??Get_SSID_4
+    374              Five_Msec_Delay(POSIT_1); 
+    375              i++;
+    376            }
+    377            Five_Msec_Delay(POSIT_2);
+   \   000066   2C43         MOV.W   #0x2, R12
+   \   000068   ........     CALLA   #Five_Msec_Delay
+    378          }
+   \   00006C   053C         JMP     ??Get_SSID_2
+   \                     ??Get_SSID_4:
+   \   00006E   1C43         MOV.W   #0x1, R12
+   \   000070   ........     CALLA   #Five_Msec_Delay
+   \   000074   1A53         ADD.W   #0x1, R10
+   \   000076   E93F         JMP     ??Get_SSID_1
+   \                     ??Get_SSID_2:
+   \   000078   A1002800     ADDA    #0x28, SP
+   \   00007C   3A41         POP.W   R10
+   \   00007E   1001         RETA
+   \   000080                REQUIRE _A_UCA1TXBUF_L
+   \   000080                REQUIRE _A_UCA0TXBUF_L
+    379          
+    380          //*****************************************************************************
+    381          //      Function name: Set_HostN
+    382          //      Description: Sets host name 
+    383          //      Global variables: 
+    384          //      Local variables:  
+    385          //      Return: VOID
+    386          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    387          void Set_HostN(void){
+   \                     Set_HostN:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    388            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    389            char sHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname,ECE-306_02_R\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=ip_hostname...">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    390            
+    391            // initializing receive buffer
+    392            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Set_HostN_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Set_HostN_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Set_HostN_0
+    393            
+    394            // Updating display 
+    395            Out_To_LCD("Set", POSIT_0, "hostname", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Set_HostN_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "hostname">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Set">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    396            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    397            
+    398            // Transmitting commands 
+    399            while(ALWAYS){
+    400              UCA1TXBUF = UCA0TXBUF = sHostN[i]; 
+   \                     ??Set_HostN_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    401              if(sHostN[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Set_HostN_4
+    402              Five_Msec_Delay(POSIT_1); 
+    403              i++;
+    404            }
+    405            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    406          } 
+   \   00006E   053C         JMP     ??Set_HostN_2
+   \                     ??Set_HostN_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Set_HostN_1
+   \                     ??Set_HostN_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    407          
+    408          //*****************************************************************************
+    409          //      Function name: Get_HostN
+    410          //      Description: Gets host name 
+    411          //      Global variables: 
+    412          //      Local variables:  
+    413          //      Return: VOID
+    414          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    415          void Get_HostN(void){
+   \                     Get_HostN:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    416            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    417            char gHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname\r";  
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=ip_hostname\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    418            
+    419            // initializing receive buffer
+    420            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Get_HostN_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Get_HostN_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Get_HostN_0
+    421            
+    422            // Updating display 
+    423            Out_To_LCD("Get", POSIT_0, "hostname", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Get_HostN_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "hostname">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Get">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    424            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    425            
+    426            // Transmitting commands 
+    427            while(ALWAYS){
+    428              UCA1TXBUF = UCA0TXBUF = gHostN[i]; 
+   \                     ??Get_HostN_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    429              if(gHostN[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Get_HostN_4
+    430              Five_Msec_Delay(POSIT_1); 
+    431              i++;
+    432            }
+    433            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    434          }
+   \   00006E   053C         JMP     ??Get_HostN_2
+   \                     ??Get_HostN_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Get_HostN_1
+   \                     ??Get_HostN_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    435          
+    436          //*****************************************************************************
+    437          //      Function name: Set_NetP
+    438          //      Description: Setting network privacy mode 
+    439          //      Global variables: 
+    440          //      Local variables:  
+    441          //      Return: VOID
+    442          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    443          void Set_NetP(void){
+   \                     Set_NetP:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    444            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    445            char sNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode,0\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_priv_m...">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    446            
+    447            // initializing receive buffer
+    448            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Set_NetP_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Set_NetP_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Set_NetP_0
+    449            
+    450            // Updating display 
+    451            Out_To_LCD("Set", POSIT_0, "network", POSIT_0, "privacy", POSIT_0, "", POSIT_0); 
+   \                     ??Set_NetP_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "privacy">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "network">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Set">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    452            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    453            
+    454            // Transmitting commands 
+    455            while(ALWAYS){
+    456              UCA1TXBUF = UCA0TXBUF = sNetP[i]; 
+   \                     ??Set_NetP_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    457              if(sNetP[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Set_NetP_4
+    458              Five_Msec_Delay(POSIT_1); 
+    459              i++;
+    460            }
+    461            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    462          } 
+   \   00006E   053C         JMP     ??Set_NetP_2
+   \                     ??Set_NetP_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Set_NetP_1
+   \                     ??Set_NetP_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    463          
+    464          //*****************************************************************************
+    465          //      Function name: Get_NetP
+    466          //      Description: Get network privacy mode  
+    467          //      Global variables: 
+    468          //      Local variables:  
+    469          //      Return: VOID
+    470          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    471          void Get_NetP(void){
+   \                     Get_NetP:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    472            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    473            char gNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_priv_m...">_1`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    474            
+    475            // initializing receive buffer
+    476            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Get_NetP_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Get_NetP_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Get_NetP_0
+    477            
+    478            // Updating display 
+    479            Out_To_LCD("Get", POSIT_0, "network", POSIT_0, "privacy", POSIT_0, "", POSIT_0); 
+   \                     ??Get_NetP_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "privacy">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "network">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Get">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    480            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    481            
+    482            // Transmitting commands 
+    483            while(ALWAYS){
+    484              UCA1TXBUF = UCA0TXBUF = gNetP[i]; 
+   \                     ??Get_NetP_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    485              if(gNetP[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Get_NetP_4
+    486              Five_Msec_Delay(POSIT_1); 
+    487              i++;
+    488            }
+    489            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    490          } 
+   \   00006E   053C         JMP     ??Get_NetP_2
+   \                     ??Get_NetP_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Get_NetP_1
+   \                     ??Get_NetP_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    491          
+    492          //*****************************************************************************
+    493          //      Function name: Set_NetM
+    494          //      Description: Setting network mode 
+    495          //      Global variables: 
+    496          //      Local variables:  
+    497          //      Return: VOID
+    498          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    499          void Set_NetM(void){
+   \                     Set_NetM:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    500            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    501            char sNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode,1\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_mode,1\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    502            
+    503            // initializing receive buffer
+    504            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Set_NetM_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Set_NetM_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Set_NetM_0
+    505            
+    506            // Updating display 
+    507            Out_To_LCD("Set", POSIT_0, "network", POSIT_0, "mode", POSIT_0, "", POSIT_0); 
+   \                     ??Set_NetM_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "mode">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "network">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Set">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    508            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    509            
+    510            // Transmitting commands 
+    511            while(ALWAYS){
+    512              UCA1TXBUF = UCA0TXBUF = sNetM[i]; 
+   \                     ??Set_NetM_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    513              if(sNetM[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Set_NetM_4
+    514              Five_Msec_Delay(POSIT_1); 
+    515              i++;
+    516            }
+    517            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    518          } 
+   \   00006E   053C         JMP     ??Set_NetM_2
+   \                     ??Set_NetM_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Set_NetM_1
+   \                     ??Set_NetM_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    519          
+    520          //*****************************************************************************
+    521          //      Function name: Get_NetM
+    522          //      Description: Getting network mode 
+    523          //      Global variables: 
+    524          //      Local variables:  
+    525          //      Return: VOID
+    526          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    527          void Get_NetM(void){
+   \                     Get_NetM:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    528            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    529            char gNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_mode\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    530            
+    531            // initializing receive buffer
+    532            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Get_NetM_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Get_NetM_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Get_NetM_0
+    533            
+    534            // Updating display 
+    535            Out_To_LCD("Get", POSIT_0, "network", POSIT_0, "mode", POSIT_0, "", POSIT_0); 
+   \                     ??Get_NetM_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "mode">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "network">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Get">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    536            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    537            
+    538            // Transmitting commands 
+    539            while(ALWAYS){
+    540              UCA1TXBUF = UCA0TXBUF = gNetM[i]; 
+   \                     ??Get_NetM_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    541              if(gNetM[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Get_NetM_4
+    542              Five_Msec_Delay(POSIT_1); 
+    543              i++;
+    544            }
+    545            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    546          } 
+   \   00006E   053C         JMP     ??Get_NetM_2
+   \                     ??Get_NetM_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Get_NetM_1
+   \                     ??Get_NetM_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    547          
+    548          //*****************************************************************************
+    549          //      Function name: Save_All
+    550          //      Description: Save the settings on the flash memory   
+    551          //      Global variables: 
+    552          //      Local variables:  
+    553          //      Return: VOID
+    554          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    555          void Save_All(void){
+   \                     Save_All:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    556            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    557            char save[SMALL_RING_SIZE] = "AT&W\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT&W\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    558            
+    559            // initializing receive buffer
+    560            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Save_All_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Save_All_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Save_All_0
+    561            
+    562            // Updating display 
+    563            Out_To_LCD("Save", POSIT_0, "settings", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Save_All_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "settings">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Save">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    564            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    565            
+    566            // Transmitting commands 
+    567            while(ALWAYS){
+    568              UCA1TXBUF = UCA0TXBUF = save[i]; 
+   \                     ??Save_All_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    569              if(save[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Save_All_4
+    570              Five_Msec_Delay(POSIT_1); 
+    571              i++;
+    572            }
+    573            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    574          } 
+   \   00006E   053C         JMP     ??Save_All_2
+   \                     ??Save_All_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Save_All_1
+   \                     ??Save_All_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    575          
+    576          //*****************************************************************************
+    577          //      Function name: Reset_All 
+    578          //      Description: Resets the module 
+    579          //      Global variables: 
+    580          //      Local variables:  
+    581          //      Return: VOID
+    582          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    583          void Reset_All(void){
+   \                     Reset_All:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    584            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    585            char reset[SMALL_RING_SIZE] = "AT+CFUN=1\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+CFUN=1\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    586            
+    587            // initializing receive buffer
+    588            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Reset_All_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Reset_All_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Reset_All_0
+    589            
+    590            // Updating display 
+    591            Out_To_LCD("Reset", POSIT_0, "module", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Reset_All_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "module">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Reset">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    592            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    593            
+    594            // Transmitting commands 
+    595            while(ALWAYS){
+    596              UCA1TXBUF = UCA0TXBUF = reset[i]; 
+   \                     ??Reset_All_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    597              if(reset[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Reset_All_4
+    598              Five_Msec_Delay(POSIT_1); 
+    599              i++;
+    600            }
+    601            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    602          } 
+   \   00006E   053C         JMP     ??Reset_All_2
+   \                     ??Reset_All_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Reset_All_1
+   \                     ??Reset_All_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    603          
+    604          //*****************************************************************************
+    605          //      Function name: Roam
+    606          //      Description: Sets up roaming for wifi 
+    607          //      Global variables: 
+    608          //      Local variables:  
+    609          //      Return: VOID
+    610          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    611          void Roam(void){
+   \                     Roam:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    612            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    613            char roam[SMALL_RING_SIZE] = "AT+S.ROAM\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.ROAM\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    614            
+    615            // initializing receive buffer
+    616            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Roam_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Roam_3
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Roam_0
+    617            
+    618            // Updating display 
+    619            Out_To_LCD("Roaming...", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \                     ??Roam_3:
+   \   000026   0312         PUSH.W  #0x0
+   \   000028   3012....     PUSH.W  #`?<Constant "">`
+   \   00002C   0312         PUSH.W  #0x0
+   \   00002E   3012....     PUSH.W  #`?<Constant "">`
+   \   000032   0F43         MOV.W   #0x0, R15
+   \   000034   3E40....     MOV.W   #`?<Constant "">`, R14
+   \   000038   0D43         MOV.W   #0x0, R13
+   \   00003A   3C40....     MOV.W   #`?<Constant "Roaming...">`, R12
+   \   00003E   ........     CALLA   #Out_To_LCD
+    620            Display_Process();
+   \   000042   ........     CALLA   #Display_Process
+   \   000046   A1000800     ADDA    #0x8, SP
+    621            
+    622            // Transmitting commands 
+    623            while(ALWAYS){
+    624              UCA1TXBUF = UCA0TXBUF = roam[i]; 
+   \                     ??Roam_1:
+   \   00004A   0F4A         MOV.W   R10, R15
+   \   00004C   0F51         ADD.W   SP, R15
+   \   00004E   6E4F         MOV.B   @R15, R14
+   \   000050   4E4E         MOV.B   R14, R14
+   \   000052   824ECE05     MOV.W   R14, &0x5ce
+   \   000056   824EEE05     MOV.W   R14, &0x5ee
+    625              if(roam[i] == CAR_RET)break; 
+   \   00005A   0F4A         MOV.W   R10, R15
+   \   00005C   0F51         ADD.W   SP, R15
+   \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000064   0520         JNE     ??Roam_4
+    626              Five_Msec_Delay(POSIT_1); 
+    627              i++;
+    628            }
+    629            Five_Msec_Delay(POSIT_5);
+   \   000066   3C400500     MOV.W   #0x5, R12
+   \   00006A   ........     CALLA   #Five_Msec_Delay
+    630          }
+   \   00006E   053C         JMP     ??Roam_2
+   \                     ??Roam_4:
+   \   000070   1C43         MOV.W   #0x1, R12
+   \   000072   ........     CALLA   #Five_Msec_Delay
+   \   000076   1A53         ADD.W   #0x1, R10
+   \   000078   E83F         JMP     ??Roam_1
+   \                     ??Roam_2:
+   \   00007A   A1002800     ADDA    #0x28, SP
+   \   00007E   3A41         POP.W   R10
+   \   000080   1001         RETA
+   \   000082                REQUIRE _A_UCA1TXBUF_L
+   \   000082                REQUIRE _A_UCA0TXBUF_L
+    631          
+    632          //*****************************************************************************
+    633          //      Function name: Check_Status
+    634          //      Description: Gets ip address  
+    635          //      Global variables: 
+    636          //      Local variables:  
+    637          //      Return: VOID
+    638          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    639          void Check_Status(void){
+   \                     Check_Status:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    640            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    641            char check[SMALL_RING_SIZE] = "AT+S.STS=ip_ipaddr\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.STS=ip_ipaddr\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    642            
+    643            // initializing receive buffer
+    644            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Check_Status_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Check_Status_1
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Check_Status_0
+    645            
+    646            // Transmitting commands 
+    647            while(ALWAYS){
+    648              UCA1TXBUF = UCA0TXBUF = check[i]; 
+   \                     ??Check_Status_1:
+   \   000026   0F4A         MOV.W   R10, R15
+   \   000028   0F51         ADD.W   SP, R15
+   \   00002A   6E4F         MOV.B   @R15, R14
+   \   00002C   4E4E         MOV.B   R14, R14
+   \   00002E   824ECE05     MOV.W   R14, &0x5ce
+   \   000032   824EEE05     MOV.W   R14, &0x5ee
+    649              if(check[i] == CAR_RET)break; 
+   \   000036   0F4A         MOV.W   R10, R15
+   \   000038   0F51         ADD.W   SP, R15
+   \   00003A   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000040   0520         JNE     ??Check_Status_3
+    650              Five_Msec_Delay(POSIT_1); 
+    651              i++;
+    652            }
+    653            Five_Msec_Delay(POSIT_5);
+   \   000042   3C400500     MOV.W   #0x5, R12
+   \   000046   ........     CALLA   #Five_Msec_Delay
+    654          }
+   \   00004A   053C         JMP     ??Check_Status_2
+   \                     ??Check_Status_3:
+   \   00004C   1C43         MOV.W   #0x1, R12
+   \   00004E   ........     CALLA   #Five_Msec_Delay
+   \   000052   1A53         ADD.W   #0x1, R10
+   \   000054   E83F         JMP     ??Check_Status_1
+   \                     ??Check_Status_2:
+   \   000056   A1002800     ADDA    #0x28, SP
+   \   00005A   3A41         POP.W   R10
+   \   00005C   1001         RETA
+   \   00005E                REQUIRE _A_UCA1TXBUF_L
+   \   00005E                REQUIRE _A_UCA0TXBUF_L
+    655          
+    656          //*****************************************************************************
+    657          //      Function name: Ping
+    658          //      Description: Pings lab computer   
+    659          //      Global variables: 
+    660          //      Local variables:  
+    661          //      Return: VOID
+    662          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    663          void Ping(void){
+   \                     Ping:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    664            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    665            char ping[SMALL_RING_SIZE] = "AT+S.PING= 152.14.99.126\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.PING= 152.14.99....">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    666            
+    667            // initializing receive buffer
+    668            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Ping_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Ping_1
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Ping_0
+    669            
+    670            // Transmitting commands 
+    671            while(ALWAYS){
+    672              UCA1TXBUF = UCA0TXBUF = ping[i]; 
+   \                     ??Ping_1:
+   \   000026   0F4A         MOV.W   R10, R15
+   \   000028   0F51         ADD.W   SP, R15
+   \   00002A   6E4F         MOV.B   @R15, R14
+   \   00002C   4E4E         MOV.B   R14, R14
+   \   00002E   824ECE05     MOV.W   R14, &0x5ce
+   \   000032   824EEE05     MOV.W   R14, &0x5ee
+    673              if(ping[i] == CAR_RET)break; 
+   \   000036   0F4A         MOV.W   R10, R15
+   \   000038   0F51         ADD.W   SP, R15
+   \   00003A   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000040   0520         JNE     ??Ping_3
+    674              Five_Msec_Delay(POSIT_1); 
+    675              i++;
+    676            }
+    677            Five_Msec_Delay(POSIT_5);
+   \   000042   3C400500     MOV.W   #0x5, R12
+   \   000046   ........     CALLA   #Five_Msec_Delay
+    678          }
+   \   00004A   053C         JMP     ??Ping_2
+   \                     ??Ping_3:
+   \   00004C   1C43         MOV.W   #0x1, R12
+   \   00004E   ........     CALLA   #Five_Msec_Delay
+   \   000052   1A53         ADD.W   #0x1, R10
+   \   000054   E83F         JMP     ??Ping_1
+   \                     ??Ping_2:
+   \   000056   A1002800     ADDA    #0x28, SP
+   \   00005A   3A41         POP.W   R10
+   \   00005C   1001         RETA
+   \   00005E                REQUIRE _A_UCA1TXBUF_L
+   \   00005E                REQUIRE _A_UCA0TXBUF_L
+    679          
+    680          //*****************************************************************************
+    681          //      Function name: Check_Str
+    682          //      Description: Checks to see if string is allowed to be received  
+    683          //      Global variables: 
+    684          //      Local variables:  
+    685          //      Return: VOID
+    686          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    687          int Check_Str(void){
+   \                     Check_Str:
+   \   000000   1B15         PUSHM.W #0x2, R11
+   \   000002   B1000400     SUBA    #0x4, SP
+    688            int inc = POSIT_0; 
+   \   000006   0A43         MOV.W   #0x0, R10
+    689            int i = POSIT_0;
+   \   000008   0B43         MOV.W   #0x0, R11
+    690            char pin[POSIT_4];
+    691            
+    692            Out_To_LCD(" ",POSIT_0,"Checking",POSIT_0,"Pin...",POSIT_0," ",POSIT_0);
+   \   00000A   0312         PUSH.W  #0x0
+   \   00000C   3012....     PUSH.W  #`?<Constant " ">`
+   \   000010   0312         PUSH.W  #0x0
+   \   000012   3012....     PUSH.W  #`?<Constant "Pin...">`
+   \   000016   0F43         MOV.W   #0x0, R15
+   \   000018   3E40....     MOV.W   #`?<Constant "Checking">`, R14
+   \   00001C   0D43         MOV.W   #0x0, R13
+   \   00001E   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   000022   ........     CALLA   #Out_To_LCD
+    693            lcd_4line();
+   \   000026   ........     CALLA   #lcd_4line
+    694            Display_Process();
+   \   00002A   ........     CALLA   #Display_Process
+    695            X_Seconds_Delay(POSIT_1);
+   \   00002E   1C43         MOV.W   #0x1, R12
+   \   000030   ........     CALLA   #X_Seconds_Delay
+    696            
+    697            // Pin to be recognized 
+    698            pin[POSIT_0] = '0';
+   \   000034   F14030000800 MOV.B   #0x30, 0x8(SP)
+    699            pin[POSIT_1] = '1';
+   \   00003A   F14031000900 MOV.B   #0x31, 0x9(SP)
+    700            pin[POSIT_2] = '2';
+   \   000040   F14032000A00 MOV.B   #0x32, 0xa(SP)
+    701            pin[POSIT_3] = '4';
+   \   000046   F14034000B00 MOV.B   #0x34, 0xb(SP)
+    702            
+    703            Five_Msec_Delay(BIG_DELAY); 
+   \   00004C   3C40F401     MOV.W   #0x1f4, R12
+   \   000050   ........     CALLA   #Five_Msec_Delay
+   \   000054   A1000800     ADDA    #0x8, SP
+    704            
+    705            // Checking for '*'
+    706            while(ALWAYS){
+    707              if(IOT_Char_Rx[inc] == '*')break; 
+   \                     ??Check_Str_0:
+   \   000058   FA902A00.... CMP.B   #0x2a, IOT_Char_Rx(R10)
+   \   00005E   0620         JNE     ??Check_Str_3
+    708              if(inc >= SMALL_RING_SIZE)inc=POSIT_0;
+    709              inc++;
+    710            }
+    711            inc = POSIT_0;
+   \   000060   0A43         MOV.W   #0x0, R10
+    712            
+    713            // Examining for unique pin
+    714            Five_Msec_Delay(BIG_DELAY); 
+   \   000062   3C40F401     MOV.W   #0x1f4, R12
+   \   000066   ........     CALLA   #Five_Msec_Delay
+   \   00006A   063C         JMP     ??Check_Str_1
+   \                     ??Check_Str_3:
+   \   00006C   3A902800     CMP.W   #0x28, R10
+   \   000070   0138         JL      ??Check_Str_4
+   \   000072   0A43         MOV.W   #0x0, R10
+   \                     ??Check_Str_4:
+   \   000074   1A53         ADD.W   #0x1, R10
+   \   000076   F03F         JMP     ??Check_Str_0
+    715            while(ALWAYS){
+    716              if(i)break;
+   \                     ??Check_Str_1:
+   \   000078   0B93         CMP.W   #0x0, R11
+   \   00007A   1924         JEQ     ??Check_Str_5
+    717              if(inc >= SMALL_RING_SIZE)inc=POSIT_0;
+    718              if(IOT_Char_Rx[inc] == pin[POSIT_0]){
+    719                if(IOT_Char_Rx[inc+POSIT_1] == pin[POSIT_1]){
+    720                  if(IOT_Char_Rx[inc+POSIT_2] == pin[POSIT_2]){
+    721                    if(IOT_Char_Rx[inc+POSIT_3] == pin[POSIT_3]){
+    722                      i = ALWAYS;
+    723                    }
+    724                  }
+    725                }
+    726              }
+    727              inc++;
+    728            }
+    729            Out_To_LCD(" ",POSIT_0,"Pin",POSIT_0,"Approved",POSIT_0," ",POSIT_0);
+   \   00007C   0312         PUSH.W  #0x0
+   \   00007E   3012....     PUSH.W  #`?<Constant " ">`
+   \   000082   0312         PUSH.W  #0x0
+   \   000084   3012....     PUSH.W  #`?<Constant "Approved">`
+   \   000088   0F43         MOV.W   #0x0, R15
+   \   00008A   3E40....     MOV.W   #`?<Constant "Pin">`, R14
+   \   00008E   0D43         MOV.W   #0x0, R13
+   \   000090   3C40....     MOV.W   #`?<Constant " ">`, R12
+   \   000094   ........     CALLA   #Out_To_LCD
+    730            lcd_4line();
+   \   000098   ........     CALLA   #lcd_4line
+    731            Display_Process();
+   \   00009C   ........     CALLA   #Display_Process
+    732            X_Seconds_Delay(POSIT_1);
+   \   0000A0   1C43         MOV.W   #0x1, R12
+   \   0000A2   ........     CALLA   #X_Seconds_Delay
+    733            return i; 
+   \   0000A6   0C4B         MOV.W   R11, R12
+   \   0000A8   A1000800     ADDA    #0x8, SP
+   \   0000AC   163C         JMP     ??Check_Str_2
+   \                     ??Check_Str_5:
+   \   0000AE   3A902800     CMP.W   #0x28, R10
+   \   0000B2   0138         JL      ??Check_Str_6
+   \   0000B4   0A43         MOV.W   #0x0, R10
+   \                     ??Check_Str_6:
+   \   0000B6   EA91....     CMP.B   @SP, IOT_Char_Rx(R10)
+   \   0000BA   0D20         JNE     ??Check_Str_7
+   \   0000BC   DA910100.... CMP.B   0x1(SP), IOT_Char_Rx + 1(R10)
+   \   0000C2   0920         JNE     ??Check_Str_7
+   \   0000C4   DA910200.... CMP.B   0x2(SP), IOT_Char_Rx + 2(R10)
+   \   0000CA   0520         JNE     ??Check_Str_7
+   \   0000CC   DA910300.... CMP.B   0x3(SP), IOT_Char_Rx + 3(R10)
+   \   0000D2   0120         JNE     ??Check_Str_7
+   \   0000D4   1B43         MOV.W   #0x1, R11
+   \                     ??Check_Str_7:
+   \   0000D6   1A53         ADD.W   #0x1, R10
+   \   0000D8   CF3F         JMP     ??Check_Str_1
+   \                     ??Check_Str_2:
+   \   0000DA   A1000400     ADDA    #0x4, SP
+   \   0000DE   1A17         POPM.W  #0x2, R11
+   \   0000E0   1001         RETA
+    734          }
+    735          
+    736          //*****************************************************************************
+    737          //      Function name: Reconnect
+    738          //      Description: Reconnects to Wifi   
+    739          //      Global variables: 
+    740          //      Local variables:  
+    741          //      Return: VOID
+    742          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    743          void Reconnect(void){
+   \                     Reconnect:
+   \   000000   3B15         PUSHM.W #0x4, R11
+    744              int i; 
+    745              int j; 
+    746              int k; 
+    747              Reset_All();
+   \   000002   ........     CALLA   #Reset_All
+    748            
+    749            // Reset, delayed for one second, brought back
+    750            PJOUT |= RESET;
+   \   000006   B2D22203     BIS.W   #0x8, &0x322
+    751            X_Seconds_Delay(POSIT_1); 
+   \   00000A   1C43         MOV.W   #0x1, R12
+   \   00000C   ........     CALLA   #X_Seconds_Delay
+    752            PJOUT &= ~RESET;
+   \   000010   B2C22203     BIC.W   #0x8, &0x322
+    753            
+    754            // Another 1 second delay, then re-initialize LCD 
+    755            X_Seconds_Delay(POSIT_1); 
+   \   000014   1C43         MOV.W   #0x1, R12
+   \   000016   ........     CALLA   #X_Seconds_Delay
+    756            Init_LCD(); 
+   \   00001A   ........     CALLA   #Init_LCD
+    757            
+    758            // Clearing LCD 
+    759            Out_To_LCD("Reset", POSIT_0, "Complete", POSIT_0, "", POSIT_0, "", POSIT_0); 
+   \   00001E   0312         PUSH.W  #0x0
+   \   000020   3012....     PUSH.W  #`?<Constant "">`
+   \   000024   0312         PUSH.W  #0x0
+   \   000026   3012....     PUSH.W  #`?<Constant "">`
+   \   00002A   0F43         MOV.W   #0x0, R15
+   \   00002C   3E40....     MOV.W   #`?<Constant "Complete">`, R14
+   \   000030   0D43         MOV.W   #0x0, R13
+   \   000032   3C40....     MOV.W   #`?<Constant "Reset">`, R12
+   \   000036   ........     CALLA   #Out_To_LCD
+    760            Display_Process();
+   \   00003A   ........     CALLA   #Display_Process
+    761            X_Seconds_Delay(POSIT_2);
+   \   00003E   2C43         MOV.W   #0x2, R12
+   \   000040   ........     CALLA   #X_Seconds_Delay
+    762            
+    763            //----------Connecting to network---------------------------------------------
+    764            Out_To_LCD("Connecting", POSIT_0, "to", POSIT_0, "network...", POSIT_0, "",
+    765                       POSIT_0);
+   \   000044   0312         PUSH.W  #0x0
+   \   000046   3012....     PUSH.W  #`?<Constant "">`
+   \   00004A   0312         PUSH.W  #0x0
+   \   00004C   3012....     PUSH.W  #`?<Constant "network...">`
+   \   000050   0F43         MOV.W   #0x0, R15
+   \   000052   3E40....     MOV.W   #`?<Constant "to">`, R14
+   \   000056   0D43         MOV.W   #0x0, R13
+   \   000058   3C40....     MOV.W   #`?<Constant "Connecting">`, R12
+   \   00005C   ........     CALLA   #Out_To_LCD
+    766            Display_Process();
+   \   000060   ........     CALLA   #Display_Process
+    767            Five_Msec_Delay(FITTY); 
+   \   000064   3C403200     MOV.W   #0x32, R12
+   \   000068   ........     CALLA   #Five_Msec_Delay
+    768            
+    769            // Checking if connection is successful by looking out for "Handshake" 
+    770            i = POSIT_0;
+   \   00006C   0A43         MOV.W   #0x0, R10
+    771            cpu_rx_ring_wr = POSIT_0;
+   \   00006E   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+   \   000072   A1001000     ADDA    #0x10, SP
+    772            while(ALWAYS){
+    773              if(i)break; 
+   \                     ??Reconnect_0:
+   \   000076   0A93         CMP.W   #0x0, R10
+   \   000078   1E24         JEQ     ??Reconnect_5
+    774              if(IOT_Char_Rx[cpu_rx_ring_wr]== 'H'){
+    775                if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_1]== 'a'){
+    776                  if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_2]== 'n'){
+    777                    i = ALWAYS;
+    778                  }
+    779                }
+    780              }
+    781            }
+    782              
+    783            Out_To_LCD("Successful", POSIT_0, "connection", POSIT_0, "", POSIT_0, "",
+    784                       POSIT_0);
+   \   00007A   0312         PUSH.W  #0x0
+   \   00007C   3012....     PUSH.W  #`?<Constant "">`
+   \   000080   0312         PUSH.W  #0x0
+   \   000082   3012....     PUSH.W  #`?<Constant "">`
+   \   000086   0F43         MOV.W   #0x0, R15
+   \   000088   3E40....     MOV.W   #`?<Constant "connection">`, R14
+   \   00008C   0D43         MOV.W   #0x0, R13
+   \   00008E   3C40....     MOV.W   #`?<Constant "Successful">`, R12
+   \   000092   ........     CALLA   #Out_To_LCD
+    785            Display_Process(); 
+   \   000096   ........     CALLA   #Display_Process
+    786            X_Seconds_Delay(POSIT_2);
+   \   00009A   2C43         MOV.W   #0x2, R12
+   \   00009C   ........     CALLA   #X_Seconds_Delay
+    787            
+    788            //----------Roaming----------------------------------------------------------- 
+    789            //  Roam(); 
+    790            //  Five_Msec_Delay(POSIT_10);
+    791            
+    792            //---------Get SSID and display to LCD----------------------------------------
+    793            Get_SSID(); 
+   \   0000A0   ........     CALLA   #Get_SSID
+    794            cpu_rx_ring_wr = POSIT_0;
+   \   0000A4   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    795            i = POSIT_0;
+   \   0000A8   0A43         MOV.W   #0x0, R10
+    796            X_Seconds_Delay(POSIT_1);
+   \   0000AA   1C43         MOV.W   #0x1, R12
+   \   0000AC   ........     CALLA   #X_Seconds_Delay
+   \   0000B0   A1000800     ADDA    #0x8, SP
+   \   0000B4   143C         JMP     ??Reconnect_1
+   \                     ??Reconnect_5:
+   \   0000B6   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   0000BA   FF904800.... CMP.B   #0x48, IOT_Char_Rx(R15)
+   \   0000C0   DA23         JNE     ??Reconnect_0
+   \   0000C2   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   0000C6   FF906100.... CMP.B   #0x61, IOT_Char_Rx + 1(R15)
+   \   0000CC   D423         JNE     ??Reconnect_0
+   \   0000CE   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   0000D2   FF906E00.... CMP.B   #0x6e, IOT_Char_Rx + 2(R15)
+   \   0000D8   CE23         JNE     ??Reconnect_0
+   \   0000DA   1A43         MOV.W   #0x1, R10
+   \   0000DC   CC3F         JMP     ??Reconnect_0
+    797            
+    798            // Parsing through Rx array until "ncsu" is reached 
+    799            while(ALWAYS){
+    800              if(i)break;
+   \                     ??Reconnect_1:
+   \   0000DE   0A93         CMP.W   #0x0, R10
+   \   0000E0   8124         JEQ     ??Reconnect_6
+    801              
+    802              // Finds "u" first and then backtracks to "n"
+    803              if(IOT_Char_Rx[cpu_rx_ring_wr] == 'u'){
+    804                if(IOT_Char_Rx[cpu_rx_ring_wr - POSIT_1] == 's'){
+    805                  i = ALWAYS;
+    806                }
+    807              }
+    808              // Keeping value of IOT_Char_Rx counter 
+    809              k = cpu_rx_ring_wr;
+    810              cpu_rx_ring_wr++;
+    811            }
+    812            
+    813            // Output SSID to LCD 
+    814            display_1[POSIT_0] = ' '; 
+   \   0000E2   1F42....     MOV.W   &display_1, R15
+   \   0000E6   FF4020000000 MOV.B   #0x20, 0(R15)
+    815            display_1[POSIT_1] = ' ';
+   \   0000EC   1F42....     MOV.W   &display_1, R15
+   \   0000F0   FF4020000100 MOV.B   #0x20, 0x1(R15)
+    816            display_1[POSIT_2] = ' ';
+   \   0000F6   1F42....     MOV.W   &display_1, R15
+   \   0000FA   FF4020000200 MOV.B   #0x20, 0x2(R15)
+    817            display_1[POSIT_3] = IOT_Char_Rx[k-POSIT_3];
+   \   000100   1F42....     MOV.W   &display_1, R15
+   \   000104   DF48....0300 MOV.B   LWRD(IOT_Char_Rx + 65533)(R8), 0x3(R15)
+    818            display_1[POSIT_4] = IOT_Char_Rx[k-POSIT_2];
+   \   00010A   1F42....     MOV.W   &display_1, R15
+   \   00010E   DF48....0400 MOV.B   LWRD(IOT_Char_Rx + 65534)(R8), 0x4(R15)
+    819            display_1[POSIT_5] = IOT_Char_Rx[k-POSIT_1];
+   \   000114   1F42....     MOV.W   &display_1, R15
+   \   000118   DF48....0500 MOV.B   LWRD(IOT_Char_Rx + 65535)(R8), 0x5(R15)
+    820            display_1[POSIT_6] = IOT_Char_Rx[k];
+   \   00011E   1F42....     MOV.W   &display_1, R15
+   \   000122   DF48....0600 MOV.B   IOT_Char_Rx(R8), 0x6(R15)
+    821            display_1[POSIT_7] = ' ';
+   \   000128   1F42....     MOV.W   &display_1, R15
+   \   00012C   FF4020000700 MOV.B   #0x20, 0x7(R15)
+    822            display_1[POSIT_8] = ' ';
+   \   000132   1F42....     MOV.W   &display_1, R15
+   \   000136   FF4020000800 MOV.B   #0x20, 0x8(R15)
+    823            display_1[POSIT_9] = ' ';
+   \   00013C   1F42....     MOV.W   &display_1, R15
+   \   000140   FF4020000900 MOV.B   #0x20, 0x9(R15)
+    824            Display_Process();
+   \   000146   ........     CALLA   #Display_Process
+    825            
+    826            // Re-initializing values 
+    827            cpu_rx_ring_wr = POSIT_0;
+   \   00014A   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    828            k = POSIT_0;
+   \   00014E   0843         MOV.W   #0x0, R8
+    829            Five_Msec_Delay(BIG_DELAY);
+   \   000150   3C40F401     MOV.W   #0x1f4, R12
+   \   000154   ........     CALLA   #Five_Msec_Delay
+    830            
+    831            
+    832            //---------Get ip address-----------------------------------------------------
+    833            display_2 = "          ";
+   \   000158   B240........ MOV.W   #`?<Constant "          ">`, &display_2
+    834            display_2[POSIT_0] = ' '; 
+   \   00015E   1F42....     MOV.W   &display_2, R15
+   \   000162   FF4020000000 MOV.B   #0x20, 0(R15)
+    835            display_2[POSIT_1] = ' ';
+   \   000168   1F42....     MOV.W   &display_2, R15
+   \   00016C   FF4020000100 MOV.B   #0x20, 0x1(R15)
+    836            display_2[POSIT_2] = 'i';
+   \   000172   1F42....     MOV.W   &display_2, R15
+   \   000176   FF4069000200 MOV.B   #0x69, 0x2(R15)
+    837            display_2[POSIT_3] = 'p';
+   \   00017C   1F42....     MOV.W   &display_2, R15
+   \   000180   FF4070000300 MOV.B   #0x70, 0x3(R15)
+    838            display_2[POSIT_4] = 'a';
+   \   000186   1F42....     MOV.W   &display_2, R15
+   \   00018A   FF4061000400 MOV.B   #0x61, 0x4(R15)
+    839            display_2[POSIT_5] = 'd';
+   \   000190   1F42....     MOV.W   &display_2, R15
+   \   000194   FF4064000500 MOV.B   #0x64, 0x5(R15)
+    840            display_2[POSIT_6] = 'd';
+   \   00019A   1F42....     MOV.W   &display_2, R15
+   \   00019E   FF4064000600 MOV.B   #0x64, 0x6(R15)
+    841            display_2[POSIT_7] = 'r';
+   \   0001A4   1F42....     MOV.W   &display_2, R15
+   \   0001A8   FF4072000700 MOV.B   #0x72, 0x7(R15)
+    842            display_2[POSIT_8] = ' ';
+   \   0001AE   1F42....     MOV.W   &display_2, R15
+   \   0001B2   FF4020000800 MOV.B   #0x20, 0x8(R15)
+    843            display_2[POSIT_9] = ' ';
+   \   0001B8   1F42....     MOV.W   &display_2, R15
+   \   0001BC   FF4020000900 MOV.B   #0x20, 0x9(R15)
+    844            Display_Process(); 
+   \   0001C2   ........     CALLA   #Display_Process
+    845            X_Seconds_Delay(POSIT_2);
+   \   0001C6   2C43         MOV.W   #0x2, R12
+   \   0001C8   ........     CALLA   #X_Seconds_Delay
+    846            
+    847            // Function to get ip address 
+    848            Check_Status(); 
+   \   0001CC   ........     CALLA   #Check_Status
+    849            Five_Msec_Delay(BOOT_DELAY);
+   \   0001D0   3C401900     MOV.W   #0x19, R12
+   \   0001D4   ........     CALLA   #Five_Msec_Delay
+    850            
+    851            // Reset ring buffer increment 
+    852            cpu_rx_ring_wr = POSIT_0;
+   \   0001D8   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    853            i = POSIT_0;
+   \   0001DC   0A43         MOV.W   #0x0, R10
+    854            
+    855            // Disabling RX interrupt
+    856            UCA1IE &= ~UCRXIE;             
+   \   0001DE   92C3FA05     BIC.W   #0x1, &0x5fa
+   \   0001E2   123C         JMP     ??Reconnect_2
+   \                     ??Reconnect_6:
+   \   0001E4   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   0001E8   FF907500.... CMP.B   #0x75, IOT_Char_Rx(R15)
+   \   0001EE   0720         JNE     ??Reconnect_7
+   \   0001F0   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   0001F4   FF907300.... CMP.B   #0x73, LWRD(IOT_Char_Rx + 65535)(R15)
+   \   0001FA   0120         JNE     ??Reconnect_7
+   \   0001FC   1A43         MOV.W   #0x1, R10
+   \                     ??Reconnect_7:
+   \   0001FE   1842....     MOV.W   &cpu_rx_ring_wr, R8
+   \   000202   9253....     ADD.W   #0x1, &cpu_rx_ring_wr
+   \   000206   6B3F         JMP     ??Reconnect_1
+    857            
+    858            // Parsing through Rx array until ip_addr is reached 
+    859            while(ALWAYS){
+    860              if(i)break; 
+   \                     ??Reconnect_2:
+   \   000208   0A93         CMP.W   #0x0, R10
+   \   00020A   0824         JEQ     ??Reconnect_8
+    861              if(IOT_Char_Rx[cpu_rx_ring_wr] == 'i'){
+    862                if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_1] == 'p'){
+    863                  if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_2] == 'a'){
+    864                    i = ALWAYS; 
+    865                    j = cpu_rx_ring_wr; 
+    866                    Display_Process(); 
+    867                    Five_Msec_Delay(WAIT_TIME);
+    868                  }
+    869                } 
+    870              }
+    871              cpu_rx_ring_wr++;
+    872            }
+    873            cpu_rx_ring_wr = POSIT_0;
+   \   00020C   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    874            
+    875            // Offset increment by 9 to get to start of ip address (from ip_addr) in array 
+    876            k = j + POSIT_9;
+   \   000210   0F4B         MOV.W   R11, R15
+   \   000212   3F500900     ADD.W   #0x9, R15
+   \   000216   084F         MOV.W   R15, R8
+    877            
+    878            // Clearing array to prepare for new data 
+    879            for(int inc=POSIT_0; inc<=POSIT_9; inc++)display_3[inc] = ' '; 
+   \   000218   0F43         MOV.W   #0x0, R15
+   \   00021A   1E3C         JMP     ??Reconnect_3
+   \                     ??Reconnect_8:
+   \   00021C   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   000220   FF906900.... CMP.B   #0x69, IOT_Char_Rx(R15)
+   \   000226   1520         JNE     ??Reconnect_9
+   \   000228   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   00022C   FF907000.... CMP.B   #0x70, IOT_Char_Rx + 1(R15)
+   \   000232   0F20         JNE     ??Reconnect_9
+   \   000234   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   000238   FF906100.... CMP.B   #0x61, IOT_Char_Rx + 2(R15)
+   \   00023E   0920         JNE     ??Reconnect_9
+   \   000240   1A43         MOV.W   #0x1, R10
+   \   000242   1B42....     MOV.W   &cpu_rx_ring_wr, R11
+   \   000246   ........     CALLA   #Display_Process
+   \   00024A   3C401400     MOV.W   #0x14, R12
+   \   00024E   ........     CALLA   #Five_Msec_Delay
+   \                     ??Reconnect_9:
+   \   000252   9253....     ADD.W   #0x1, &cpu_rx_ring_wr
+   \   000256   D83F         JMP     ??Reconnect_2
+   \                     ??Reconnect_3:
+   \   000258   3F900A00     CMP.W   #0xa, R15
+   \   00025C   0834         JGE     ??Reconnect_10
+   \   00025E   1E42....     MOV.W   &display_3, R14
+   \   000262   0E5F         ADD.W   R15, R14
+   \   000264   FE4020000000 MOV.B   #0x20, 0(R14)
+   \   00026A   1F53         ADD.W   #0x1, R15
+   \   00026C   F53F         JMP     ??Reconnect_3
+    880            Display_Process(); 
+   \                     ??Reconnect_10:
+   \   00026E   ........     CALLA   #Display_Process
+    881            X_Seconds_Delay(POSIT_2);
+   \   000272   2C43         MOV.W   #0x2, R12
+   \   000274   ........     CALLA   #X_Seconds_Delay
+    882            
+    883            // Output ip address to LCD 
+    884            display_3[POSIT_0] = ' '; 
+   \   000278   1F42....     MOV.W   &display_3, R15
+   \   00027C   FF4020000000 MOV.B   #0x20, 0(R15)
+    885            display_3[POSIT_1] = ' ';
+   \   000282   1F42....     MOV.W   &display_3, R15
+   \   000286   FF4020000100 MOV.B   #0x20, 0x1(R15)
+    886            display_3[POSIT_2] = IOT_Char_Rx[k];
+   \   00028C   1F42....     MOV.W   &display_3, R15
+   \   000290   DF48....0200 MOV.B   IOT_Char_Rx(R8), 0x2(R15)
+    887            display_3[POSIT_3] = IOT_Char_Rx[k+POSIT_1];
+   \   000296   1F42....     MOV.W   &display_3, R15
+   \   00029A   DF48....0300 MOV.B   IOT_Char_Rx + 1(R8), 0x3(R15)
+    888            display_3[POSIT_4] = IOT_Char_Rx[k+POSIT_2];
+   \   0002A0   1F42....     MOV.W   &display_3, R15
+   \   0002A4   DF48....0400 MOV.B   IOT_Char_Rx + 2(R8), 0x4(R15)
+    889            display_3[POSIT_5] = IOT_Char_Rx[k+POSIT_3];
+   \   0002AA   1F42....     MOV.W   &display_3, R15
+   \   0002AE   DF48....0500 MOV.B   IOT_Char_Rx + 3(R8), 0x5(R15)
+    890            display_3[POSIT_6] = IOT_Char_Rx[k+POSIT_4];
+   \   0002B4   1F42....     MOV.W   &display_3, R15
+   \   0002B8   DF48....0600 MOV.B   IOT_Char_Rx + 4(R8), 0x6(R15)
+    891            display_3[POSIT_7] = IOT_Char_Rx[k+POSIT_5];
+   \   0002BE   1F42....     MOV.W   &display_3, R15
+   \   0002C2   DF48....0700 MOV.B   IOT_Char_Rx + 5(R8), 0x7(R15)
+    892            display_3[POSIT_8] = ' ';
+   \   0002C8   1F42....     MOV.W   &display_3, R15
+   \   0002CC   FF4020000800 MOV.B   #0x20, 0x8(R15)
+    893            display_3[POSIT_9] = ' '; 
+   \   0002D2   1F42....     MOV.W   &display_3, R15
+   \   0002D6   FF4020000900 MOV.B   #0x20, 0x9(R15)
+    894            Display_Process();
+   \   0002DC   ........     CALLA   #Display_Process
+    895            X_Seconds_Delay(POSIT_2); 
+   \   0002E0   2C43         MOV.W   #0x2, R12
+   \   0002E2   ........     CALLA   #X_Seconds_Delay
+    896            Five_Msec_Delay(BIG_DELAY);
+   \   0002E6   3C40F401     MOV.W   #0x1f4, R12
+   \   0002EA   ........     CALLA   #Five_Msec_Delay
+    897            
+    898            display_4 = "          ";
+   \   0002EE   B240........ MOV.W   #`?<Constant "          ">`, &display_4
+    899            display_4[POSIT_0] = ' '; 
+   \   0002F4   1F42....     MOV.W   &display_4, R15
+   \   0002F8   FF4020000000 MOV.B   #0x20, 0(R15)
+    900            display_4[POSIT_1] = ' ';
+   \   0002FE   1F42....     MOV.W   &display_4, R15
+   \   000302   FF4020000100 MOV.B   #0x20, 0x1(R15)
+    901            display_4[POSIT_2] = IOT_Char_Rx[k+POSIT_6];
+   \   000308   1F42....     MOV.W   &display_4, R15
+   \   00030C   DF48....0200 MOV.B   IOT_Char_Rx + 6(R8), 0x2(R15)
+    902            display_4[POSIT_3] = IOT_Char_Rx[k+POSIT_7];
+   \   000312   1F42....     MOV.W   &display_4, R15
+   \   000316   DF48....0300 MOV.B   IOT_Char_Rx + 7(R8), 0x3(R15)
+    903            display_4[POSIT_4] = IOT_Char_Rx[k+POSIT_8];
+   \   00031C   1F42....     MOV.W   &display_4, R15
+   \   000320   DF48....0400 MOV.B   IOT_Char_Rx + 8(R8), 0x4(R15)
+    904            display_4[POSIT_5] = IOT_Char_Rx[k+POSIT_9];
+   \   000326   1F42....     MOV.W   &display_4, R15
+   \   00032A   DF48....0500 MOV.B   IOT_Char_Rx + 9(R8), 0x5(R15)
+    905            display_4[POSIT_6] = IOT_Char_Rx[k+POSIT_10];
+   \   000330   1F42....     MOV.W   &display_4, R15
+   \   000334   DF48....0600 MOV.B   IOT_Char_Rx + 10(R8), 0x6(R15)
+    906            display_4[POSIT_7] = IOT_Char_Rx[k+POSIT_11];
+   \   00033A   1F42....     MOV.W   &display_4, R15
+   \   00033E   DF48....0700 MOV.B   IOT_Char_Rx + 11(R8), 0x7(R15)
+    907            display_4[POSIT_8] = IOT_Char_Rx[k+POSIT_12];
+   \   000344   1F42....     MOV.W   &display_4, R15
+   \   000348   DF48....0800 MOV.B   IOT_Char_Rx + 12(R8), 0x8(R15)
+    908            display_4[POSIT_9] = ' ';
+   \   00034E   1F42....     MOV.W   &display_4, R15
+   \   000352   FF4020000900 MOV.B   #0x20, 0x9(R15)
+    909            Display_Process();
+   \   000358   ........     CALLA   #Display_Process
+    910            
+    911            // Re-enable RX interrupt
+    912            UCA1IE |= UCRXIE;                 
+   \   00035C   92D3FA05     BIS.W   #0x1, &0x5fa
+    913            Five_Msec_Delay(BIG_DELAY);
+   \   000360   3C40F401     MOV.W   #0x1f4, R12
+   \   000364   ........     CALLA   #Five_Msec_Delay
+    914            
+    915            // Waiting until "OK" has been received 
+    916            i = POSIT_0;
+   \   000368   0A43         MOV.W   #0x0, R10
+    917            while(IOT_Char_Rx[i] != 'O')i++; 
+   \                     ??Reconnect_4:
+   \   00036A   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
+   \   000370   0224         JEQ     ??Reconnect_11
+   \   000372   1A53         ADD.W   #0x1, R10
+   \   000374   FA3F         JMP     ??Reconnect_4
+    918          }
+   \                     ??Reconnect_11:
+   \   000376   3817         POPM.W  #0x4, R11
+   \   000378   1001         RETA
+   \   00037A                REQUIRE _A_PJOUT_L
+   \   00037A                REQUIRE _A_UCA1IE_L
+    919          
+    920          //*****************************************************************************
+    921          //      Function name: Socket
+    922          //      Description: Socket-Server connection    
+    923          //      Global variables: 
+    924          //      Local variables:  
+    925          //      Return: VOID
+    926          //*****************************************************************************
+
+   \                                 In  segment CODE, align 2
+    927          void Socket(void){
+   \                     Socket:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   B1002800     SUBA    #0x28, SP
+    928            int i = POSIT_0;
+   \   000006   0A43         MOV.W   #0x0, R10
+    929            char socket[SMALL_RING_SIZE] = "AT+S.SOCKD=9001\r";
+   \   000008   0C41         MOV.W   SP, R12
+   \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SOCKD=9001\\r">`, R14
+   \   00000E   3D402800     MOV.W   #0x28, R13
+   \   000012   ........     CALLA   #?CopyMemoryBytes
+    930            
+    931            // initializing receive buffer
+    932            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+   \   000016   0F43         MOV.W   #0x0, R15
+   \                     ??Socket_0:
+   \   000018   3F902800     CMP.W   #0x28, R15
+   \   00001C   0434         JGE     ??Socket_1
+   \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
+   \   000022   1F53         ADD.W   #0x1, R15
+   \   000024   F93F         JMP     ??Socket_0
+    933            
+    934            // Transmitting commands 
+    935            while(ALWAYS){
+    936              UCA1TXBUF = UCA0TXBUF = socket[i]; 
+   \                     ??Socket_1:
+   \   000026   0F4A         MOV.W   R10, R15
+   \   000028   0F51         ADD.W   SP, R15
+   \   00002A   6E4F         MOV.B   @R15, R14
+   \   00002C   4E4E         MOV.B   R14, R14
+   \   00002E   824ECE05     MOV.W   R14, &0x5ce
+   \   000032   824EEE05     MOV.W   R14, &0x5ee
+    937              if(socket[i] == CAR_RET)break; 
+   \   000036   0F4A         MOV.W   R10, R15
+   \   000038   0F51         ADD.W   SP, R15
+   \   00003A   FF900D000000 CMP.B   #0xd, 0(R15)
+   \   000040   0520         JNE     ??Socket_3
+    938              Five_Msec_Delay(POSIT_1); 
+    939              i++;
+    940            }
+    941            Five_Msec_Delay(POSIT_5);
+   \   000042   3C400500     MOV.W   #0x5, R12
+   \   000046   ........     CALLA   #Five_Msec_Delay
+    942          }
+   \   00004A   053C         JMP     ??Socket_2
+   \                     ??Socket_3:
+   \   00004C   1C43         MOV.W   #0x1, R12
+   \   00004E   ........     CALLA   #Five_Msec_Delay
+   \   000052   1A53         ADD.W   #0x1, R10
+   \   000054   E83F         JMP     ??Socket_1
+   \                     ??Socket_2:
+   \   000056   A1002800     ADDA    #0x28, SP
+   \   00005A   3A41         POP.W   R10
+   \   00005C   1001         RETA
+   \   00005E                REQUIRE _A_UCA1TXBUF_L
+   \   00005E                REQUIRE _A_UCA0TXBUF_L
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant " ">`:
+   \   000000   2000         DC8 " "
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Waiting">`:
+   \   000000   57616974696E DC8 "Waiting"
+   \            6700        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "For">`:
+   \   000000   466F7200     DC8 "For"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Input...">`:
+   \   000000   496E7075742E DC8 "Input..."
+   \            2E2E00      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Forward">`:
+   \   000000   466F72776172 DC8 "Forward"
+   \            6400        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Reverse">`:
+   \   000000   526576657273 DC8 "Reverse"
+   \            6500        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "CW">`:
+   \   000000   435700       DC8 "CW"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "CCW">`:
+   \   000000   43435700     DC8 "CCW"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Left">`:
+   \   000000   4C65667400   DC8 "Left"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Turn">`:
+   \   000000   5475726E00   DC8 "Turn"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Right">`:
+   \   000000   526967687400 DC8 "Right"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "R">`:
+   \   000000   5200         DC8 "R"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SSIDTXT=ncsu\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.SSIDTXT=ncsu\015"
+   \            534944545854
+   \            3D6E6373750D
+   \            00          
+   \   000013   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            000000000000
+   \            000000      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Set SSID">`:
+   \   000000   536574205353 DC8 "Set SSID"
+   \            494400      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "">`:
+   \   000000   00           DC8 ""
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SSIDTXT\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.SSIDTXT\015"
+   \            534944545854
+   \            0D00        
+   \   00000E   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            00000000    
+   \   00001E   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            00000000    
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Get SSID">`:
+   \   000000   476574205353 DC8 "Get SSID"
+   \            494400      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SCFG=ip_hostname...">`:
+   \   000000   41542B532E53 DC8 "AT+S.SCFG=ip_hostname,ECE-306_02_R\015"
+   \            4346473D6970
+   \            5F686F73746E
+   \            616D652C4543
+   \            452D3330365F
+   \            30325F520D00
+   \   000024   00000000     DC8 0, 0, 0, 0
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Set">`:
+   \   000000   53657400     DC8 "Set"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "hostname">`:
+   \   000000   686F73746E61 DC8 "hostname"
+   \            6D6500      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SCFG=ip_hostname\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.SCFG=ip_hostname\015"
+   \            4346473D6970
+   \            5F686F73746E
+   \            616D650D00  
+   \   000017   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            0000000000  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Get">`:
+   \   000000   47657400     DC8 "Get"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SCFG=wifi_priv_m...">`:
+   \   000000   41542B532E53 DC8 "AT+S.SCFG=wifi_priv_mode,0\015"
+   \            4346473D7769
+   \            66695F707269
+   \            765F6D6F6465
+   \            2C300D00    
+   \   00001C   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "network">`:
+   \   000000   6E6574776F72 DC8 "network"
+   \            6B00        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "privacy">`:
+   \   000000   707269766163 DC8 "privacy"
+   \            7900        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SCFG=wifi_priv_m...">_1`:
+   \   000000   41542B532E53 DC8 "AT+S.SCFG=wifi_priv_mode\015"
+   \            4346473D7769
+   \            66695F707269
+   \            765F6D6F6465
+   \            0D00        
+   \   00001A   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            0000        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SCFG=wifi_mode,1\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.SCFG=wifi_mode,1\015"
+   \            4346473D7769
+   \            66695F6D6F64
+   \            652C310D00  
+   \   000017   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            0000000000  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "mode">`:
+   \   000000   6D6F646500   DC8 "mode"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SCFG=wifi_mode\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.SCFG=wifi_mode\015"
+   \            4346473D7769
+   \            66695F6D6F64
+   \            650D00      
+   \   000015   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            000000000000
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT&W\\r">`:
+   \   000000   415426570D00 DC8 "AT&W\015"
+   \   000006   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            00000000    
+   \   000016   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            000000000000
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Save">`:
+   \   000000   5361766500   DC8 "Save"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "settings">`:
+   \   000000   73657474696E DC8 "settings"
+   \            677300      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+CFUN=1\\r">`:
+   \   000000   41542B434655 DC8 "AT+CFUN=1\015"
+   \            4E3D310D00  
+   \   00000B   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            00000000    
+   \   00001B   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Reset">`:
+   \   000000   526573657400 DC8 "Reset"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "module">`:
+   \   000000   6D6F64756C65 DC8 "module"
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.ROAM\\r">`:
+   \   000000   41542B532E52 DC8 "AT+S.ROAM\015"
+   \            4F414D0D00  
+   \   00000B   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            00000000    
+   \   00001B   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Roaming...">`:
+   \   000000   526F616D696E DC8 "Roaming..."
+   \            672E2E2E00  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.STS=ip_ipaddr\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.STS=ip_ipaddr\015"
+   \            54533D69705F
+   \            697061646472
+   \            0D00        
+   \   000014   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            000000000000
+   \            0000        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.PING= 152.14.99....">`:
+   \   000000   41542B532E50 DC8 "AT+S.PING= 152.14.99.126\015"
+   \            494E473D2031
+   \            35322E31342E
+   \            39392E313236
+   \            0D00        
+   \   00001A   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            0000        
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Checking">`:
+   \   000000   436865636B69 DC8 "Checking"
+   \            6E6700      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Pin...">`:
+   \   000000   50696E2E2E2E DC8 "Pin..."
+   \            00          
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Pin">`:
+   \   000000   50696E00     DC8 "Pin"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Approved">`:
+   \   000000   417070726F76 DC8 "Approved"
+   \            656400      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Complete">`:
+   \   000000   436F6D706C65 DC8 "Complete"
+   \            746500      
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Connecting">`:
+   \   000000   436F6E6E6563 DC8 "Connecting"
+   \            74696E6700  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "to">`:
+   \   000000   746F00       DC8 "to"
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "network...">`:
+   \   000000   6E6574776F72 DC8 "network..."
+   \            6B2E2E2E00  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "Successful">`:
+   \   000000   537563636573 DC8 "Successful"
+   \            7366756C00  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "connection">`:
+   \   000000   636F6E6E6563 DC8 "connection"
+   \            74696F6E00  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "          ">`:
+   \   000000   202020202020 DC8 "          "
+   \            2020202000  
+
+   \                                 In  segment DATA16_C, align 1, align-sorted
+   \                     `?<Constant "AT+S.SOCKD=9001\\r">`:
+   \   000000   41542B532E53 DC8 "AT+S.SOCKD=9001\015"
+   \            4F434B443D39
+   \            3030310D00  
+   \   000011   000000000000 DC8 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+   \            000000000000
+   \            000000000000
+   \            0000000000  
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     46   Check_Status
+       46   -> Five_Msec_Delay
+       46 ?CopyMemoryBytes
+     20   Check_Str
+       20   -> Display_Process
+       12   -> Five_Msec_Delay
+       20   -> Five_Msec_Delay
+       20   -> Out_To_LCD
+       20   -> X_Seconds_Delay
+       20   -> lcd_4line
+     54   Get_HostN
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Get_NetM
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Get_NetP
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Get_SSID
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     14   IOT_config
+       14   -> Display_Process
+       14   -> Five_Msec_Delay
+        6   -> Get_HostN
+        6   -> Get_NetM
+        6   -> Get_NetP
+        6   -> Get_SSID
+       14   -> Out_To_LCD
+        6   -> Ping
+        6   -> Reconnect
+        6   -> Save_All
+        6   -> Set_HostN
+        6   -> Set_NetM
+        6   -> Set_NetP
+       14   -> Set_SSID
+        6   -> Socket
+        6   -> Switches_Process
+        6   -> X_Seconds_Delay
+       14   -> lcd_4line
+     20   Listen
+       12   -> All_Off
+       12   -> Check_Str
+       20   -> Display_Process
+       20   -> Five_Msec_Delay
+       12   -> Left_Forward_Off
+       12   -> Left_Forward_On
+       12   -> Left_Reverse_Off
+       12   -> Left_Reverse_On
+       20   -> Out_To_LCD
+       12   -> Right_Forward_Off
+       12   -> Right_Forward_On
+       12   -> Right_Reverse_Off
+       12   -> Right_Reverse_On
+     46   Ping
+       46   -> Five_Msec_Delay
+       46 ?CopyMemoryBytes
+     28   Reconnect
+       12   -> Check_Status
+       12   -> Display_Process
+       20   -> Display_Process
+       28   -> Display_Process
+       12   -> Five_Msec_Delay
+       28   -> Five_Msec_Delay
+       20   -> Get_SSID
+       12   -> Init_LCD
+       20   -> Out_To_LCD
+       28   -> Out_To_LCD
+       12   -> Reset_All
+       12   -> X_Seconds_Delay
+       20   -> X_Seconds_Delay
+     54   Reset_All
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Roam
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Save_All
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Set_HostN
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Set_NetM
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Set_NetP
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     54   Set_SSID
+       54   -> Display_Process
+       46   -> Five_Msec_Delay
+       54   -> Out_To_LCD
+       46 ?CopyMemoryBytes
+     46   Socket
+       46   -> Five_Msec_Delay
+       46 ?CopyMemoryBytes
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      11  ?<Constant "          ">
+       2  ?<Constant " ">
+       1  ?<Constant "">
+      40  ?<Constant "AT&W\r">
+      40  ?<Constant "AT+CFUN=1\r">
+      40  ?<Constant "AT+S.PING= 152.14.99....">
+      40  ?<Constant "AT+S.ROAM\r">
+      40  ?<Constant "AT+S.SCFG=ip_hostname...">
+      40  ?<Constant "AT+S.SCFG=ip_hostname\r">
+      40  ?<Constant "AT+S.SCFG=wifi_mode,1\r">
+      40  ?<Constant "AT+S.SCFG=wifi_mode\r">
+      40  ?<Constant "AT+S.SCFG=wifi_priv_m...">
+      40  ?<Constant "AT+S.SCFG=wifi_priv_m...">_1
+      40  ?<Constant "AT+S.SOCKD=9001\r">
+      40  ?<Constant "AT+S.SSIDTXT=ncsu\r">
+      40  ?<Constant "AT+S.SSIDTXT\r">
+      40  ?<Constant "AT+S.STS=ip_ipaddr\r">
+       9  ?<Constant "Approved">
+       4  ?<Constant "CCW">
+       3  ?<Constant "CW">
+       9  ?<Constant "Checking">
+       9  ?<Constant "Complete">
+      11  ?<Constant "Connecting">
+       4  ?<Constant "For">
+       8  ?<Constant "Forward">
+       9  ?<Constant "Get SSID">
+       4  ?<Constant "Get">
+       9  ?<Constant "Input...">
+       5  ?<Constant "Left">
+       4  ?<Constant "Pin">
+       7  ?<Constant "Pin...">
+       2  ?<Constant "R">
+       6  ?<Constant "Reset">
+       8  ?<Constant "Reverse">
+       6  ?<Constant "Right">
+      11  ?<Constant "Roaming...">
+       5  ?<Constant "Save">
+       9  ?<Constant "Set SSID">
+       4  ?<Constant "Set">
+      11  ?<Constant "Successful">
+       5  ?<Constant "Turn">
+       8  ?<Constant "Waiting">
+      11  ?<Constant "connection">
+       9  ?<Constant "hostname">
+       5  ?<Constant "mode">
+       7  ?<Constant "module">
+       8  ?<Constant "network">
+      11  ?<Constant "network...">
+       8  ?<Constant "privacy">
+       9  ?<Constant "settings">
+       3  ?<Constant "to">
+      94  Check_Status
+     226  Check_Str
+     130  Get_HostN
+     130  Get_NetM
+     130  Get_NetP
+     128  Get_SSID
+     358  IOT_config
+     670  Listen
+      94  Ping
+     890  Reconnect
+     130  Reset_All
+     130  Roam
+     130  Save_All
+     130  Set_HostN
+     130  Set_NetM
+     130  Set_NetP
+     130  Set_SSID
+      94  Socket
+       2  _A_PBIN_L
+       2  _A_PJOUT_L
+       2  _A_UCA0TXBUF_L
+       2  _A_UCA1IE_L
+       2  _A_UCA1TXBUF_L
+
+ 
+ 3 854 bytes in segment CODE
+    10 bytes in segment DATA16_AN
+   815 bytes in segment DATA16_C
+ 
+ 3 854 bytes of CODE  memory
+   815 bytes of CONST memory
+     0 bytes of DATA  memory (+ 10 bytes shared)
+
+Errors: none
+Warnings: none

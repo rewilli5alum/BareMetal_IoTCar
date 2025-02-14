@@ -1,0 +1,254 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# Copyright 1996-2023 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\motor_control.c
+#    Command line  =  
+#        -f
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\motor_control.r43.rsp
+#        (C:\Users\rache\Desktop\BareMetal_IoTCar\motor_control.c -lC
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=32 --hw_workaround=CPU40
+#        --code_model=large) --dependencies=n
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\motor_control.r43.iar_deps
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\motor_control.lst
+#    Object file   =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\motor_control.r43
+#
+###############################################################################
+
+C:\Users\rache\Desktop\BareMetal_IoTCar\motor_control.c
+      1          //***********************************************************************
+      2          //      Title: motor_control.c 
+      3          //      Description: This file handles control for left and right motors
+      4          //      Rachel Williams
+      5          //      November 2015
+      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      7          //***********************************************************************
+      8          
+      9          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x222
+   \   union <unnamed> _A_PBOUT_L
+   \                     _A_PBOUT_L:
+   \   000000                DS8 2
+     10          #include  "functions.h"
+     11          #include "macros.h"
+     12          
+     13          //***********************************************************************
+     14          //      Function name: Left_Forward_On
+     15          //      Description: Turns on forward motion of left motor  
+     16          //      Global variables: NONE
+     17          //      Local variables: NONE
+     18          //      Return: VOID
+     19          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     20          void Left_Forward_On(void){
+   \                     Left_Forward_On:
+     21            P3OUT |= LED7;
+   \   000000   F2D040002202 BIS.B   #0x40, &0x222
+     22           }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     23          
+     24          //***********************************************************************
+     25          //      Function name: Left_Forward_Off
+     26          //      Description: Turns off forward motion of left motor  
+     27          //      Global variables: NONE
+     28          //      Local variables: NONE
+     29          //      Return: VOID
+     30          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     31          void Left_Forward_Off(void){
+   \                     Left_Forward_Off:
+     32            P3OUT &= ~LED7;
+   \   000000   F2C040002202 BIC.B   #0x40, &0x222
+     33           }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     34          
+     35          //***********************************************************************
+     36          //      Function name: Left_Reverse_On
+     37          //      Description: Turns on reverse motion of left motor  
+     38          //      Global variables: NONE
+     39          //      Local variables: NONE
+     40          //      Return: VOID
+     41          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     42          void Left_Reverse_On(void){
+   \                     Left_Reverse_On:
+     43            P3OUT |= LED8;
+   \   000000   F2D080002202 BIS.B   #0x80, &0x222
+     44           }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     45          
+     46          //***********************************************************************
+     47          //      Function name: Left_Reverse_Off
+     48          //      Description: Turns off reverse motion of left motor  
+     49          //      Global variables: NONE
+     50          //      Local variables: NONE
+     51          //      Return: VOID
+     52          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     53          void Left_Reverse_Off(void){
+   \                     Left_Reverse_Off:
+     54            P3OUT &= ~LED8;
+   \   000000   F2C080002202 BIC.B   #0x80, &0x222
+     55           }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     56          
+     57          //***********************************************************************
+     58          //      Function name: Right_Forward_On
+     59          //      Description: Turns on forward motion of right motor  
+     60          //      Global variables: NONE
+     61          //      Local variables: NONE
+     62          //      Return: VOID
+     63          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     64          void Right_Forward_On(void){
+   \                     Right_Forward_On:
+     65            P3OUT |= LED5;
+   \   000000   F2D010002202 BIS.B   #0x10, &0x222
+     66          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     67          
+     68          //***********************************************************************
+     69          //      Function name: Right_Forward_Off
+     70          //      Description: Turns off forward motion of right motor  
+     71          //      Global variables: NONE
+     72          //      Local variables: NONE
+     73          //      Return: VOID
+     74          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     75          void Right_Forward_Off(void){
+   \                     Right_Forward_Off:
+     76            P3OUT &= ~LED5;
+   \   000000   F2C010002202 BIC.B   #0x10, &0x222
+     77          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     78          
+     79          //***********************************************************************
+     80          //      Function name: Right_Reverse_On
+     81          //      Description: Turns on reverse motion of right motor  
+     82          //      Global variables: NONE
+     83          //      Local variables: NONE
+     84          //      Return: VOID
+     85          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     86          void Right_Reverse_On(void){
+   \                     Right_Reverse_On:
+     87            P3OUT |= LED6;
+   \   000000   F2D020002202 BIS.B   #0x20, &0x222
+     88           }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+     89          
+     90          //***********************************************************************
+     91          //      Function name: Right_Reverse_Off
+     92          //      Description: Turns off reverse motion of right motor  
+     93          //      Global variables: NONE
+     94          //      Local variables: NONE
+     95          //      Return: VOID
+     96          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     97          void Right_Reverse_Off(void){
+   \                     Right_Reverse_Off:
+     98            P3OUT &= ~LED6;
+   \   000000   F2C020002202 BIC.B   #0x20, &0x222
+     99          }
+   \   000006   1001         RETA
+   \   000008                REQUIRE _A_PBOUT_L
+    100          
+    101          //***********************************************************************
+    102          //      Function name: All_Off
+    103          //      Description: Turns off all motors   
+    104          //      Global variables: NONE
+    105          //      Local variables: NONE
+    106          //      Return: VOID
+    107          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+    108          void All_Off(void){
+   \                     All_Off:
+    109            Left_Forward_Off();
+   \   000000   ........     CALLA   #Left_Forward_Off
+    110            Right_Forward_Off();
+   \   000004   ........     CALLA   #Right_Forward_Off
+    111            Left_Reverse_Off();
+   \   000008   ........     CALLA   #Left_Reverse_Off
+    112            Right_Reverse_Off(); 
+   \   00000C   ........     CALLA   #Right_Reverse_Off
+    113          }
+   \   000010   1001         RETA
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   All_Off
+        4   -> Left_Forward_Off
+        4   -> Left_Reverse_Off
+        4   -> Right_Forward_Off
+        4   -> Right_Reverse_Off
+      4   Left_Forward_Off
+      4   Left_Forward_On
+      4   Left_Reverse_Off
+      4   Left_Reverse_On
+      4   Right_Forward_Off
+      4   Right_Forward_On
+      4   Right_Reverse_Off
+      4   Right_Reverse_On
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      18  All_Off
+       8  Left_Forward_Off
+       8  Left_Forward_On
+       8  Left_Reverse_Off
+       8  Left_Reverse_On
+       8  Right_Forward_Off
+       8  Right_Forward_On
+       8  Right_Reverse_Off
+       8  Right_Reverse_On
+       2  _A_PBOUT_L
+
+ 
+ 82 bytes in segment CODE
+  2 bytes in segment DATA16_AN
+ 
+ 82 bytes of CODE memory
+  0 bytes of DATA memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: none

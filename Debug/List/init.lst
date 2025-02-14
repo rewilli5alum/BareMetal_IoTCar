@@ -1,0 +1,521 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# Copyright 1996-2023 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\init.c
+#    Command line  =  
+#        -f C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\init.r43.rsp
+#        (C:\Users\rache\Desktop\BareMetal_IoTCar\init.c -lC
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=32 --hw_workaround=CPU40
+#        --code_model=large) --dependencies=n
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\init.r43.iar_deps
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\init.lst
+#    Object file   =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\init.r43
+#
+###############################################################################
+
+C:\Users\rache\Desktop\BareMetal_IoTCar\init.c
+      1          //******************************************************************************
+      2          //      Title: init.c 
+      3          //      Description: This file contains the initialization configurations
+      4          //      Rachel Williams
+      5          //      September 2015
+      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      7          //******************************************************************************
+      8          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x700
+   \   union <unnamed> _A_ADC10CTL0_L
+   \                     _A_ADC10CTL0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x702
+   \   union <unnamed> _A_ADC10CTL1_L
+   \                     _A_ADC10CTL1_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x202
+   \   union <unnamed> _A_PAOUT_L
+   \                     _A_PAOUT_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x204
+   \   union <unnamed> _A_PADIR_L
+   \                     _A_PADIR_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x20a
+   \   union <unnamed> _A_PASEL0_L
+   \                     _A_PASEL0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x20c
+   \   union <unnamed> _A_PASEL1_L
+   \                     _A_PASEL1_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x340
+   \   unsigned short volatile TA0CTL
+   \                     TA0CTL:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x342
+   \   unsigned short volatile TA0CCTL0
+   \                     TA0CCTL0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x352
+   \   unsigned short volatile TA0CCR0
+   \                     TA0CCR0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x360
+   \   unsigned short volatile TA0EX0
+   \                     TA0EX0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5c0
+   \   union <unnamed> _A_UCA0CTLW0_L
+   \                     _A_UCA0CTLW0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5c6
+   \   union <unnamed> _A_UCA0BRW_L
+   \                     _A_UCA0BRW_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5c8
+   \   union <unnamed> _A_UCA0MCTLW_L
+   \                     _A_UCA0MCTLW_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5da
+   \   union <unnamed> _A_UCA0IE_L
+   \                     _A_UCA0IE_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5e0
+   \   union <unnamed> _A_UCA1CTLW0_L
+   \                     _A_UCA1CTLW0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5e6
+   \   union <unnamed> _A_UCA1BRW_L
+   \                     _A_UCA1BRW_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5e8
+   \   union <unnamed> _A_UCA1MCTLW_L
+   \                     _A_UCA1MCTLW_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5fa
+   \   union <unnamed> _A_UCA1IE_L
+   \                     _A_UCA1IE_L:
+   \   000000                DS8 2
+      9          #include  "functions.h"
+     10          #include "macros.h"
+     11          
+     12          //******************************************************************************
+     13          //      Function name: Init_Conditions
+     14          //      Description: Initialization configurations for interrupts and
+     15          //                   display features
+     16          //      Global variables: NONE
+     17          //      Local variables: NONE
+     18          //      Return: VOID
+     19          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     20          void Init_Conditions(void){
+   \                     Init_Conditions:
+     21            // Interrupts are disabled by default, they are enabled here  
+     22            enable_interrupts();
+   \   000000   ........     CALLA   #enable_interrupts
+     23            display_1 = &display_line_1[INIT_ARRAY];
+   \   000004   B240........ MOV.W   #display_line_1, &display_1
+     24            display_2 = &display_line_2[INIT_ARRAY];
+   \   00000A   B240........ MOV.W   #display_line_2, &display_2
+     25            display_3 = &display_line_3[INIT_ARRAY];
+   \   000010   B240........ MOV.W   #display_line_3, &display_3
+     26            display_4 = &display_line_4[INIT_ARRAY];
+   \   000016   B240........ MOV.W   #display_line_4, &display_4
+     27          }
+   \   00001C   1001         RETA
+     28          
+     29          //******************************************************************************
+     30          //      Function name: Init_Timers
+     31          //      Description: Initializes all needed timers  
+     32          //      Global variables: NONE
+     33          //      Local variables: NONE
+     34          //      Return: VOID
+     35          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     36          void Init_Timers(void){
+   \                     Init_Timers:
+     37            Init_Timer_A0(); //
+   \   000000   ........     CALLA   #Init_Timer_A0
+     38            //  Init_Timer_A1(); // 
+     39            //  Init_Timer_B0(); // 
+     40            //  Init_Timer_B1(); //  
+     41            Init_Timer_B2();   //  Required for provided compiled code to work
+   \   000004   ........     CALLA   #Init_Timer_B2
+     42          }
+   \   000008   1001         RETA
+     43          
+     44          //******************************************************************************
+     45          //      Function name: Init_Timer_A0
+     46          //      Description: Initializes Timer A0, sets up both A0_0 and A0_1-A0_2
+     47          //      Global variables: NONE
+     48          //      Local variables: NONE
+     49          //      Return: VOID
+     50          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     51          void Init_Timer_A0(void) {
+   \                     Init_Timer_A0:
+     52            TA0CTL = TASSEL__SMCLK;    // SMCLK source
+   \   000000   B24000024003 MOV.W   #0x200, &0x340
+     53            TA0CTL |= TACLR;           // Resets TA0R, clock divider, count direction
+   \   000006   A2D24003     BIS.W   #0x4, &0x340
+     54            TA0CTL |= MC__CONTINOUS;   // Continuous up to 0xFFFH then back to 0
+   \   00000A   B2D020004003 BIS.W   #0x20, &0x340
+     55            TA0CTL |= ID__2;           // Divide clock by 2
+   \   000010   B2D040004003 BIS.W   #0x40, &0x340
+     56            TA0CTL &= ~TAIE;           // Disable Overflow Interrupt
+   \   000016   A2C34003     BIC.W   #0x2, &0x340
+     57            TA0CTL &= ~TAIFG;          // Clear Overflow Interrupt flag
+   \   00001A   92C34003     BIC.W   #0x1, &0x340
+     58            
+     59            TA0EX0 = TAIDEX_7;         // Divide clock by an additional 8, index bit
+   \   00001E   B24007006003 MOV.W   #0x7, &0x360
+     60            
+     61            TA0CCR0 = TA0CCR0_INTERVAL; // CCR0, time the timer counts up to 
+   \   000024   B2407D005203 MOV.W   #0x7d, &0x352
+     62            TA0CCTL0 |= CCIE;           // CCR0 enable interrupt, as soon as it's 
+   \   00002A   B2D010004203 BIS.W   #0x10, &0x342
+     63            //      initialized, interrupts will come in 
+     64          }
+   \   000030   1001         RETA
+   \   000032                REQUIRE TA0CTL
+   \   000032                REQUIRE TA0EX0
+   \   000032                REQUIRE TA0CCR0
+   \   000032                REQUIRE TA0CCTL0
+     65          
+     66          //******************************************************************************
+     67          //      Function name: ADC_Process
+     68          //      Description: Configures system for ADC sampling and conversion 
+     69          //      Global variables: NONE
+     70          //      Local variables: NONE
+     71          //      Return: VOID
+     72          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     73          void ADC_Process(void){
+   \                     ADC_Process:
+   \                     ??ADC_Process_0:
+     74            while (ADC10CTL1 & BUSY);              // Wait if ADC10 core is active
+   \   000000   92B30207     BIT.W   #0x1, &0x702
+   \   000004   FD2F         JC      ??ADC_Process_0
+     75            ADC10CTL0 |= ADC10ENC + ADC10SC;       // Sampling and conversion start
+   \   000006   B2D003000007 BIS.W   #0x3, &0x700
+     76          } 
+   \   00000C   1001         RETA
+   \   00000E                REQUIRE _A_ADC10CTL1_L
+   \   00000E                REQUIRE _A_ADC10CTL0_L
+     77          
+     78          //******************************************************************************
+     79          //      Function name: Init_Serial_UCA0
+     80          //      Description: Initializing serial port for CPU communication 
+     81          //      Global variables: CPU_Char_Rx, CPU_Char_Tx, cpu_rx_ring_wr,
+     82          //                        cpu_rx_ring_rd, cpu_tx_ring_wr, cpu_tx_ring_rd
+     83          //      Local variables: i 
+     84          //      Return: VOID
+     85          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+     86          void Init_Serial_UCA0(void){
+   \                     Init_Serial_UCA0:
+     87            int i;
+     88            for(i=POSIT_0; i<SMALL_RING_SIZE; i++){
+   \   000000   0F43         MOV.W   #0x0, R15
+   \                     ??Init_Serial_UCA0_0:
+   \   000002   3F902800     CMP.W   #0x28, R15
+   \   000006   0434         JGE     ??Init_Serial_UCA0_2
+     89              USB_Char_Rx[i] = ORIGINAL;                 // USB Rx Buffer
+   \   000008   CF43....     MOV.B   #0x0, USB_Char_Rx(R15)
+     90            }
+   \   00000C   1F53         ADD.W   #0x1, R15
+   \   00000E   F93F         JMP     ??Init_Serial_UCA0_0
+     91            usb_rx_ring_wr = BEGINNING;
+   \                     ??Init_Serial_UCA0_2:
+   \   000010   8243....     MOV.W   #0x0, &usb_rx_ring_wr
+     92            usb_rx_ring_rd = BEGINNING;
+   \   000014   8243....     MOV.W   #0x0, &usb_rx_ring_rd
+     93            
+     94            for(i=ORIGINAL; i<SMALL_RING_SIZE; i++){ 
+   \   000018   0F43         MOV.W   #0x0, R15
+   \                     ??Init_Serial_UCA0_1:
+   \   00001A   3F902800     CMP.W   #0x28, R15
+   \   00001E   0434         JGE     ??Init_Serial_UCA0_3
+     95              USB_Char_Tx[i] = CLEAR_REGISTER;          // USB Tx Buffer
+   \   000020   CF43....     MOV.B   #0x0, USB_Char_Tx(R15)
+     96            }
+   \   000024   1F53         ADD.W   #0x1, R15
+   \   000026   F93F         JMP     ??Init_Serial_UCA0_1
+     97            usb_tx_ring_wr = BEGINNING;
+   \                     ??Init_Serial_UCA0_3:
+   \   000028   8243....     MOV.W   #0x0, &usb_tx_ring_wr
+     98            usb_tx_ring_rd = BEGINNING;
+   \   00002C   8243....     MOV.W   #0x0, &usb_tx_ring_rd
+     99            
+    100            // Configure UART 0
+    101            UCA0CTLW0 = POSIT_0;                         // Use word register
+   \   000030   8243C005     MOV.W   #0x0, &0x5c0
+    102            UCA0CTLW0 |= UCSSEL__SMCLK;                  // Set SMCLK as fBRCLK
+   \   000034   B2D08000C005 BIS.W   #0x80, &0x5c0
+    103            UCA0CTLW0 |= UCSWRST;                        // Set Software reset enable
+   \   00003A   92D3C005     BIS.W   #0x1, &0x5c0
+    104            UCA0BRW = B_RATE_9600;                       // 9,600 Baud
+   \   00003E   B2403400C605 MOV.W   #0x34, &0x5c6
+    105            UCA0MCTLW = UCA1MCTLW_DFLT;                  // UCA0MCTLW = UCSx concatenate 
+   \   000044   B2401149C805 MOV.W   #0x4911, &0x5c8
+    106                                                         //    UCFx concatenate UCOS16;
+    107            
+    108            // re-configuring ports 
+    109            P2SEL0 &= ~USB_TXD;
+   \   00004A   D2C30B02     BIC.B   #0x1, &0x20b
+    110            P2SEL1 |= USB_TXD; 
+   \   00004E   D2D30D02     BIS.B   #0x1, &0x20d
+    111            P2OUT |= USB_TXD; 
+   \   000052   D2D30302     BIS.B   #0x1, &0x203
+    112            P2DIR |= USB_TXD; 
+   \   000056   D2D30502     BIS.B   #0x1, &0x205
+    113            
+    114            P2SEL0 &= ~USB_RXD;
+   \   00005A   E2C30B02     BIC.B   #0x2, &0x20b
+    115            P2SEL1 |= USB_RXD;
+   \   00005E   E2D30D02     BIS.B   #0x2, &0x20d
+    116            P2OUT &= ~USB_RXD; 
+   \   000062   E2C30302     BIC.B   #0x2, &0x203
+    117            P2DIR &= ~USB_RXD;
+   \   000066   E2C30502     BIC.B   #0x2, &0x205
+    118            
+    119            P2SEL1 |= CPU_TXD;
+   \   00006A   F2D020000D02 BIS.B   #0x20, &0x20d
+    120            P2SEL0 &= ~CPU_TXD;
+   \   000070   F2C020000B02 BIC.B   #0x20, &0x20b
+    121            P2OUT  |= CPU_TXD;
+   \   000076   F2D020000302 BIS.B   #0x20, &0x203
+    122            P2DIR  |= CPU_TXD;
+   \   00007C   F2D020000502 BIS.B   #0x20, &0x205
+    123            
+    124            P2SEL1 |= CPU_RXD;
+   \   000082   F2D040000D02 BIS.B   #0x40, &0x20d
+    125            P2SEL0 &= ~CPU_RXD;
+   \   000088   F2C040000B02 BIC.B   #0x40, &0x20b
+    126            P2OUT &= ~CPU_RXD;
+   \   00008E   F2C040000302 BIC.B   #0x40, &0x203
+    127            P2DIR &= ~CPU_RXD;
+   \   000094   F2C040000502 BIC.B   #0x40, &0x205
+    128            
+    129            UCA0CTL1 &= ~UCSWRST; // Release from reset
+   \   00009A   D2C3C005     BIC.B   #0x1, &0x5c0
+    130            UCA0IE |= UCRXIE; // Enable RX interrupt
+   \   00009E   92D3DA05     BIS.W   #0x1, &0x5da
+    131            UCA0IE |= UCTXIE; // Enable TX interrupt 
+   \   0000A2   A2D3DA05     BIS.W   #0x2, &0x5da
+    132          }
+   \   0000A6   1001         RETA
+   \   0000A8                REQUIRE _A_UCA0CTLW0_L
+   \   0000A8                REQUIRE _A_UCA0BRW_L
+   \   0000A8                REQUIRE _A_UCA0MCTLW_L
+   \   0000A8                REQUIRE _A_PASEL0_L
+   \   0000A8                REQUIRE _A_PASEL1_L
+   \   0000A8                REQUIRE _A_PAOUT_L
+   \   0000A8                REQUIRE _A_PADIR_L
+   \   0000A8                REQUIRE _A_UCA0IE_L
+    133          
+    134          //******************************************************************************
+    135          //      Function name: Init_Serial_UCA1
+    136          //      Description: Initializing serial port for CPU communication 
+    137          //      Global variables: CPU_Char_Rx, CPU_Char_Tx, cpu_rx_ring_wr,
+    138          //                        cpu_rx_ring_rd, cpu_tx_ring_wr, cpu_tx_ring_rd
+    139          //      Local variables: i 
+    140          //      Return: VOID
+    141          //******************************************************************************
+
+   \                                 In  segment CODE, align 2
+    142          void Init_Serial_UCA1(void){
+   \                     Init_Serial_UCA1:
+    143            int i;
+    144            for(i=ORIGINAL; i<SMALL_RING_SIZE; i++){
+   \   000000   0F43         MOV.W   #0x0, R15
+   \                     ??Init_Serial_UCA1_0:
+   \   000002   3F902800     CMP.W   #0x28, R15
+   \   000006   0434         JGE     ??Init_Serial_UCA1_2
+    145              CPU_Char_Rx[i] = CLEAR_REGISTER;      // CPU Rx Buffer
+   \   000008   CF43....     MOV.B   #0x0, CPU_Char_Rx(R15)
+    146            }
+   \   00000C   1F53         ADD.W   #0x1, R15
+   \   00000E   F93F         JMP     ??Init_Serial_UCA1_0
+    147            cpu_rx_ring_wr = BEGINNING;
+   \                     ??Init_Serial_UCA1_2:
+   \   000010   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    148            cpu_rx_ring_rd = BEGINNING;
+   \   000014   8243....     MOV.W   #0x0, &cpu_rx_ring_rd
+    149            
+    150            for(i=ORIGINAL; i<SMALL_RING_SIZE; i++){ 
+   \   000018   0F43         MOV.W   #0x0, R15
+   \                     ??Init_Serial_UCA1_1:
+   \   00001A   3F902800     CMP.W   #0x28, R15
+   \   00001E   0434         JGE     ??Init_Serial_UCA1_3
+    151              CPU_Char_Tx[i] = CLEAR_REGISTER;      // CPU Tx Buffer
+   \   000020   CF43....     MOV.B   #0x0, CPU_Char_Tx(R15)
+    152            }
+   \   000024   1F53         ADD.W   #0x1, R15
+   \   000026   F93F         JMP     ??Init_Serial_UCA1_1
+    153            cpu_tx_ring_wr = BEGINNING;
+   \                     ??Init_Serial_UCA1_3:
+   \   000028   8243....     MOV.W   #0x0, &cpu_tx_ring_wr
+    154            cpu_tx_ring_rd = BEGINNING;
+   \   00002C   8243....     MOV.W   #0x0, &cpu_tx_ring_rd
+    155            
+    156            // Configure UART 1
+    157            UCA1CTLW0 = ORIGINAL;         // Use word register
+   \   000030   8243E005     MOV.W   #0x0, &0x5e0
+    158            UCA1CTLW0 |= UCSSEL__SMCLK;   // Set SMCLK as fBRCLK
+   \   000034   B2D08000E005 BIS.W   #0x80, &0x5e0
+    159            UCA1CTLW0 |= UCSWRST;         // Set Software reset enable     
+   \   00003A   92D3E005     BIS.W   #0x1, &0x5e0
+    160            UCA1BRW = B_RATE_9600;          // setting baud rate 
+   \   00003E   B2403400E605 MOV.W   #0x34, &0x5e6
+    161            UCA1MCTLW = UCA1MCTLW_DFLT;
+   \   000044   B2401149E805 MOV.W   #0x4911, &0x5e8
+    162            
+    163            // Re-configuring ports 
+    164            P2SEL0 &= ~USB_TXD;
+   \   00004A   D2C30B02     BIC.B   #0x1, &0x20b
+    165            P2SEL1 |= USB_TXD; 
+   \   00004E   D2D30D02     BIS.B   #0x1, &0x20d
+    166            P2OUT |= USB_TXD; 
+   \   000052   D2D30302     BIS.B   #0x1, &0x203
+    167            P2DIR |= USB_TXD; 
+   \   000056   D2D30502     BIS.B   #0x1, &0x205
+    168            
+    169            P2SEL0 &= ~USB_RXD;
+   \   00005A   E2C30B02     BIC.B   #0x2, &0x20b
+    170            P2SEL1 |= USB_RXD;
+   \   00005E   E2D30D02     BIS.B   #0x2, &0x20d
+    171            P2OUT &= ~USB_RXD; 
+   \   000062   E2C30302     BIC.B   #0x2, &0x203
+    172            P2DIR &= ~USB_RXD;
+   \   000066   E2C30502     BIC.B   #0x2, &0x205
+    173            
+    174            P2SEL1 |= CPU_TXD;
+   \   00006A   F2D020000D02 BIS.B   #0x20, &0x20d
+    175            P2SEL0 &= ~CPU_TXD;
+   \   000070   F2C020000B02 BIC.B   #0x20, &0x20b
+    176            P2OUT  |= CPU_TXD;
+   \   000076   F2D020000302 BIS.B   #0x20, &0x203
+    177            P2DIR  |= CPU_TXD;
+   \   00007C   F2D020000502 BIS.B   #0x20, &0x205
+    178            
+    179            P2SEL1 |= CPU_RXD;
+   \   000082   F2D040000D02 BIS.B   #0x40, &0x20d
+    180            P2SEL0 &= ~CPU_RXD;
+   \   000088   F2C040000B02 BIC.B   #0x40, &0x20b
+    181            P2OUT &= ~CPU_RXD;
+   \   00008E   F2C040000302 BIC.B   #0x40, &0x203
+    182            P2DIR &= ~CPU_RXD;
+   \   000094   F2C040000502 BIC.B   #0x40, &0x205
+    183            
+    184            // Reset release and interrupt enabling 
+    185            UCA1CTL1 &= ~UCSWRST;         // Release from reset
+   \   00009A   D2C3E005     BIC.B   #0x1, &0x5e0
+    186            UCA1IE |= UCRXIE;             // Enable RX interrupt
+   \   00009E   92D3FA05     BIS.W   #0x1, &0x5fa
+    187            UCA1IE |= UCTXIE;             // Enable TX interrupt 
+   \   0000A2   A2D3FA05     BIS.W   #0x2, &0x5fa
+    188          }
+   \   0000A6   1001         RETA
+   \   0000A8                REQUIRE _A_UCA1CTLW0_L
+   \   0000A8                REQUIRE _A_UCA1BRW_L
+   \   0000A8                REQUIRE _A_UCA1MCTLW_L
+   \   0000A8                REQUIRE _A_PASEL0_L
+   \   0000A8                REQUIRE _A_PASEL1_L
+   \   0000A8                REQUIRE _A_PAOUT_L
+   \   0000A8                REQUIRE _A_PADIR_L
+   \   0000A8                REQUIRE _A_UCA1IE_L
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   ADC_Process
+      4   Init_Conditions
+        4   -> enable_interrupts
+      4   Init_Serial_UCA0
+      4   Init_Serial_UCA1
+      4   Init_Timer_A0
+      4   Init_Timers
+        4   -> Init_Timer_A0
+        4   -> Init_Timer_B2
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      14  ADC_Process
+      30  Init_Conditions
+     168  Init_Serial_UCA0
+     168  Init_Serial_UCA1
+      50  Init_Timer_A0
+      10  Init_Timers
+       2  TA0CCR0
+       2  TA0CCTL0
+       2  TA0CTL
+       2  TA0EX0
+       2  _A_ADC10CTL0_L
+       2  _A_ADC10CTL1_L
+       2  _A_PADIR_L
+       2  _A_PAOUT_L
+       2  _A_PASEL0_L
+       2  _A_PASEL1_L
+       2  _A_UCA0BRW_L
+       2  _A_UCA0CTLW0_L
+       2  _A_UCA0IE_L
+       2  _A_UCA0MCTLW_L
+       2  _A_UCA1BRW_L
+       2  _A_UCA1CTLW0_L
+       2  _A_UCA1IE_L
+       2  _A_UCA1MCTLW_L
+
+ 
+ 440 bytes in segment CODE
+  36 bytes in segment DATA16_AN
+ 
+ 440 bytes of CODE memory
+   0 bytes of DATA memory (+ 36 bytes shared)
+
+Errors: none
+Warnings: none

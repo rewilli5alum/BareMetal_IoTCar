@@ -1,0 +1,262 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# Copyright 1996-2023 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\clocks.c
+#    Command line  =  
+#        -f C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\clocks.r43.rsp
+#        (C:\Users\rache\Desktop\BareMetal_IoTCar\clocks.c -lC
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=32 --hw_workaround=CPU40
+#        --code_model=large) --dependencies=n
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\clocks.r43.iar_deps
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\clocks.lst
+#    Object file   =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\clocks.r43
+#
+###############################################################################
+
+C:\Users\rache\Desktop\BareMetal_IoTCar\clocks.c
+      1          //***********************************************************************
+      2          //      Title: clocks.c 
+      3          //      Description: This file contains the clock initializations 
+      4          //      Rachel Williams
+      5          //      September 2015
+      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      7          //***********************************************************************
+      8          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x160
+   \   union <unnamed> _A_CSCTL0_L
+   \                     _A_CSCTL0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x162
+   \   union <unnamed> _A_CSCTL1_L
+   \                     _A_CSCTL1_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x164
+   \   union <unnamed> _A_CSCTL2_L
+   \                     _A_CSCTL2_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x166
+   \   union <unnamed> _A_CSCTL3_L
+   \                     _A_CSCTL3_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x168
+   \   union <unnamed> _A_CSCTL4_L
+   \                     _A_CSCTL4_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x15c
+   \   union <unnamed> _A_WDTCTL_L
+   \                     _A_WDTCTL_L:
+   \   000000                DS8 2
+      9          #include  "functions.h"
+     10          #include  "macros.h"
+     11          
+     12          //***********************************************************************
+     13          //      Function name: Five_Msec_Delay
+     14          //      Description: Creates a delay 
+     15          //      Global variables: milli_counter
+     16          //      Local variables: fivemsec
+     17          //      Return: VOID
+     18          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     19          void Five_Msec_Delay(unsigned int fivemsec){
+   \                     Five_Msec_Delay:
+     20            milli_counter = ORIGINAL;
+   \   000000   8243....     MOV.W   #0x0, &milli_counter
+     21            while(milli_counter < (fivemsec*FIVE_MSEC));
+   \                     ??Five_Msec_Delay_0:
+   \   000004   0F4C         MOV.W   R12, R15
+   \   000006   0E4F         MOV.W   R15, R14
+   \   000008   5F06         RLAM.W  #0x2, R15
+   \   00000A   0F5E         ADD.W   R14, R15
+   \   00000C   829F....     CMP.W   R15, &milli_counter
+   \   000010   F92B         JNC     ??Five_Msec_Delay_0
+     22            milli_counter = ORIGINAL;
+   \   000012   8243....     MOV.W   #0x0, &milli_counter
+     23          }
+   \   000016   1001         RETA
+     24          
+     25          //***********************************************************************
+     26          //      Function name: X_Seconds_Delay
+     27          //      Description: Creates a delay in 1 second intervals  
+     28          //      Global variables: milli_counter
+     29          //      Local variables: sec
+     30          //      Return: VOID
+     31          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     32          void X_Seconds_Delay(unsigned int sec){
+   \                     X_Seconds_Delay:
+     33            if(sec < POSIT_10){
+   \   000000   3C900A00     CMP.W   #0xa, R12
+   \   000004   122C         JC      ??X_Seconds_Delay_1
+     34              milli_counter = ORIGINAL;
+   \   000006   8243....     MOV.W   #0x0, &milli_counter
+     35              while(milli_counter < (sec*ONE_SECOND));
+   \                     ??X_Seconds_Delay_0:
+   \   00000A   0F4C         MOV.W   R12, R15
+   \   00000C   5F0A         RLAM.W  #0x3, R15
+   \   00000E   0E4F         MOV.W   R15, R14
+   \   000010   5F06         RLAM.W  #0x2, R15
+   \   000012   0E5F         ADD.W   R15, R14
+   \   000014   0F5F         RLA.W   R15
+   \   000016   0E5F         ADD.W   R15, R14
+   \   000018   0F5F         RLA.W   R15
+   \   00001A   0E5F         ADD.W   R15, R14
+   \   00001C   0F5F         RLA.W   R15
+   \   00001E   0E5F         ADD.W   R15, R14
+   \   000020   0F5F         RLA.W   R15
+   \   000022   0F5E         ADD.W   R14, R15
+   \   000024   829F....     CMP.W   R15, &milli_counter
+   \   000028   F02B         JNC     ??X_Seconds_Delay_0
+     36            }
+     37            milli_counter = ORIGINAL;
+   \                     ??X_Seconds_Delay_1:
+   \   00002A   8243....     MOV.W   #0x0, &milli_counter
+     38          }
+   \   00002E   1001         RETA
+     39          //***********************************************************************
+     40          //      Function name: Init_Clocks
+     41          //      Description: Clock configurations; clock initialization for the 
+     42          //                   program; initial clock configuration, runs 
+     43          //                   immediately after boot; disables 1ms watchdog timer;
+     44          //                   configure MCLK to 8MHz; configure SMCLK to 8MHz; 
+     45          //                   X1CLK is an unknown speed since X1 oscillator 
+     46          //                   not connected 
+     47          //      Global variables: NONE
+     48          //      Local variables: NONE
+     49          //      Return: VOID
+     50          //***********************************************************************
+
+   \                                 In  segment CODE, align 2
+     51          void Init_Clocks(void){
+   \                     Init_Clocks:
+     52            WDTCTL = WDTPW | WDTHOLD;  // Disable watchdog
+   \   000000   B240805A5C01 MOV.W   #0x5a80, &0x15c
+     53          //  PJSEL0 |= XINR;
+     54          //  PJSEL0 |= XOUTR;
+     55            
+     56          // Clocks:
+     57          // Clock System Control 0 Register
+     58            CSCTL0 = CSKEY;            // Unlock register
+   \   000006   B24000A56001 MOV.W   #0xa500, &0x160
+     59            
+     60          // Clock System Control 1 Register
+     61            CSCTL1 = CLEAR_REGISTER;   // Clear register
+   \   00000C   82436201     MOV.W   #0x0, &0x162
+     62            CSCTL1 &= ~DCORSEL;        // DCO range select. For high-speed devices,
+   \   000010   B2C080006201 BIC.W   #0x80, &0x162
+     63                                       // this bit can be written by the user.
+     64                                       // For low-speed devices, it is always reset.
+     65          //  CSCTL1 |= DCOFSEL_0;     // Set 5.33MHz DCO or 16MHz  
+     66          //  CSCTL1 |= DCOFSEL_1;     // Set 6.67MHz DCO or 20MHz 
+     67          //  CSCTL1 |= DCOFSEL_2;     // Set 5.33MHz DCO or 16MHz
+     68            CSCTL1 |= DCOFSEL_3;       // Set 8MHz DCO or 24MHz
+   \   000016   B2D006006201 BIS.W   #0x6, &0x162
+     69            
+     70          // Clock System Control 2 Register
+     71            CSCTL2 = CLEAR_REGISTER;   // Clear register
+   \   00001C   82436401     MOV.W   #0x0, &0x164
+     72          //  CSCTL2 |= SELA_0;        // set ACLK = XT1; 
+     73            CSCTL2 = SELA_1;           // set ACLK = vlo;
+   \   000020   B24000016401 MOV.W   #0x100, &0x164
+     74            CSCTL2 |= SELS_3;          // set SMCLK = DCO;
+   \   000026   B2D030006401 BIS.W   #0x30, &0x164
+     75            CSCTL2 |= SELM_3;          // set MCLK = DCO
+   \   00002C   B2D003006401 BIS.W   #0x3, &0x164
+     76            
+     77          // Clock System Control 3 Register
+     78            CSCTL3 = CLEAR_REGISTER;   // Clear register
+   \   000032   82436601     MOV.W   #0x0, &0x166
+     79            CSCTL3 |= DIVA_0;          // set ACLK clock divider /1
+   \   000036   924266016601 MOV.W   &0x166, &0x166
+     80            CSCTL3 |= DIVS_0;          // set SMCLK clock divider /1
+   \   00003C   924266016601 MOV.W   &0x166, &0x166
+     81            CSCTL3 |= DIVM_0;          // set MCLK clock divider /1
+   \   000042   924266016601 MOV.W   &0x166, &0x166
+     82            
+     83          // Clock System Control 4 Register
+     84            CSCTL4 = CLEAR_REGISTER;   // Clear register
+   \   000048   82436801     MOV.W   #0x0, &0x168
+     85            CSCTL4 &= ~XT1OFF;         // XT1 is on if XT1 is selected by the port selection and XT1 is not in bypass 
+   \   00004C   92C36801     BIC.W   #0x1, &0x168
+     86            CSCTL4 &= ~SMCLKOFF;       // SMCLK is not Off 
+   \   000050   A2C36801     BIC.W   #0x2, &0x168
+     87            CSCTL4 &= ~XT1BYPASS;      // XT1 sourced from external crystal 
+   \   000054   B2C010006801 BIC.W   #0x10, &0x168
+     88            CSCTL4 &= ~XTS;            // Low-frequency mode
+   \   00005A   B2C020006801 BIC.W   #0x20, &0x168
+     89            CSCTL4 |= XT1DRIVE_0;      // Lowest current consumption for XT1 LF mode. 
+   \   000060   924268016801 MOV.W   &0x168, &0x168
+     90                                       // XT1 oscillator operating range in HF mode is 4 MHz to 8 MHz.
+     91            CSCTL4 |= XT2OFF;          // High Frequency Oscillator 2 (XT2) disable 
+   \   000066   B2D000016801 BIS.W   #0x100, &0x168
+     92            
+     93            CSCTL0_H = CSLOCK;         // Lock registers
+   \   00006C   D2436101     MOV.B   #0x1, &0x161
+     94          //------------------------------------------------------------------------------
+     95          }
+   \   000070   1001         RETA
+   \   000072                REQUIRE _A_WDTCTL_L
+   \   000072                REQUIRE _A_CSCTL0_L
+   \   000072                REQUIRE _A_CSCTL1_L
+   \   000072                REQUIRE _A_CSCTL2_L
+   \   000072                REQUIRE _A_CSCTL3_L
+   \   000072                REQUIRE _A_CSCTL4_L
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   Five_Msec_Delay
+      4   Init_Clocks
+      4   X_Seconds_Delay
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      24  Five_Msec_Delay
+     114  Init_Clocks
+      48  X_Seconds_Delay
+       2  _A_CSCTL0_L
+       2  _A_CSCTL1_L
+       2  _A_CSCTL2_L
+       2  _A_CSCTL3_L
+       2  _A_CSCTL4_L
+       2  _A_WDTCTL_L
+
+ 
+ 186 bytes in segment CODE
+  12 bytes in segment DATA16_AN
+ 
+ 186 bytes of CODE memory
+   0 bytes of DATA memory (+ 12 bytes shared)
+
+Errors: none
+Warnings: none

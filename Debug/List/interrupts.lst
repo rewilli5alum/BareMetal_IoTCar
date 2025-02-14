@@ -1,0 +1,388 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# Copyright 1996-2023 IAR Systems AB.
+# Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  C:\Users\rache\Desktop\BareMetal_IoTCar\interrupts.c
+#    Command line  =  
+#        -f
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\interrupts.r43.rsp
+#        (C:\Users\rache\Desktop\BareMetal_IoTCar\interrupts.c -lC
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\ -o
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\ --no_cse
+#        --no_unroll --no_inline --no_code_motion --no_tbaa --debug
+#        -D__MSP430FR5739__ -e --double=32 --dlib_config "C:\Program Files\IAR
+#        Systems\Embedded Workbench 9.1\430\lib\dlib\dl430xlsfn.h" --core=430X
+#        --data_model=small -On --multiplier=32 --hw_workaround=CPU40
+#        --code_model=large) --dependencies=n
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\interrupts.r43.iar_deps
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\List\interrupts.lst
+#    Object file   =  
+#        C:\Users\rache\Desktop\BareMetal_IoTCar\Debug\Obj\interrupts.r43
+#
+###############################################################################
+
+C:\Users\rache\Desktop\BareMetal_IoTCar\interrupts.c
+      1          //******************************************************************************
+      2          //      Title: interrupts.c
+      3          //      Description: This file contains initialization and configuration for
+      4          //                   all interrupts
+      5          //      Rachel Williams
+      6          //      October 2015
+      7          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      8          //******************************************************************************
+      9          
+     10          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x700
+   \   union <unnamed> _A_ADC10CTL0_L
+   \                     _A_ADC10CTL0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x70a
+   \   union <unnamed> _A_ADC10MCTL0_L
+   \                     _A_ADC10MCTL0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x712
+   \   union <unnamed> _A_ADC10MEM0_L
+   \                     _A_ADC10MEM0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x71e
+   \   union <unnamed> _A_ADC10IV_L
+   \                     _A_ADC10IV_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x352
+   \   unsigned short volatile TA0CCR0
+   \                     TA0CCR0:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5cc
+   \   union <unnamed> _A_UCA0RXBUF_L
+   \                     _A_UCA0RXBUF_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5de
+   \   unsigned short volatile UCA0IV
+   \                     UCA0IV:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5ec
+   \   union <unnamed> _A_UCA1RXBUF_L
+   \                     _A_UCA1RXBUF_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x5fe
+   \   unsigned short volatile UCA1IV
+   \                     UCA1IV:
+   \   000000                DS8 2
+     11          #include  "functions.h"
+     12          #include "macros.h"
+     13          
+     14          //******************************************************************************
+     15          //      Function name: TIMER0_A0_VECTOR 
+     16          //      Description: Sets up timer
+     17          //      Global variables: milli_counter, milli_counter2
+     18          //      Local variables: NONE
+     19          //      Return: VOID
+     20          //******************************************************************************
+     21          #pragma vector = TIMER0_A0_VECTOR 
+
+   \                                 In  segment ISR_CODE, align 2
+     22          __interrupt void Timer0_A0_ISR(void){  
+   \                     Timer0_A0_ISR:
+     23            if(milli_counter >= MAX_MILLI){
+   \   000000   B2901027.... CMP.W   #0x2710, &milli_counter
+   \   000006   0228         JNC     ??Timer0_A0_ISR_0
+     24              milli_counter = ORIGINAL;
+   \   000008   8243....     MOV.W   #0x0, &milli_counter
+     25            }
+     26            
+     27            if(milli_counter == FOURP5_SEC){
+   \                     ??Timer0_A0_ISR_0:
+   \   00000C   B2909411.... CMP.W   #0x1194, &milli_counter
+   \   000012   0420         JNE     ??Timer0_A0_ISR_1
+     28               milli_counter2++; 
+   \   000014   9253....     ADD.W   #0x1, &milli_counter2
+     29               //PJOUT ^= LED3;  
+     30               milli_counter= ORIGINAL;
+   \   000018   8243....     MOV.W   #0x0, &milli_counter
+     31            }
+     32            milli_counter++;
+   \                     ??Timer0_A0_ISR_1:
+   \   00001C   9253....     ADD.W   #0x1, &milli_counter
+     33            TA0CCR0 += TA0CCR0_INTERVAL; // Add Offset to TACCR0, get new interrupt
+   \   000020   B2507D005203 ADD.W   #0x7d, &0x352
+     34                                         // same # of counts b/w interrupts 
+     35          }
+   \   000026   0013         RETI
+   \   000028                REQUIRE TA0CCR0
+     36          
+     37          //******************************************************************************
+     38          //      Function name: ADC10_ISR 
+     39          //      Description: Sets up ADC for overall system 
+     40          //      Global variables: ADC_Left_Detector, ADC_Right_Detector, ADC_Thumb_Wheel
+     41          //      Local variables: NONE
+     42          //      Return: VOID
+     43          //******************************************************************************
+     44          #pragma vector=ADC10_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     45          __interrupt void ADC10_ISR(void){
+   \                     ADC10_ISR:
+   \   000000   1F15         PUSHM.W #0x2, R15
+     46            switch(__even_in_range(ADC10IV,POSIT_12)) {
+   \   000002   1F421E07     MOV.W   &0x71e, R15
+   \   000006   E00F         ADDA    R15, PC
+   \                     `?<Jumptable for ADC10_ISR>_0`:
+   \   000008   283C         JMP     ??ADC10_ISR_0
+   \   00000A   273C         JMP     ??ADC10_ISR_0
+   \   00000C   263C         JMP     ??ADC10_ISR_0
+   \   00000E   253C         JMP     ??ADC10_ISR_0
+   \   000010   243C         JMP     ??ADC10_ISR_0
+   \   000012   233C         JMP     ??ADC10_ISR_0
+   \   000014   003C         JMP     ??ADC10_ISR_5
+     47            case POSIT_0: break; // No interrupt
+     48            case POSIT_2: break; // conversion result overflow
+     49            case POSIT_4: break; // conversion time overflow
+     50            case POSIT_6: break; // ADC10HI
+     51            case POSIT_8: break; // ADC10LO
+     52            case POSIT_10: break;// ADC10IN
+     53            case POSIT_12:
+     54              ADC10CTL0 &= ~ADC10ENC;    // stops sampling and conversion
+   \                     ??ADC10_ISR_5:
+   \   000016   A2C30007     BIC.W   #0x2, &0x700
+     55              
+     56              // preparing to change ADC channels
+     57              switch(chng_channel++){
+   \   00001A   1F42....     MOV.W   &chng_channel, R15
+   \   00001E   0E4F         MOV.W   R15, R14
+   \   000020   1E53         ADD.W   #0x1, R14
+   \   000022   824E....     MOV.W   R14, &chng_channel
+   \   000026   0F83         SUB.W   #0x0, R15
+   \   000028   0524         JEQ     ??ADC10_ISR_2
+   \   00002A   1F83         SUB.W   #0x1, R15
+   \   00002C   0924         JEQ     ??ADC10_ISR_3
+   \   00002E   1F83         SUB.W   #0x1, R15
+   \   000030   0E24         JEQ     ??ADC10_ISR_4
+   \   000032   133C         JMP     ??ADC10_ISR_0
+     58              case POSIT_0:                     // Left Detector 
+     59                ADC10MCTL0 = ADC10INCH_1;       // upcoming: channel A1
+   \                     ??ADC10_ISR_2:
+   \   000034   92430A07     MOV.W   #0x1, &0x70a
+     60                ADC_Left_Detector = ADC10MEM0;  //  channel is read to detector 
+   \   000038   92421207.... MOV.W   &0x712, &ADC_Left_Detector
+     61                break;
+   \   00003E   0D3C         JMP     ??ADC10_ISR_0
+     62              case POSIT_1:                      // Right Detector
+     63                ADC10MCTL0 = ADC10INCH_3;        // upcoming: channel A3  
+   \                     ??ADC10_ISR_3:
+   \   000040   B24003000A07 MOV.W   #0x3, &0x70a
+     64                ADC_Right_Detector = ADC10MEM0;  // channel is read to detector 
+   \   000046   92421207.... MOV.W   &0x712, &ADC_Right_Detector
+     65                break;
+   \   00004C   063C         JMP     ??ADC10_ISR_0
+     66              case POSIT_2:                      // Thumb Wheel
+     67                ADC10MCTL0 = ADC10INCH_11;       // upcoming: channel A11           
+   \                     ??ADC10_ISR_4:
+   \   00004E   B2400B000A07 MOV.W   #0xb, &0x70a
+     68                ADC_Thumb = ADC10MEM0;           // channel is read to thumb wheel           
+   \   000054   92421207.... MOV.W   &0x712, &ADC_Thumb
+     69                break; 
+     70              default: break;
+     71              }
+     72              break; 
+     73            default:break; 
+     74            }
+     75          }
+   \                     ??ADC10_ISR_0:
+   \   00005A   1E17         POPM.W  #0x2, R15
+   \   00005C   0013         RETI
+   \   00005E                REQUIRE _A_ADC10CTL0_L
+   \   00005E                REQUIRE _A_ADC10MCTL0_L
+   \   00005E                REQUIRE _A_ADC10MEM0_L
+   \   00005E                REQUIRE _A_ADC10IV_L
+     76          
+     77          //******************************************************************************
+     78          //      Function name: USCI_A0_ISR
+     79          //      Description: Transmission and reception interrupt for USCI_A0
+     80          //      Global variables: usb_rx_ring_wr, temp, USB_Char_Rx[] 
+     81          //      Local variables: NONE
+     82          //      Return: VOID
+     83          //******************************************************************************
+     84          #pragma vector=USCI_A0_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     85          __interrupt void USCI_A0_ISR(void){
+   \                     USCI_A0_ISR:
+   \   000000   1F15         PUSHM.W #0x2, R15
+     86            unsigned int temp;
+     87            switch(__even_in_range(UCA0IV,UCA1IV_DFLT)){
+   \   000002   1E42DE05     MOV.W   &0x5de, R14
+   \   000006   E00E         ADDA    R14, PC
+   \                     `?<Jumptable for USCI_A0_ISR>_0`:
+   \   000008   143C         JMP     ??USCI_A0_ISR_2
+   \   00000A   033C         JMP     ??USCI_A0_ISR_3
+   \   00000C   123C         JMP     ??USCI_A0_ISR_2
+   \   00000E   113C         JMP     ??USCI_A0_ISR_2
+   \   000010   103C         JMP     ??USCI_A0_ISR_2
+     88            case POSIT_0:                          // Vector 0 - no interrupt
+     89              break;
+     90            case POSIT_2:                          // Vector 2 - RXIFG
+     91              temp = usb_rx_ring_wr;
+   \                     ??USCI_A0_ISR_3:
+   \   000012   1F42....     MOV.W   &usb_rx_ring_wr, R15
+     92              USB_Char_Rx[temp] = UCA0RXBUF;        // RX -> USB_Char_Rx character
+   \   000016   1E42CC05     MOV.W   &0x5cc, R14
+   \   00001A   CF4E....     MOV.B   R14, USB_Char_Rx(R15)
+     93              if (++usb_rx_ring_wr >= (SMALL_RING_SIZE)){
+   \   00001E   1E42....     MOV.W   &usb_rx_ring_wr, R14
+   \   000022   1E53         ADD.W   #0x1, R14
+   \   000024   824E....     MOV.W   R14, &usb_rx_ring_wr
+   \   000028   3E902800     CMP.W   #0x28, R14
+   \   00002C   0228         JNC     ??USCI_A0_ISR_2
+     94                usb_rx_ring_wr = BEGINNING;         // Circular buffer back to beginning
+   \   00002E   8243....     MOV.W   #0x0, &usb_rx_ring_wr
+     95              }
+     96              break;
+     97            case POSIT_4:                          // Vector 4 – TXIFG
+     98              break;
+     99            default: break;
+    100            }
+    101          }
+   \                     ??USCI_A0_ISR_2:
+   \   000032   1E17         POPM.W  #0x2, R15
+   \   000034   0013         RETI
+   \   000036                REQUIRE _A_UCA0RXBUF_L
+   \   000036                REQUIRE UCA0IV
+    102          
+    103          //******************************************************************************
+    104          //      Function name: USCI_A1_ISR
+    105          //      Description: Transmission and reception interrupt for USCI_A1
+    106          //      Global variables: cpu_rx_ring_wr, temp, temp1 
+    107          //      Local variables: NONE
+    108          //      Return: VOID
+    109          //******************************************************************************
+    110          #pragma vector=USCI_A1_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+    111          __interrupt void USCI_A1_ISR(void){
+   \                     USCI_A1_ISR:
+   \   000000   1F15         PUSHM.W #0x2, R15
+    112            switch(__even_in_range(UCA1IV,UCA1IV_DFLT)){
+   \   000002   1F42FE05     MOV.W   &0x5fe, R15
+   \   000006   E00F         ADDA    R15, PC
+   \                     `?<Jumptable for USCI_A1_ISR>_0`:
+   \   000008   1B3C         JMP     ??USCI_A1_ISR_1
+   \   00000A   033C         JMP     ??USCI_A1_ISR_3
+   \   00000C   193C         JMP     ??USCI_A1_ISR_1
+   \   00000E   183C         JMP     ??USCI_A1_ISR_1
+   \   000010   173C         JMP     ??USCI_A1_ISR_1
+    113            case POSIT_0:                               // Vector 0 - no interrupt
+    114              break;
+    115            case POSIT_2:                               // Vector 2 - RXIFG
+    116              enabled_RX = POSIT_1; 
+   \                     ??USCI_A1_ISR_3:
+   \   000012   D243....     MOV.B   #0x1, &enabled_RX
+    117              temp = cpu_rx_ring_wr; 
+   \   000016   9242........ MOV.W   &cpu_rx_ring_wr, &temp
+    118              IOT_Char_Rx[temp] = UCA1RXBUF;           // RX -> IOT_Char_Rx character
+   \   00001C   1E42EC05     MOV.W   &0x5ec, R14
+   \   000020   1F42....     MOV.W   &temp, R15
+   \   000024   CF4E....     MOV.B   R14, IOT_Char_Rx(R15)
+    119              if (++cpu_rx_ring_wr >= (SMALL_RING_SIZE)){
+   \   000028   1F42....     MOV.W   &cpu_rx_ring_wr, R15
+   \   00002C   1F53         ADD.W   #0x1, R15
+   \   00002E   824F....     MOV.W   R15, &cpu_rx_ring_wr
+   \   000032   3F902800     CMP.W   #0x28, R15
+   \   000036   0228         JNC     ??USCI_A1_ISR_2
+    120                cpu_rx_ring_wr = BEGINNING;           // Circular buffer back to beginning
+   \   000038   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
+    121              }
+    122              enabled_RX = ORIGINAL;
+   \                     ??USCI_A1_ISR_2:
+   \   00003C   C243....     MOV.B   #0x0, &enabled_RX
+    123              break;
+    124            case POSIT_4:                               // Vector 4 – TXIFG
+    125              break;
+    126            default: break;
+    127            }
+    128          }
+   \                     ??USCI_A1_ISR_1:
+   \   000040   1E17         POPM.W  #0x2, R15
+   \   000042   0013         RETI
+   \   000044                REQUIRE _A_UCA1RXBUF_L
+   \   000044                REQUIRE UCA1IV
+
+   \                                 In  segment INTVEC, offset 0x56, root
+   \                     `??USCI_A1_ISR::??INTVEC 86`:
+   \   000056   ....         DC16    USCI_A1_ISR
+
+   \                                 In  segment INTVEC, offset 0x5a, root
+   \                     `??Timer0_A0_ISR::??INTVEC 90`:
+   \   00005A   ....         DC16    Timer0_A0_ISR
+
+   \                                 In  segment INTVEC, offset 0x5c, root
+   \                     `??ADC10_ISR::??INTVEC 92`:
+   \   00005C   ....         DC16    ADC10_ISR
+
+   \                                 In  segment INTVEC, offset 0x60, root
+   \                     `??USCI_A0_ISR::??INTVEC 96`:
+   \   000060   ....         DC16    USCI_A0_ISR
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      8   ADC10_ISR
+      4   Timer0_A0_ISR
+      8   USCI_A0_ISR
+      8   USCI_A1_ISR
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      94  ADC10_ISR
+       2  ADC10_ISR::??INTVEC 92
+       2  TA0CCR0
+      40  Timer0_A0_ISR
+       2  Timer0_A0_ISR::??INTVEC 90
+       2  UCA0IV
+       2  UCA1IV
+      54  USCI_A0_ISR
+       2  USCI_A0_ISR::??INTVEC 96
+      68  USCI_A1_ISR
+       2  USCI_A1_ISR::??INTVEC 86
+       2  _A_ADC10CTL0_L
+       2  _A_ADC10IV_L
+       2  _A_ADC10MCTL0_L
+       2  _A_ADC10MEM0_L
+       2  _A_UCA0RXBUF_L
+       2  _A_UCA1RXBUF_L
+
+ 
+  18 bytes in segment DATA16_AN
+   8 bytes in segment INTVEC
+ 256 bytes in segment ISR_CODE
+ 
+ 256 bytes of CODE  memory
+   0 bytes of CONST memory (+  8 bytes shared)
+   0 bytes of DATA  memory (+ 18 bytes shared)
+
+Errors: none
+Warnings: none

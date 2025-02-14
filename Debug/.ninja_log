@@ -1,0 +1,54 @@
+# ninja log v5
+13	311	7612737546046021	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/init.r43	7af60bde2afa3f26
+53	344	7612737546046021	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/switch.r43	354321e5d8e6c3a8
+4	250	7612737545577831	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/clocks.r43	c890d6f2a0d00245
+44	374	7612737546683198	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/ports.r43	7706918f7699015b
+28	267	7612737545802198	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/motor_control.r43	d4675b8933957863
+64	496	7612737548105953	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/IOT.r43	ededdcb6206bb30e
+20	336	7612737545968016	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/display.r43	3528ad59f01f14ff
+272	444	7612737547638637	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/system.r43	79e539d24adc64f2
+73	322	7612737546440402	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/interrupts.r43	27c4282692ca39a5
+254	452	7612737547638637	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+500	679	7612737550015777	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+19	492	7612740303456975	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/clocks.r43	c890d6f2a0d00245
+3	504	7612740303519042	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/init.r43	7af60bde2afa3f26
+27	567	7612740303826746	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/motor_control.r43	d4675b8933957863
+12	637	7612740304812698	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/display.r43	3528ad59f01f14ff
+496	686	7612740305430027	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/interrupts.r43	27c4282692ca39a5
+35	701	7612740305469800	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/ports.r43	7706918f7699015b
+508	707	7612740305618971	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/system.r43	79e539d24adc64f2
+54	721	7612740305658111	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/switch.r43	354321e5d8e6c3a8
+64	753	7612740306034245	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+44	798	7612740306526582	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/IOT.r43	ededdcb6206bb30e
+802	1005	7612740308752269	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+20	507	7612750590460177	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/clocks.r43	c890d6f2a0d00245
+3	520	7612750590777948	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/display.r43	3528ad59f01f14ff
+28	594	7612750591460064	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/interrupts.r43	27c4282692ca39a5
+13	651	7612750592119459	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/init.r43	7af60bde2afa3f26
+47	691	7612750592461426	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/switch.r43	354321e5d8e6c3a8
+510	724	7612750592909203	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/ports.r43	7706918f7699015b
+55	733	7612750592752994	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+532	738	7612750593002564	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/system.r43	79e539d24adc64f2
+38	771	7612750593285416	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/motor_control.r43	d4675b8933957863
+66	998	7612750595317386	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/IOT.r43	ededdcb6206bb30e
+4	189	7612750858420470	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+191	371	7612750860285152	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+5	166	7612751017006548	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+4	249	7612751316493008	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+258	465	7612751319186653	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+5	194	7612751423435254	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+198	367	7612751425250818	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+4	190	7612751480081528	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+5	212	7612752246802252	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+4	213	7612752957996807	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+218	429	7612752960377441	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+5	479	7612754194329025	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+482	694	7612754196704912	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+3	177	7612754750575662	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+180	347	7612754752309501	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+4	371	7612757564592434	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+375	556	7612757566684796	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+6	239	7612759442354963	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+245	481	7612759444835463	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
+6	452	7612760597395614	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Obj/main.r43	ec203d1f017e7e08
+455	683	7612760599786508	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/Exe/Project 08.d43	fa5197974257d0f3
