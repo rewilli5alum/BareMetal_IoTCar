@@ -50350,7 +50350,7 @@
     "display": "void Init_Conditions(void)",
     "location": {
       "column": "6",
-      "line": "25",
+      "line": "29",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "Init_Conditions",
@@ -50364,7 +50364,7 @@
     "display": "void Init_Timers(void)",
     "location": {
       "column": "6",
-      "line": "42",
+      "line": "46",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "Init_Timers",
@@ -50378,7 +50378,7 @@
     "display": "void Init_Timer_A0(void)",
     "location": {
       "column": "6",
-      "line": "57",
+      "line": "61",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "Init_Timer_A0",
@@ -50392,7 +50392,7 @@
     "display": "void ADC_Process(void)",
     "location": {
       "column": "6",
-      "line": "80",
+      "line": "84",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "ADC_Process",
@@ -50406,7 +50406,7 @@
     "display": "void Init_Serial_UCA0(void)",
     "location": {
       "column": "6",
-      "line": "93",
+      "line": "97",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "Init_Serial_UCA0",
@@ -50414,13 +50414,13 @@
     "scope": null
   },
   {
-    "ID": "c:init.c@4167@F@Init_Serial_UCA0@i",
+    "ID": "c:init.c@4216@F@Init_Serial_UCA0@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "7",
-      "line": "94",
+      "line": "98",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "i",
@@ -50434,7 +50434,7 @@
     "display": "void Init_Serial_UCA1(void)",
     "location": {
       "column": "6",
-      "line": "149",
+      "line": "153",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "Init_Serial_UCA1",
@@ -50442,13 +50442,13 @@
     "scope": null
   },
   {
-    "ID": "c:init.c@6118@F@Init_Serial_UCA1@i",
+    "ID": "c:init.c@6167@F@Init_Serial_UCA1@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "7",
-      "line": "150",
+      "line": "154",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\init.c"
     },
     "name": "i",
