@@ -50672,7 +50672,7 @@
     "display": "void Out_To_LCD(char *, int, char *, int, char *, int, char *, int)",
     "location": {
       "column": "6",
-      "line": "28",
+      "line": "29",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\display.c"
     },
     "name": "Out_To_LCD",
@@ -50686,7 +50686,7 @@
     "display": "void Display_Process(void)",
     "location": {
       "column": "6",
-      "line": "49",
+      "line": "50",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\display.c"
     },
     "name": "Display_Process",
