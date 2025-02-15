@@ -14,6 +14,10 @@
 #include  "functions.h"
 #include "macros.h"
 
+// Global Variables 
+
+// Constant Variables
+
 //------------------------------------------------------------------------------
 //      Function name: Init_Conditions
 //      Description: Initialization configurations for interrupts and
