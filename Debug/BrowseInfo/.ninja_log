@@ -1,102 +1,31 @@
 # ninja log v5
-18	183	7612747837436314	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
-55	1062	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/ports.xcl	a8e0bf3e3ab46693
 50	1052	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/interrupts.xcl	3c4edf0bed302719
-11	198	7612747837521161	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/IOT.pbi	6259df92e8c863e2
-74	1125	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.xcl	b3013b1934e51aaf
-45	1109	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/clocks.xcl	fc0d1309262d897d
+3	79	7613569144956739	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
+55	1062	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/ports.xcl	a8e0bf3e3ab46693
 174	280	7612747838445246	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/system.pbi	2c80ab146b27722a
 1	1057	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.xcl	cca1b1ed4b8fbb85
+45	1109	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/clocks.xcl	fc0d1309262d897d
+11	198	7612747837521161	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/IOT.pbi	6259df92e8c863e2
+74	1125	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.xcl	b3013b1934e51aaf
 65	1151	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/IOT.xcl	17b75369f04989b1
 41	1104	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/display.xcl	29c5cd0afe6b3842
-3	86	7612750897201872	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
 60	1172	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/motor_control.xcl	451b4742e003c5d9
+4	88	7613542369416114	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
 1053	1196	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/switch.xcl	4dd524e0db690cff
 1058	1222	7612642220000000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/system.xcl	51dc802d0e72f42f
-162	291	7612747838445246	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/ports.pbi	f207f848559797f7
 24	172	7612747837321074	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/clocks.pbi	9f77f8a3c5f642e
-32	186	7612747837481523	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/display.pbi	594183f31bef5e3b
+162	291	7612747838445246	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/ports.pbi	f207f848559797f7
+3	91	7613575559884831	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/display.pbi	594183f31bef5e3b
 46	201	7612747837543948	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/switch.pbi	7a84601c3035b985
 3	160	7612747837265921	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/interrupts.pbi	1474b427bd01f48b
 39	212	7612747837639645	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/motor_control.pbi	9ed9d97be2ade681
 281	318	7612747838776014	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part3.pbi	5e5d7070644276f7
-188	289	7612747838445246	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
-87	139	7612750897707040	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-141	206	7612750898444722	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-292	347	7612747839071346	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part2.pbi	8771de72bdc2afd5
-208	851	7612750904144918	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-4	86	7612751057949795	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-89	220	7612751059360393	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-221	280	7612751059853556	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-281	915	7612751065623885	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	88	7612751320922916	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-90	212	7612751322188704	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-214	274	7612751322813653	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-276	930	7612751328809901	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	88	7612751431509625	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-90	215	7612751432756305	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-216	282	7612751433414017	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-283	909	7612751439366897	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	86	7612751491357952	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-87	208	7612751492605456	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-210	277	7612751493290281	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-278	953	7612751499383173	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	92	7612752258249060	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-94	177	7612752259100764	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-178	242	7612752259749400	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-245	900	7612752265703109	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	89	7612752974262948	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-91	221	7612752975606583	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-223	285	7612752976233574	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-287	955	7612752982251373	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	87	7612754198275594	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-89	219	7612754199729233	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-221	288	7612754200379682	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-291	939	7612754206635000	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	88	7612754712631417	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-90	166	7612754713424002	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-167	227	7612754714048866	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-229	876	7612754719877754	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-5	117	7612757550229958	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-119	201	7612757551013376	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-203	268	7612757551795305	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-269	988	7612757558436462	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	89	7612759479498003	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-90	146	7612759480128632	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-148	211	7612759480757911	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-212	849	7612759486587539	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-6	96	7612760601354189	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-98	180	7612760602305582	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-182	251	7612760602942113	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-252	974	7612760609600740	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-120	253	7613541286430995	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
-254	392	7613541287857201	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-393	508	7613541289027643	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-509	2604	7613541309704650	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-4	88	7613542369416114	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/main.pbi	796e270da7ffa2d1
+92	153	7613575560540741	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
 89	153	7613542370094787	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part1.pbi	9e919a1cd47e6377
-156	236	7613542370977203	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-237	949	7613542377624060	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	63	7613551303705884	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
-65	157	7613551304664868	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
-158	205	7613551305145014	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-206	695	7613551309451001	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-<<<<<<< HEAD
-4	84	7613558986455713	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
-85	133	7613558987089095	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
-135	201	7613558987771259	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-203	842	7613558993741983	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-=======
-4	87	7613556758303541	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
-89	170	7613556759098970	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
-171	243	7613556759835737	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-245	955	7613556766346463	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
->>>>>>> reviewInit.c
-4	93	7613568581306325	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
-95	173	7613568582107800	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
-174	242	7613568582823364	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-243	879	7613568588469896	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
-3	79	7613569144956739	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/init.pbi	5c88cfc3f7930f51
-80	134	7613569145505767	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
-136	195	7613569146099512	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
-197	804	7613569151655676	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
+292	347	7612747839071346	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part2.pbi	8771de72bdc2afd5
+155	234	7613575561325565	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
+236	960	7613575567800317	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
+4	97	7613577738753935	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/display.pbi	594183f31bef5e3b
+98	155	7613577739317129	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08_part0.pbi	1c08f4de0cb00b2d
+156	218	7613577739972457	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbd	38450d1e5b61febe
+219	830	7613577745816554	C:/Users/rache/Desktop/BareMetal_IoTCar/Debug/BrowseInfo/Project 08.pbw	a68f953988f5d26
