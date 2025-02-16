@@ -50624,7 +50624,7 @@
     "scope": null
   },
   {
-    "ID": "c:init.c@4216@F@Init_Serial_UCA0@i",
+    "ID": "c:init.c@4213@F@Init_Serial_UCA0@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
@@ -50652,7 +50652,7 @@
     "scope": null
   },
   {
-    "ID": "c:init.c@6167@F@Init_Serial_UCA1@i",
+    "ID": "c:init.c@6164@F@Init_Serial_UCA1@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
@@ -50672,7 +50672,7 @@
     "display": "void Out_To_LCD(char *, int, char *, int, char *, int, char *, int)",
     "location": {
       "column": "6",
-      "line": "29",
+      "line": "28",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\display.c"
     },
     "name": "Out_To_LCD",
@@ -50686,7 +50686,7 @@
     "display": "void Display_Process(void)",
     "location": {
       "column": "6",
-      "line": "50",
+      "line": "49",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\display.c"
     },
     "name": "Display_Process",
@@ -52408,7 +52408,7 @@
     "display": "void Switches_Process(void)",
     "location": {
       "column": "6",
-      "line": "20",
+      "line": "23",
       "path": "C:\\Users\\rache\\Desktop\\BareMetal_IoTCar\\switch.c"
     },
     "name": "Switches_Process",

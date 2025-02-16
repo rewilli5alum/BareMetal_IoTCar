@@ -16,7 +16,6 @@
 // Global Variables 
 
 // Constant Variables 
-// added a comment here 
 
 //------------------------------------------------------------------------------
 //      Function name: Out_To_LCD

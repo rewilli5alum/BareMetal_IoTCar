@@ -93,7 +93,12 @@ void main(void)
     tens_num = NUM_BASE;
     hundreds_num = NUM_BASE;
     menu_type = ORIGINAL;
-    lcd_BIG_mid();
+    //lcd_BIG_mid();
+    
+    // Initializing pointers used for updating the display 
+    //display_1 = 
+    
+    
    
     // Initial display 
     display_1 = "Rachel";

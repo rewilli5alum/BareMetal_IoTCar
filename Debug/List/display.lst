@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          15/Feb/2025  20:05:18
 # Copyright 1996-2023 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
 #
@@ -34,92 +34,100 @@
 
 C:\Users\rache\Desktop\BareMetal_IoTCar\display.c
       1          //******************************************************************************
-      2          //      Title: display.c 
-      3          //      Description: This file handles display output 
-      4          //      Rachel Williams
-      5          //      September 2015
-      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
-      7          //******************************************************************************
-      8          #include  "msp430.h"
-      9          #include  "functions.h"
-     10          #include "macros.h"
-     11          
-     12          //******************************************************************************
-     13          //      Function name: Display_Process
-     14          //      Description: Updates display to LCD screen  
-     15          //      Global variables: display_1, display_2, display_3, display_4,
-     16          //                        LCD_HOME_L1, LCD_HOME_L2, LCD_HOME_L3, 
-     17          //                        LCD_HOME_L4, posL1, posL2, posL3, posL4
-     18          //      Local variables: NONE
-     19          //      Return: VOID
-     20          //******************************************************************************
+      2          //   Name: display.c
+      3          //   Author: Rachel E. Williams
+      4          //   Date Created: September 9 2015 (9/9/2015)
+      5          //   Last Updated: 2/15/2025
+      6          //   Description: This file handles displaying information to the LCD
+      7          //   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      8          //   Updated revisions built with IAR Embedded Workbench - MSP430 V8.10.3
+      9          //******************************************************************************   
+     10          
+     11          // #includes 
+     12          #include  "msp430.h"
+     13          #include  "functions.h"
+     14          #include "macros.h"
+     15          
+     16          // Global Variables 
+     17          
+     18          // Constant Variables 
+     19          
+     20          //------------------------------------------------------------------------------
+     21          //      Function name: Out_To_LCD
+     22          //      Description: Holds values for LCD before update  
+     23          //      Global variables: NONE
+     24          //      Local variables: L1_line[], L1pos, L2_line[], L2pos, 
+     25          //                       L3_line[], L3pos, L4_line[], L4pos
+     26          //      Return: VOID
+     27          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     21          void Display_Process(void){
-   \                     Display_Process:
-     22            ClrDisplay();
-   \   000000   ........     CALLA   #ClrDisplay
-     23            lcd_out(display_1, LCD_HOME_L1, posL1);
-   \   000004   5E42....     MOV.B   &posL1, R14
-   \   000008   7D408000     MOV.B   #0x80, R13
-   \   00000C   1C42....     MOV.W   &display_1, R12
-   \   000010   ........     CALLA   #lcd_out
-     24            lcd_out(display_2, LCD_HOME_L2, posL2);
-   \   000014   5E42....     MOV.B   &posL2, R14
-   \   000018   7D40A000     MOV.B   #0xa0, R13
-   \   00001C   1C42....     MOV.W   &display_2, R12
-   \   000020   ........     CALLA   #lcd_out
-     25            lcd_out(display_3, LCD_HOME_L3, posL3);
-   \   000024   5E42....     MOV.B   &posL3, R14
-   \   000028   7D40C000     MOV.B   #0xc0, R13
-   \   00002C   1C42....     MOV.W   &display_3, R12
-   \   000030   ........     CALLA   #lcd_out
-     26            lcd_out(display_4, LCD_HOME_L4, posL4);
-   \   000034   5E42....     MOV.B   &posL4, R14
-   \   000038   7D40E000     MOV.B   #0xe0, R13
-   \   00003C   1C42....     MOV.W   &display_4, R12
-   \   000040   ........     CALLA   #lcd_out
-     27           }
-   \   000044   1001         RETA
-     28          
-     29          //******************************************************************************
-     30          //      Function name: Out_To_LCD
-     31          //      Description: Holds values for LCD before update  
-     32          //      Global variables: NONE
-     33          //      Local variables: L1_line[], L1pos, L2_line[], L2pos, 
-     34          //                       L3_line[], L3pos, L4_line[], L4pos
-     35          //      Return: VOID
-     36          //******************************************************************************
-
-   \                                 In  segment CODE, align 2
-     37          void Out_To_LCD(char L1_line[], int L1pos, char L2_line[], int L2pos, 
+     28          void Out_To_LCD(char L1_line[], int L1pos, char L2_line[], int L2pos, 
    \                     Out_To_LCD:
-     38                          char L3_line[], int L3pos, char L4_line[], int L4pos){
+     29                          char L3_line[], int L3pos, char L4_line[], int L4pos){
    \   000000   3B15         PUSHM.W #0x4, R11
    \   000002   0A4D         MOV.W   R13, R10
    \   000004   18410C00     MOV.W   0xc(SP), R8
    \   000008   1B410E00     MOV.W   0xe(SP), R11
    \   00000C   19411000     MOV.W   0x10(SP), R9
    \   000010   1D411200     MOV.W   0x12(SP), R13
-     39            display_1 = L1_line;
+     30            display_1 = L1_line;
    \   000014   824C....     MOV.W   R12, &display_1
-     40            posL1 = L1pos;
+     31            posL1 = L1pos;
    \   000018   C24A....     MOV.B   R10, &posL1
-     41            display_2 = L2_line;
+     32            display_2 = L2_line;
    \   00001C   824E....     MOV.W   R14, &display_2
-     42            posL2 = L2pos;
+     33            posL2 = L2pos;
    \   000020   C24F....     MOV.B   R15, &posL2
-     43            display_3 = L3_line;
+     34            display_3 = L3_line;
    \   000024   8248....     MOV.W   R8, &display_3
-     44            posL3 = L3pos;
+     35            posL3 = L3pos;
    \   000028   C24B....     MOV.B   R11, &posL3
-     45            display_4 = L4_line; 
+     36            display_4 = L4_line; 
    \   00002C   8249....     MOV.W   R9, &display_4
-     46            posL4 = L4pos; 
+     37            posL4 = L4pos; 
    \   000030   C24D....     MOV.B   R13, &posL4
-     47          }
+     38          }
    \   000034   3817         POPM.W  #0x4, R11
    \   000036   1001         RETA
+     39          
+     40          //------------------------------------------------------------------------------
+     41          //      Function name: Display_Process
+     42          //      Description: Updates display to LCD screen  
+     43          //      Global variables: display_1, display_2, display_3, display_4,
+     44          //                        LCD_HOME_L1, LCD_HOME_L2, LCD_HOME_L3, 
+     45          //                        LCD_HOME_L4, posL1, posL2, posL3, posL4
+     46          //      Local variables: NONE
+     47          //      Return: VOID
+     48          //------------------------------------------------------------------------------
+
+   \                                 In  segment CODE, align 2
+     49          void Display_Process(void){
+   \                     Display_Process:
+     50            ClrDisplay();
+   \   000000   ........     CALLA   #ClrDisplay
+     51            lcd_out(display_1, LCD_HOME_L1, posL1);
+   \   000004   5E42....     MOV.B   &posL1, R14
+   \   000008   7D408000     MOV.B   #0x80, R13
+   \   00000C   1C42....     MOV.W   &display_1, R12
+   \   000010   ........     CALLA   #lcd_out
+     52            lcd_out(display_2, LCD_HOME_L2, posL2);
+   \   000014   5E42....     MOV.B   &posL2, R14
+   \   000018   7D40A000     MOV.B   #0xa0, R13
+   \   00001C   1C42....     MOV.W   &display_2, R12
+   \   000020   ........     CALLA   #lcd_out
+     53            lcd_out(display_3, LCD_HOME_L3, posL3);
+   \   000024   5E42....     MOV.B   &posL3, R14
+   \   000028   7D40C000     MOV.B   #0xc0, R13
+   \   00002C   1C42....     MOV.W   &display_3, R12
+   \   000030   ........     CALLA   #lcd_out
+     54            lcd_out(display_4, LCD_HOME_L4, posL4);
+   \   000034   5E42....     MOV.B   &posL4, R14
+   \   000038   7D40E000     MOV.B   #0xe0, R13
+   \   00003C   1C42....     MOV.W   &display_4, R12
+   \   000040   ........     CALLA   #lcd_out
+     55           }
+   \   000044   1001         RETA
 
    Maximum stack usage in bytes:
 

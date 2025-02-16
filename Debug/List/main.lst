@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:40:59
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          15/Feb/2025  20:52:17
 # Copyright 1996-2023 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
 #
@@ -37,7 +37,7 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\main.c
       2          //   Name: main.c
       3          //   Author: Rachel E. Williams
       4          //   Date Created: September 9 2015 (9/9/2015)
-      5          //   Last Updated: 2/14/2025
+      5          //   Last Updated: 2/15/2025
       6          //   Description: This file contains the main routine to run the entire project
       7          //                using while(1) "Super Loop" architecture
       8          //   
@@ -326,107 +326,111 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\main.c
    \   000060   F2403000.... MOV.B   #0x30, &hundreds_num
      95              menu_type = ORIGINAL;
    \   000066   8243....     MOV.W   #0x0, &menu_type
-     96              lcd_BIG_mid();
-   \   00006A   ........     CALLA   #lcd_BIG_mid
-     97             
-     98              // Initial display 
-     99              display_1 = "Rachel";
-   \   00006E   B240........ MOV.W   #`?<Constant "Rachel">`, &display_1
-    100              posL1 = POSIT_2;
-   \   000074   E243....     MOV.B   #0x2, &posL1
-    101              display_2 = "PROJECT 8";
-   \   000078   B240........ MOV.W   #`?<Constant "PROJECT 8">`, &display_2
-    102              posL2 = POSIT_0;
-   \   00007E   C243....     MOV.B   #0x0, &posL2
-    103              display_3 = "Williams";
-   \   000082   B240........ MOV.W   #`?<Constant "Williams">`, &display_3
-    104              posL3 = POSIT_1;
-   \   000088   D243....     MOV.B   #0x1, &posL3
-    105              Out_To_LCD(display_1,posL1,display_2,posL2,display_3,posL3,display_4,posL4); 
-   \   00008C   5F42....     MOV.B   &posL4, R15
-   \   000090   4F4F         MOV.B   R15, R15
-   \   000092   0F12         PUSH.W  R15
-   \   000094   1212....     PUSH.W  &display_4
-   \   000098   5F42....     MOV.B   &posL3, R15
-   \   00009C   4F4F         MOV.B   R15, R15
-   \   00009E   0F12         PUSH.W  R15
-   \   0000A0   1212....     PUSH.W  &display_3
-   \   0000A4   5F42....     MOV.B   &posL2, R15
-   \   0000A8   4F4F         MOV.B   R15, R15
-   \   0000AA   1E42....     MOV.W   &display_2, R14
-   \   0000AE   5D42....     MOV.B   &posL1, R13
-   \   0000B2   4D4D         MOV.B   R13, R13
-   \   0000B4   1C42....     MOV.W   &display_1, R12
-   \   0000B8   ........     CALLA   #Out_To_LCD
-    106              Display_Process(); 
-   \   0000BC   ........     CALLA   #Display_Process
-   \   0000C0   A1000800     ADDA    #0x8, SP
-    107            
-    108          //------------------------------------------------------------------------------
-    109          // Begining of the While "Super Loop" Operating System
-    110          //------------------------------------------------------------------------------
-    111              while(ALWAYS) 
-    112              {                            // Can the Operating system run
-    113                switch(Time_Sequence)
+     96              //lcd_BIG_mid();
+     97              
+     98              // Initializing pointers used for updating the display 
+     99              //display_1 = 
+    100              
+    101              
+    102             
+    103              // Initial display 
+    104              display_1 = "Rachel";
+   \   00006A   B240........ MOV.W   #`?<Constant "Rachel">`, &display_1
+    105              posL1 = POSIT_2;
+   \   000070   E243....     MOV.B   #0x2, &posL1
+    106              display_2 = "PROJECT 8";
+   \   000074   B240........ MOV.W   #`?<Constant "PROJECT 8">`, &display_2
+    107              posL2 = POSIT_0;
+   \   00007A   C243....     MOV.B   #0x0, &posL2
+    108              display_3 = "Williams";
+   \   00007E   B240........ MOV.W   #`?<Constant "Williams">`, &display_3
+    109              posL3 = POSIT_1;
+   \   000084   D243....     MOV.B   #0x1, &posL3
+    110              Out_To_LCD(display_1,posL1,display_2,posL2,display_3,posL3,display_4,posL4); 
+   \   000088   5F42....     MOV.B   &posL4, R15
+   \   00008C   4F4F         MOV.B   R15, R15
+   \   00008E   0F12         PUSH.W  R15
+   \   000090   1212....     PUSH.W  &display_4
+   \   000094   5F42....     MOV.B   &posL3, R15
+   \   000098   4F4F         MOV.B   R15, R15
+   \   00009A   0F12         PUSH.W  R15
+   \   00009C   1212....     PUSH.W  &display_3
+   \   0000A0   5F42....     MOV.B   &posL2, R15
+   \   0000A4   4F4F         MOV.B   R15, R15
+   \   0000A6   1E42....     MOV.W   &display_2, R14
+   \   0000AA   5D42....     MOV.B   &posL1, R13
+   \   0000AE   4D4D         MOV.B   R13, R13
+   \   0000B0   1C42....     MOV.W   &display_1, R12
+   \   0000B4   ........     CALLA   #Out_To_LCD
+    111              Display_Process(); 
+   \   0000B8   ........     CALLA   #Display_Process
+   \   0000BC   A1000800     ADDA    #0x8, SP
+    112            
+    113          //------------------------------------------------------------------------------
+    114          // Begining of the While "Super Loop" Operating System
+    115          //------------------------------------------------------------------------------
+    116              while(ALWAYS) 
+    117              {                            // Can the Operating system run
+    118                switch(Time_Sequence)
    \                     ??main_0:
-   \   0000C4   1F42....     MOV.W   &Time_Sequence, R15
-   \   0000C8   3F803200     SUB.W   #0x32, R15
-   \   0000CC   0B24         JEQ     ??main_2
-   \   0000CE   3F803200     SUB.W   #0x32, R15
-   \   0000D2   0824         JEQ     ??main_2
-   \   0000D4   3F803200     SUB.W   #0x32, R15
-   \   0000D8   0524         JEQ     ??main_2
-   \   0000DA   3F803200     SUB.W   #0x32, R15
-   \   0000DE   0224         JEQ     ??main_2
-   \   0000E0   3F803200     SUB.W   #0x32, R15
-    114                {
-    115                  case 250:                               // 1000 msec  
-    116                    /*if(one_time){
-    117                    Init_LEDs();                        // Initialize LEDs
-    118                    one_time = 0;
-    119                    }
-    120                    Time_Sequence = 0;*/                    // 
-    121                  case 200:                               // 1000 msec  
-    122                    /*if(one_time){
-    123                    PJOUT |= LED4;                      // Change State of LED 4
-    124                    P3OUT |= LED5;                      // Change State of LED 5
-    125                    one_time = 0;
-    126                    }*/
-    127                  case 150:                               // 750 msec  
-    128                    /*if(one_time){
-    129                    PJOUT |= LED3;                      // Change State of LED 3
-    130                    P3OUT |= LED6;                      // Change State of LED 6
-    131                    one_time = 0;
-    132                    }*/
-    133                  case 100:                               // 500 msec  
-    134                    /*if(one_time){
-    135                    PJOUT |= LED2;                      // Change State of LED 2
-    136                     P3OUT |= LED7;                      // Change State of LED 7
-    137                     one_time = 0;
-    138                    }*/
-    139                  case  50:                               // 250 msec  
-    140                    /*if(one_time){
-    141                    PJOUT |= LED1;                      // Change State of LED 1
-    142                    P3OUT |= LED8;                      // Change State of LED 8
-    143                    one_time = 0;
-    144                    }*/
-    145                     break;                                // 
-    146                  default: break; 
-    147                }
-    148                Switches_Process();                       // Check for switch state change 
-   \                     ??main_2:
-   \   0000E4   ........     CALLA   #Switches_Process
-    149                if(Time_Sequence > 250)
-   \   0000E8   B290FB00.... CMP.W   #0xfb, &Time_Sequence
-   \   0000EE   EA2B         JNC     ??main_0
-    150                {
-    151                  Time_Sequence = 0;
-   \   0000F0   8243....     MOV.W   #0x0, &Time_Sequence
-   \   0000F4   E73F         JMP     ??main_0
-   \   0000F6   0343         NOP
+   \   0000C0   1F42....     MOV.W   &Time_Sequence, R15
+   \   0000C4   3F803200     SUB.W   #0x32, R15
+   \   0000C8   0B24         JEQ     ??main_2
+   \   0000CA   3F803200     SUB.W   #0x32, R15
+   \   0000CE   0824         JEQ     ??main_2
+   \   0000D0   3F803200     SUB.W   #0x32, R15
+   \   0000D4   0524         JEQ     ??main_2
+   \   0000D6   3F803200     SUB.W   #0x32, R15
+   \   0000DA   0224         JEQ     ??main_2
+   \   0000DC   3F803200     SUB.W   #0x32, R15
+    119                {
+    120                  case 250:                               // 1000 msec  
+    121                    /*if(one_time){
+    122                    Init_LEDs();                        // Initialize LEDs
+    123                    one_time = 0;
+    124                    }
+    125                    Time_Sequence = 0;*/                    // 
+    126                  case 200:                               // 1000 msec  
+    127                    /*if(one_time){
+    128                    PJOUT |= LED4;                      // Change State of LED 4
+    129                    P3OUT |= LED5;                      // Change State of LED 5
+    130                    one_time = 0;
+    131                    }*/
+    132                  case 150:                               // 750 msec  
+    133                    /*if(one_time){
+    134                    PJOUT |= LED3;                      // Change State of LED 3
+    135                    P3OUT |= LED6;                      // Change State of LED 6
+    136                    one_time = 0;
+    137                    }*/
+    138                  case 100:                               // 500 msec  
+    139                    /*if(one_time){
+    140                    PJOUT |= LED2;                      // Change State of LED 2
+    141                     P3OUT |= LED7;                      // Change State of LED 7
+    142                     one_time = 0;
+    143                    }*/
+    144                  case  50:                               // 250 msec  
+    145                    /*if(one_time){
+    146                    PJOUT |= LED1;                      // Change State of LED 1
+    147                    P3OUT |= LED8;                      // Change State of LED 8
+    148                    one_time = 0;
+    149                    }*/
+    150                     break;                                // 
+    151                  default: break; 
     152                }
-    153              }  
-    154          }
+    153                Switches_Process();                       // Check for switch state change 
+   \                     ??main_2:
+   \   0000E0   ........     CALLA   #Switches_Process
+    154                if(Time_Sequence > 250)
+   \   0000E4   B290FB00.... CMP.W   #0xfb, &Time_Sequence
+   \   0000EA   EA2B         JNC     ??main_0
+    155                {
+    156                  Time_Sequence = 0;
+   \   0000EC   8243....     MOV.W   #0x0, &Time_Sequence
+   \   0000F0   E73F         JMP     ??main_0
+   \   0000F2   0343         NOP
+    157                }
+    158              }  
+    159          }
 
    \                                 In  segment DATA16_C, align 1, align-sorted
    \                     `?<Constant "Rachel">`:
@@ -442,9 +446,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\main.c
    \                     `?<Constant "Williams">`:
    \   000000   57696C6C6961 DC8 "Williams"
    \            6D7300      
-    155          //------------------------------------------------------------------------------
-    156          // End of the While "Super Loop" Operating System
-    157          //------------------------------------------------------------------------------
+    160          //------------------------------------------------------------------------------
+    161          // End of the While "Super Loop" Operating System
+    162          //------------------------------------------------------------------------------
 
    Maximum stack usage in bytes:
 
@@ -465,7 +469,6 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\main.c
        12   -> Out_To_LCD
         4   -> Right_Reverse_Off
         4   -> Switches_Process
-        4   -> lcd_BIG_mid
 
 
    Segment part sizes:
@@ -493,7 +496,7 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\main.c
        1  enabled_RX
        1  hundreds
        1  hundreds_num
-     248  main
+     244  main
        2  menu_type
        2  milli_counter
        2  milli_counter2
@@ -512,11 +515,11 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\main.c
        2  usb_tx_ring_wr
 
  
- 248 bytes in segment CODE
+ 244 bytes in segment CODE
   26 bytes in segment DATA16_C
  247 bytes in segment DATA16_Z
  
- 248 bytes of CODE  memory
+ 244 bytes of CODE  memory
   26 bytes of CONST memory
  247 bytes of DATA  memory
 

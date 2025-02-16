@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR UBROF Linker V10.15.2.1487                          14/Feb/2025  17:40:59
+# IAR UBROF Linker V10.15.2.1487                          15/Feb/2025  21:22:06
 # Copyright 1987-2023 IAR Systems AB.
 #
 #    Target Cpu    =  MSP430
@@ -68,7 +68,7 @@
 
   ADDRESS  SPACE  TYPE         MODULE
   -------  -----  ----         ------
-   0xC544         Relocatable  ?cstart
+   0xC248         Relocatable  ?cstart
 
 
 
@@ -394,86 +394,58 @@ hundreds_num                        0x1CB4  Pub   Data  main
 USB_Char_Rx                         0x1CB5  Pub   Data  main
 USB_Char_Tx                         0x1CDD  Pub   Data  main
 IOT_Char_Rx                         0x1D05  Pub   Data  main
-__program_start                     0xC544  Pub         ?cstart [1]
-?cstart_begin                       0xC544  Pub         ?cstart [1]
-?cstart_init_zero                   0xC548  Pub         ?cstart [1]
-?cstart_call_main                   0xC554  Pub         ?cstart [1]
-Timer0_A0_ISR                       0xC55C  Pub   Code  interrupts
-?cstart_end                         0xC55C  Pub         ?cstart [1]
-ADC10_ISR                           0xC584  Pub   Code  interrupts
-USCI_A0_ISR                         0xC5E2  Pub   Code  interrupts
-USCI_A1_ISR                         0xC618  Pub   Code  interrupts
-Timer2_B0_ISR                       0xC65C  Pub   Code  timersB2
-TIMER2_B1_ISR                       0xC678  Pub   Code  timersB2
-Reconnect                           0xC6A2  Pub   Code  IOT
-Listen                              0xCA1C  Pub   Code  IOT
-IOT_config                          0xCCBA  Pub   Code  IOT
-Switches_Process                    0xCE20  Pub   Code  switch
-main                                0xCF40  Pub   Code  main
-Check_Str                           0xD038  Pub   Code  IOT
-Init_Port2                          0xD11A  Pub   Code  ports
-Init_Port3                          0xD1DC  Pub   Code  ports
-Init_Port1                          0xD29A  Pub   Code  ports
-Init_Serial_UCA1                    0xD34E  Pub   Code  init
-Init_Serial_UCA0                    0xD3F6  Pub   Code  init
-Init_LCD                            0xD49E  Pub   Code  LCD
-Save_All                            0xD53E  Pub   Code  IOT
-Set_SSID                            0xD5C0  Pub   Code  IOT
-Reset_All                           0xD642  Pub   Code  IOT
-Set_HostN                           0xD6C4  Pub   Code  IOT
-Get_HostN                           0xD746  Pub   Code  IOT
-Set_NetP                            0xD7C8  Pub   Code  IOT
-Get_NetP                            0xD84A  Pub   Code  IOT
-Set_NetM                            0xD8CC  Pub   Code  IOT
-Get_NetM                            0xD94E  Pub   Code  IOT
-Get_SSID                            0xD9D0  Pub   Code  IOT
-Init_Clocks                         0xDA50  Pub   Code  clocks
-Init_PortJ                          0xDAC2  Pub   Code  ports
-Init_ADC                            0xDB30  Pub   Code  ports
-Ping                                0xDB9C  Pub   Code  IOT
-Socket                              0xDBFA  Pub   Code  IOT
-Check_Status                        0xDC58  Pub   Code  IOT
-Display_Process                     0xDCB6  Pub   Code  display
-Init_SPI_B0                         0xDCFC  Pub   Code  LCD
-Init_Port4                          0xDD3A  Pub   Code  ports
-Out_To_LCD                          0xDD74  Pub   Code  display
-Init_Timer_A0                       0xDDAC  Pub   Code  init
-X_Seconds_Delay                     0xDDDE  Pub   Code  clocks
-WriteData                           0xDE0E  Pub   Code  LCD
-WriteIns                            0xDE3A  Pub   Code  LCD
-lcd_out                             0xDE66  Pub   Code  LCD
-Init_Conditions                     0xDE8A  Pub   Code  init
-Init_Ports                          0xDEA8  Pub   Code  ports
-Init_Timer_B2                       0xDEC2  Pub   Code  timersB2
-Five_Msec_Delay                     0xDEDC  Pub   Code  clocks
-lcd_BIG_mid                         0xDEF4  Pub   Code  LCD
-__exit                              0xDF0C  Pub   Code  ?__exit [1]
-SPI_B0_write                        0xDF20  Pub   Code  LCD
-SetPostion                          0xDF34  Pub   Code  LCD
-spi_chipselect_idle                 0xDF46  Pub   Code  LCD
-All_Off                             0xDF58  Pub   Code  motor_control
-__data16_memzero                    0xDF6A  Pub   Code  ?memzero [1]
-?CopyMemoryBytes                    0xDF7A  Pub         ?CopyMemoryBytes [1]
-DisplayOnOff                        0xDF8A  Pub   Code  LCD
-ADC_Process                         0xDF9A  Pub   Code  init
-ClrDisplay                          0xDFA8  Pub   Code  LCD
-spi_chipselect_active               0xDFB4  Pub   Code  LCD
-Init_Timers                         0xDFC0  Pub   Code  init
-Right_Forward_Off                   0xDFCA  Pub   Code  motor_control
-Left_Forward_On                     0xDFD2  Pub   Code  motor_control
-Left_Forward_Off                    0xDFDA  Pub   Code  motor_control
-Right_Reverse_Off                   0xDFE2  Pub   Code  motor_control
-Left_Reverse_On                     0xDFEA  Pub   Code  motor_control
-Left_Reverse_Off                    0xDFF2  Pub   Code  motor_control
-Right_Forward_On                    0xDFFA  Pub   Code  motor_control
-Right_Reverse_On                    0xE002  Pub   Code  motor_control
-lcd_4line                           0xE00A  Pub   Code  LCD
-spi_reset_idle                      0xE012  Pub   Code  LCD
-spi_reset_active                    0xE018  Pub   Code  LCD
-enable_interrupts                   0xE01E  Pub   Code  system
-exit                                0xE024  Pub   Code  ?exit [1]
-_exit                               0xE028  Pub   Code  ?_exit [1]
-__DebugBreak                        0xE02C  Pub   Code  ?__dbg_break [1]
+__program_start                     0xC248  Pub         ?cstart [1]
+?cstart_begin                       0xC248  Pub         ?cstart [1]
+?cstart_init_zero                   0xC24C  Pub         ?cstart [1]
+?cstart_call_main                   0xC258  Pub         ?cstart [1]
+Timer0_A0_ISR                       0xC260  Pub   Code  interrupts
+?cstart_end                         0xC260  Pub         ?cstart [1]
+ADC10_ISR                           0xC288  Pub   Code  interrupts
+USCI_A0_ISR                         0xC2E6  Pub   Code  interrupts
+USCI_A1_ISR                         0xC31C  Pub   Code  interrupts
+Timer2_B0_ISR                       0xC360  Pub   Code  timersB2
+TIMER2_B1_ISR                       0xC37C  Pub   Code  timersB2
+Switches_Process                    0xC3A6  Pub   Code  switch
+main                                0xC4B2  Pub   Code  main
+Init_Port2                          0xC5A6  Pub   Code  ports
+Init_Port3                          0xC668  Pub   Code  ports
+Init_Port1                          0xC726  Pub   Code  ports
+Init_Serial_UCA1                    0xC7DA  Pub   Code  init
+Init_Serial_UCA0                    0xC882  Pub   Code  init
+Init_LCD                            0xC92A  Pub   Code  LCD
+Init_Clocks                         0xC9CA  Pub   Code  clocks
+Init_PortJ                          0xCA3C  Pub   Code  ports
+Init_ADC                            0xCAAA  Pub   Code  ports
+Display_Process                     0xCB16  Pub   Code  display
+Init_SPI_B0                         0xCB5C  Pub   Code  LCD
+Init_Port4                          0xCB9A  Pub   Code  ports
+Out_To_LCD                          0xCBD4  Pub   Code  display
+Init_Timer_A0                       0xCC0C  Pub   Code  init
+WriteData                           0xCC3E  Pub   Code  LCD
+WriteIns                            0xCC6A  Pub   Code  LCD
+lcd_out                             0xCC96  Pub   Code  LCD
+Init_Conditions                     0xCCBA  Pub   Code  init
+Init_Timer_B2                       0xCCD8  Pub   Code  timersB2
+Init_Ports                          0xCCF2  Pub   Code  ports
+Five_Msec_Delay                     0xCD0C  Pub   Code  clocks
+__exit                              0xCD24  Pub   Code  ?__exit [1]
+SPI_B0_write                        0xCD38  Pub   Code  LCD
+spi_chipselect_idle                 0xCD4C  Pub   Code  LCD
+SetPostion                          0xCD5E  Pub   Code  LCD
+DisplayOnOff                        0xCD70  Pub   Code  LCD
+__data16_memzero                    0xCD80  Pub   Code  ?memzero [1]
+ADC_Process                         0xCD90  Pub   Code  init
+ClrDisplay                          0xCD9E  Pub   Code  LCD
+spi_chipselect_active               0xCDAA  Pub   Code  LCD
+Init_Timers                         0xCDB6  Pub   Code  init
+Left_Reverse_Off                    0xCDC0  Pub   Code  motor_control
+Right_Reverse_Off                   0xCDC8  Pub   Code  motor_control
+enable_interrupts                   0xCDD0  Pub   Code  system
+spi_reset_active                    0xCDD6  Pub   Code  LCD
+spi_reset_idle                      0xCDDC  Pub   Code  LCD
+exit                                0xCDE2  Pub   Code  ?exit [1]
+_exit                               0xCDE6  Pub   Code  ?_exit [1]
+__DebugBreak                        0xCDEA  Pub   Code  ?__dbg_break [1]
 TIMER2_B1_ISR::??INTVEC 68          0xFFD4  Pub         timersB2
 Timer2_B0_ISR::??INTVEC 70          0xFFD6  Pub         timersB2
 USCI_A1_ISR::??INTVEC 86            0xFFE6  Pub         interrupts
@@ -495,7 +467,6 @@ USCI_A0_ISR::??INTVEC 96            0xFFF0  Pub         interrupts
 Module               CODE      DATA      CONST
 ------               ----      ----      -----
                     (Rel)  (Rel)  (Abs)  (Rel)
-?CopyMemoryBytes       16
 ?__dbg_break            2
 ?__exit                20
 ?_exit                  4
@@ -503,28 +474,28 @@ Module               CODE      DATA      CONST
 ?exit                   4
 ?memzero               16
 ?reset_vector           2
-IOT                 3'724             4    764
+IOT                                   4
   + shared                            4
-LCD                   486     52      8
+LCD                   454     52      8
   + shared                            2
-clocks                186            12
+clocks                138            12
 display               126
 init                  440            20
   + shared                           16
 interrupts            256            12
   + shared             98             2
   + common
-main                  248    247            26
-motor_control          82
+main                  244    247            26
+motor_control          16
 ports                 866            20
-switch                288                   46
+switch                268                   46
 system                  6
 timersB2               96      2     14
   + common             72
 N/A (command line)           160
 N/A (alignment)
-----------          -----    ---    ---    ---
-Total:              6'892    461    114    836
+----------          -----    ---    ---     --
+Total:              2'982    461    114     72
   + common             98
 
 
@@ -534,61 +505,61 @@ Total:              6'892    461    114    836
                 *                                      *
                 ****************************************
 
-SEGMENT    SPACE    START/END ADDRESS      SIZE  TYPE  ALIGN
--------    -----  ---------------------    ----  ----  -----
-DATA16_I                 0x1C00                   dse   1(0)
-DATA16_Z             0x1C00 - 0x1D2C      0x12D   rel   2(1)
-DATA20_I                 0x1D2E                   rel   2(1)
-DATA20_Z                 0x1D2E                   rel   2(1)
-DATA20_N                 0x1D2E                   rel   2(1)
-CODE_I                   0x1D2E                   rel   2(1)
-CSTACK               0x1F60 - 0x1FFF       0xA0   rel   2(1)
-DATA16_C             0xC200 - 0xC543      0x344   rel   1(0)
-DATA20_C                 0xC544                   rel   2(1)
-DATA20_ID                0xC544                   rel   2(1)
-CSTART               0xC544 - 0xC55B       0x18   rel   2(1)
-ISR_CODE             0xC55C - 0xC6A1      0x146   rel   2(1)
-CODE_ID                  0xC6A2                   rel   2(1)
-<CODE> 1             0xC6A2 - 0xE02D     0x198C   rel   2(1)
-INTVEC               0xFF90 - 0xFFF1       0x62   com   2(1)
-RESET                0xFFFE - 0xFFFF        0x2   rel   2(1)
-DATA16_AN            0x015C - 0x015D        0x2   abs   1(0)
-                     0x0160 - 0x0169        0xA
-                     0x0202 - 0x0207        0x6
-                     0x020A - 0x020D        0x4
-                     0x0220 - 0x0227        0x8
-                     0x022A - 0x022D        0x4
-                     0x0322 - 0x0325        0x4
-                     0x032A - 0x032D        0x4
-                     0x0340 - 0x0343        0x4
-                     0x0352 - 0x0353        0x2
-                     0x0360 - 0x0361        0x2
-                     0x0440 - 0x0443        0x4
-                     0x0452 - 0x0457        0x6
-                     0x0460 - 0x0461        0x2
-                     0x046E - 0x046F        0x2
-                     0x05C0 - 0x05C1        0x2
-                     0x05C6 - 0x05C9        0x4
-                     0x05CC - 0x05CF        0x4
-                     0x05DA - 0x05DB        0x2
-                     0x05DE - 0x05E1        0x4
-                     0x05E6 - 0x05E9        0x4
-                     0x05EC - 0x05EF        0x4
-                     0x05FA - 0x05FB        0x2
-                     0x05FE - 0x05FF        0x2
-                     0x0640 - 0x0641        0x2
-                     0x0646 - 0x0647        0x2
-                     0x064E - 0x064F        0x2
-                     0x066C - 0x066D        0x2
-                     0x0700 - 0x0705        0x6
-                     0x070A - 0x070B        0x2
-                     0x0712 - 0x0713        0x2
-                     0x071A - 0x071B        0x2
-                     0x071E - 0x071F        0x2
+SEGMENT    SPACE    START/END ADDRESS     SIZE  TYPE  ALIGN
+-------    -----  ---------------------   ----  ----  -----
+DATA16_I                 0x1C00                  dse   1(0)
+DATA16_Z             0x1C00 - 0x1D2C     0x12D   rel   2(1)
+DATA20_I                 0x1D2E                  rel   2(1)
+DATA20_Z                 0x1D2E                  rel   2(1)
+DATA20_N                 0x1D2E                  rel   2(1)
+CODE_I                   0x1D2E                  rel   2(1)
+CSTACK               0x1F60 - 0x1FFF      0xA0   rel   2(1)
+DATA16_C             0xC200 - 0xC247      0x48   rel   1(0)
+DATA20_C                 0xC248                  rel   2(1)
+DATA20_ID                0xC248                  rel   2(1)
+CSTART               0xC248 - 0xC25F      0x18   rel   2(1)
+ISR_CODE             0xC260 - 0xC3A5     0x146   rel   2(1)
+CODE_ID                  0xC3A6                  rel   2(1)
+<CODE> 1             0xC3A6 - 0xCDEB     0xA46   rel   2(1)
+INTVEC               0xFF90 - 0xFFF1      0x62   com   2(1)
+RESET                0xFFFE - 0xFFFF       0x2   rel   2(1)
+DATA16_AN            0x015C - 0x015D       0x2   abs   1(0)
+                     0x0160 - 0x0169       0xA
+                     0x0202 - 0x0207       0x6
+                     0x020A - 0x020D       0x4
+                     0x0220 - 0x0227       0x8
+                     0x022A - 0x022D       0x4
+                     0x0322 - 0x0325       0x4
+                     0x032A - 0x032D       0x4
+                     0x0340 - 0x0343       0x4
+                     0x0352 - 0x0353       0x2
+                     0x0360 - 0x0361       0x2
+                     0x0440 - 0x0443       0x4
+                     0x0452 - 0x0457       0x6
+                     0x0460 - 0x0461       0x2
+                     0x046E - 0x046F       0x2
+                     0x05C0 - 0x05C1       0x2
+                     0x05C6 - 0x05C9       0x4
+                     0x05CC - 0x05CF       0x4
+                     0x05DA - 0x05DB       0x2
+                     0x05DE - 0x05E1       0x4
+                     0x05E6 - 0x05E9       0x4
+                     0x05EC - 0x05EF       0x4
+                     0x05FA - 0x05FB       0x2
+                     0x05FE - 0x05FF       0x2
+                     0x0640 - 0x0641       0x2
+                     0x0646 - 0x0647       0x2
+                     0x064E - 0x064F       0x2
+                     0x066C - 0x066D       0x2
+                     0x0700 - 0x0705       0x6
+                     0x070A - 0x070B       0x2
+                     0x0712 - 0x0713       0x2
+                     0x071A - 0x071B       0x2
+                     0x071E - 0x071F       0x2
 
- 6'990 bytes of CODE  memory
+ 3'080 bytes of CODE  memory
    461 bytes of DATA  memory (+ 114 absolute )
-   836 bytes of CONST memory
+    72 bytes of CONST memory
 
 Errors: none
 Warnings: none

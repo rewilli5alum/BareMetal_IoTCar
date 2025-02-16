@@ -3,15 +3,15 @@
 //   Author: Rachel E. Williams
 //   Date Created: September 9 2015 (9/9/2015)
 //   Last Updated: 2/15/2025
-//   Description: This file constains the configuration and initialization for
+//   Description: This file contains the configuration and initialization for
 //                interrupts, Timers, ADC, and UART
 //   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
 //   Updated revisions built with IAR Embedded Workbench - MSP430 V8.10.3
 //******************************************************************************   
 
 // #includes 
-#include  "msp430.h"
-#include  "functions.h"
+#include "msp430.h"
+#include "functions.h"
 #include "macros.h"
 
 // Global Variables 
