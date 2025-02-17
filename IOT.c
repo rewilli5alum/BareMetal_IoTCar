@@ -1,22 +1,25 @@
 //******************************************************************************
-//      Title: IOT.c
-//      Description: This file handles interaction with IOT 
-//      Rachel Williams
-//      November 2015
-//      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
-//******************************************************************************
+//   Name: IOT.c
+//   Author: Rachel E. Williams
+//   Date Created: September 9 2015 (9/9/2015)
+//   Last Updated: 2/17/2025
+//   Description: This file handles configuration, initialization, and 
+//                functions for the IoT module 
+//   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+//   Updated revisions built with IAR Embedded Workbench - MSP430 V8.10.3
+//******************************************************************************  
 
-#include  "msp430.h"
-#include  "functions.h"
+#include "msp430.h"
+#include "functions.h"
 #include "macros.h"
 
-//******************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: IOT_config
-//      Description: Configuration for IOT device on ncsu wifi  
+//      Description: Configuration for IOT device on NCSU wifi  
 //      Global variables: IOT_Char_Rx[]
 //      Local variables: i,j,k 
 //      Return: VOID
-//******************************************************************************
+//------------------------------------------------------------------------------
 void IOT_config(void){
   int i = POSIT_0;
   
@@ -129,13 +132,13 @@ void IOT_config(void){
   }
 }
 
-//******************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Listen
 //      Description: Configuration for IOT device on ncsu wifi  
 //      Global variables: IOT_Char_Rx
 //      Local variables: inc, i, j, time, t, result
 //      Return: VOID
-//******************************************************************************
+//------------------------------------------------------------------------------
 void Listen(void){
   int inc = POSIT_0;
   char j = '1'; 
@@ -321,13 +324,13 @@ void Listen(void){
   }
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Set_SSID 
 //      Description: Setting SSID 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Set_SSID(void){
   int i = POSIT_0;
   char sSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT=ncsu\r"; 
@@ -349,13 +352,13 @@ void Set_SSID(void){
   Five_Msec_Delay(POSIT_5);
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Get_SSID
 //      Description: Getting SSID 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Get_SSID(void){
   int i = POSIT_0;
   char gSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT\r"; 
@@ -377,13 +380,13 @@ void Get_SSID(void){
   Five_Msec_Delay(POSIT_2);
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Set_HostN
 //      Description: Sets host name 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Set_HostN(void){
   int i = POSIT_0;
   char sHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname,ECE-306_02_R\r";
@@ -405,13 +408,13 @@ void Set_HostN(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Get_HostN
 //      Description: Gets host name 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Get_HostN(void){
   int i = POSIT_0;
   char gHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname\r";  
@@ -433,13 +436,13 @@ void Get_HostN(void){
   Five_Msec_Delay(POSIT_5);
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Set_NetP
 //      Description: Setting network privacy mode 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Set_NetP(void){
   int i = POSIT_0;
   char sNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode,0\r";
@@ -461,13 +464,13 @@ void Set_NetP(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Get_NetP
 //      Description: Get network privacy mode  
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Get_NetP(void){
   int i = POSIT_0;
   char gNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode\r";
@@ -489,13 +492,13 @@ void Get_NetP(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Set_NetM
 //      Description: Setting network mode 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Set_NetM(void){
   int i = POSIT_0;
   char sNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode,1\r";
@@ -517,13 +520,13 @@ void Set_NetM(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Get_NetM
 //      Description: Getting network mode 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Get_NetM(void){
   int i = POSIT_0;
   char gNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode\r";
@@ -545,13 +548,13 @@ void Get_NetM(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Save_All
 //      Description: Save the settings on the flash memory   
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Save_All(void){
   int i = POSIT_0;
   char save[SMALL_RING_SIZE] = "AT&W\r";
@@ -573,13 +576,13 @@ void Save_All(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Reset_All 
 //      Description: Resets the module 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Reset_All(void){
   int i = POSIT_0;
   char reset[SMALL_RING_SIZE] = "AT+CFUN=1\r";
@@ -601,13 +604,13 @@ void Reset_All(void){
   Five_Msec_Delay(POSIT_5);
 } 
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Roam
 //      Description: Sets up roaming for wifi 
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Roam(void){
   int i = POSIT_0;
   char roam[SMALL_RING_SIZE] = "AT+S.ROAM\r";
@@ -629,13 +632,13 @@ void Roam(void){
   Five_Msec_Delay(POSIT_5);
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Check_Status
 //      Description: Gets ip address  
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Check_Status(void){
   int i = POSIT_0;
   char check[SMALL_RING_SIZE] = "AT+S.STS=ip_ipaddr\r";
@@ -653,13 +656,13 @@ void Check_Status(void){
   Five_Msec_Delay(POSIT_5);
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Ping
 //      Description: Pings lab computer   
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Ping(void){
   int i = POSIT_0;
   char ping[SMALL_RING_SIZE] = "AT+S.PING= 152.14.99.126\r";
@@ -677,13 +680,13 @@ void Ping(void){
   Five_Msec_Delay(POSIT_5);
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Check_Str
 //      Description: Checks to see if string is allowed to be received  
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 int Check_Str(void){
   int inc = POSIT_0; 
   int i = POSIT_0;
@@ -733,13 +736,13 @@ int Check_Str(void){
   return i; 
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Reconnect
 //      Description: Reconnects to Wifi   
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Reconnect(void){
     int i; 
     int j; 
@@ -917,13 +920,13 @@ void Reconnect(void){
   while(IOT_Char_Rx[i] != 'O')i++; 
 }
 
-//*****************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Socket
 //      Description: Socket-Server connection    
 //      Global variables: 
 //      Local variables:  
 //      Return: VOID
-//*****************************************************************************
+//------------------------------------------------------------------------------
 void Socket(void){
   int i = POSIT_0;
   char socket[SMALL_RING_SIZE] = "AT+S.SOCKD=9001\r";

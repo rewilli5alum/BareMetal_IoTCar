@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          14/Feb/2025  17:24:19
+# IAR C/C++ Compiler V8.10.3.1087/W32 for MSP430          17/Feb/2025  14:31:37
 # Copyright 1996-2023 IAR Systems AB.
 # Evaluation license - IAR Embedded Workbench for MSP430, Evaluation version 8.10
 #
@@ -33,14 +33,17 @@
 
 C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
       1          //******************************************************************************
-      2          //      Title: IOT.c
-      3          //      Description: This file handles interaction with IOT 
-      4          //      Rachel Williams
-      5          //      November 2015
-      6          //      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
-      7          //******************************************************************************
-      8          
-      9          #include  "msp430.h"
+      2          //   Name: IOT.c
+      3          //   Author: Rachel E. Williams
+      4          //   Date Created: September 9 2015 (9/9/2015)
+      5          //   Last Updated: 2/17/2025
+      6          //   Description: This file handles configuration, initialization, and 
+      7          //                functions for the IoT module 
+      8          //   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+      9          //   Updated revisions built with IAR Embedded Workbench - MSP430 V8.10.3
+     10          //******************************************************************************  
+     11          
+     12          #include "msp430.h"
 
    \                                 In  segment DATA16_AN, at 0x220
    \   union <unnamed> _A_PBIN_L
@@ -66,25 +69,25 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   union <unnamed> _A_UCA1IE_L
    \                     _A_UCA1IE_L:
    \   000000                DS8 2
-     10          #include  "functions.h"
-     11          #include "macros.h"
-     12          
-     13          //******************************************************************************
-     14          //      Function name: IOT_config
-     15          //      Description: Configuration for IOT device on ncsu wifi  
-     16          //      Global variables: IOT_Char_Rx[]
-     17          //      Local variables: i,j,k 
-     18          //      Return: VOID
-     19          //******************************************************************************
+     13          #include "functions.h"
+     14          #include "macros.h"
+     15          
+     16          //------------------------------------------------------------------------------
+     17          //      Function name: IOT_config
+     18          //      Description: Configuration for IOT device on NCSU wifi  
+     19          //      Global variables: IOT_Char_Rx[]
+     20          //      Local variables: i,j,k 
+     21          //      Return: VOID
+     22          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-     20          void IOT_config(void){
+     23          void IOT_config(void){
    \                     IOT_config:
    \   000000   0A12         PUSH.W  R10
-     21            int i = POSIT_0;
+     24            int i = POSIT_0;
    \   000002   0A43         MOV.W   #0x0, R10
-     22            
-     23            Out_To_LCD(" ",POSIT_0," ",POSIT_0," ",POSIT_0," ",POSIT_0);
+     25            
+     26            Out_To_LCD(" ",POSIT_0," ",POSIT_0," ",POSIT_0," ",POSIT_0);
    \   000004   0312         PUSH.W  #0x0
    \   000006   3012....     PUSH.W  #`?<Constant " ">`
    \   00000A   0312         PUSH.W  #0x0
@@ -94,274 +97,274 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000016   0D43         MOV.W   #0x0, R13
    \   000018   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   00001C   ........     CALLA   #Out_To_LCD
-     24            lcd_4line();
+     27            lcd_4line();
    \   000020   ........     CALLA   #lcd_4line
-     25            Display_Process(); 
+     28            Display_Process(); 
    \   000024   ........     CALLA   #Display_Process
-     26            Five_Msec_Delay(20); 
+     29            Five_Msec_Delay(20); 
    \   000028   3C401400     MOV.W   #0x14, R12
    \   00002C   ........     CALLA   #Five_Msec_Delay
-     27            
-     28            //----------Set SSID---------------------------------------------------------- 
-     29            Set_SSID(); 
+     30            
+     31            //----------Set SSID---------------------------------------------------------- 
+     32            Set_SSID(); 
    \   000030   ........     CALLA   #Set_SSID
    \   000034   A1000800     ADDA    #0x8, SP
-     30            
-     31            // Waiting until "OK" is received 
-     32            while(IOT_Char_Rx[i] != 'O')i++;
+     33            
+     34            // Waiting until "OK" is received 
+     35            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_0:
    \   000038   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   00003E   0224         JEQ     ??IOT_config_12
    \   000040   1A53         ADD.W   #0x1, R10
    \   000042   FA3F         JMP     ??IOT_config_0
-     33            i = POSIT_0;
+     36            i = POSIT_0;
    \                     ??IOT_config_12:
    \   000044   0A43         MOV.W   #0x0, R10
-     34            X_Seconds_Delay(POSIT_1);
+     37            X_Seconds_Delay(POSIT_1);
    \   000046   1C43         MOV.W   #0x1, R12
    \   000048   ........     CALLA   #X_Seconds_Delay
-     35            
-     36            //----------Get SSID----------------------------------------------------------
-     37            Get_SSID(); 
-   \   00004C   ........     CALLA   #Get_SSID
      38            
-     39            // Waiting until "OK" is received 
-     40            while(IOT_Char_Rx[i] != 'O')i++;
+     39            //----------Get SSID----------------------------------------------------------
+     40            Get_SSID(); 
+   \   00004C   ........     CALLA   #Get_SSID
+     41            
+     42            // Waiting until "OK" is received 
+     43            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_1:
    \   000050   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   000056   0224         JEQ     ??IOT_config_13
    \   000058   1A53         ADD.W   #0x1, R10
    \   00005A   FA3F         JMP     ??IOT_config_1
-     41            i = POSIT_0;
+     44            i = POSIT_0;
    \                     ??IOT_config_13:
    \   00005C   0A43         MOV.W   #0x0, R10
-     42            X_Seconds_Delay(POSIT_1);
+     45            X_Seconds_Delay(POSIT_1);
    \   00005E   1C43         MOV.W   #0x1, R12
    \   000060   ........     CALLA   #X_Seconds_Delay
-     43              
-     44            //----------Set host name----------------------------------------------------- 
-     45            Set_HostN(); 
+     46              
+     47            //----------Set host name----------------------------------------------------- 
+     48            Set_HostN(); 
    \   000064   ........     CALLA   #Set_HostN
-     46            
-     47            // Waiting until "OK" is received 
-     48            while(IOT_Char_Rx[i] != 'O')i++;
+     49            
+     50            // Waiting until "OK" is received 
+     51            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_2:
    \   000068   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   00006E   0224         JEQ     ??IOT_config_14
    \   000070   1A53         ADD.W   #0x1, R10
    \   000072   FA3F         JMP     ??IOT_config_2
-     49            i = POSIT_0;
+     52            i = POSIT_0;
    \                     ??IOT_config_14:
    \   000074   0A43         MOV.W   #0x0, R10
-     50            X_Seconds_Delay(POSIT_1);
+     53            X_Seconds_Delay(POSIT_1);
    \   000076   1C43         MOV.W   #0x1, R12
    \   000078   ........     CALLA   #X_Seconds_Delay
-     51            
-     52            //----------Get host name-----------------------------------------------------
-     53            Get_HostN(); 
-   \   00007C   ........     CALLA   #Get_HostN
      54            
-     55            // Waiting until "OK" is received 
-     56            while(IOT_Char_Rx[i] != 'O')i++;
+     55            //----------Get host name-----------------------------------------------------
+     56            Get_HostN(); 
+   \   00007C   ........     CALLA   #Get_HostN
+     57            
+     58            // Waiting until "OK" is received 
+     59            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_3:
    \   000080   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   000086   0224         JEQ     ??IOT_config_15
    \   000088   1A53         ADD.W   #0x1, R10
    \   00008A   FA3F         JMP     ??IOT_config_3
-     57            i = POSIT_0;
+     60            i = POSIT_0;
    \                     ??IOT_config_15:
    \   00008C   0A43         MOV.W   #0x0, R10
-     58            X_Seconds_Delay(POSIT_1);
+     61            X_Seconds_Delay(POSIT_1);
    \   00008E   1C43         MOV.W   #0x1, R12
    \   000090   ........     CALLA   #X_Seconds_Delay
-     59            
-     60            //----------Set network privacy mode------------------------------------------
-     61            Set_NetP(); 
-   \   000094   ........     CALLA   #Set_NetP
      62            
-     63            // Waiting until "OK" is received 
-     64            while(IOT_Char_Rx[i] != 'O')i++;
+     63            //----------Set network privacy mode------------------------------------------
+     64            Set_NetP(); 
+   \   000094   ........     CALLA   #Set_NetP
+     65            
+     66            // Waiting until "OK" is received 
+     67            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_4:
    \   000098   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   00009E   0224         JEQ     ??IOT_config_16
    \   0000A0   1A53         ADD.W   #0x1, R10
    \   0000A2   FA3F         JMP     ??IOT_config_4
-     65            i = POSIT_0;
+     68            i = POSIT_0;
    \                     ??IOT_config_16:
    \   0000A4   0A43         MOV.W   #0x0, R10
-     66            X_Seconds_Delay(POSIT_1);
+     69            X_Seconds_Delay(POSIT_1);
    \   0000A6   1C43         MOV.W   #0x1, R12
    \   0000A8   ........     CALLA   #X_Seconds_Delay
-     67            
-     68            //----------Get network privacy mode------------------------------------------ 
-     69            Get_NetP(); 
-   \   0000AC   ........     CALLA   #Get_NetP
      70            
-     71            // Waiting until "OK" is received 
-     72            while(IOT_Char_Rx[i] != 'O')i++;
+     71            //----------Get network privacy mode------------------------------------------ 
+     72            Get_NetP(); 
+   \   0000AC   ........     CALLA   #Get_NetP
+     73            
+     74            // Waiting until "OK" is received 
+     75            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_5:
    \   0000B0   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   0000B6   0224         JEQ     ??IOT_config_17
    \   0000B8   1A53         ADD.W   #0x1, R10
    \   0000BA   FA3F         JMP     ??IOT_config_5
-     73            i = POSIT_0;
+     76            i = POSIT_0;
    \                     ??IOT_config_17:
    \   0000BC   0A43         MOV.W   #0x0, R10
-     74            X_Seconds_Delay(POSIT_1);
+     77            X_Seconds_Delay(POSIT_1);
    \   0000BE   1C43         MOV.W   #0x1, R12
    \   0000C0   ........     CALLA   #X_Seconds_Delay
-     75            
-     76            //----------Set network mode-------------------------------------------------- 
-     77            Set_NetM(); 
-   \   0000C4   ........     CALLA   #Set_NetM
      78            
-     79            // Waiting until "OK" is received 
-     80            while(IOT_Char_Rx[i] != 'O')i++;
+     79            //----------Set network mode-------------------------------------------------- 
+     80            Set_NetM(); 
+   \   0000C4   ........     CALLA   #Set_NetM
+     81            
+     82            // Waiting until "OK" is received 
+     83            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_6:
    \   0000C8   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   0000CE   0224         JEQ     ??IOT_config_18
    \   0000D0   1A53         ADD.W   #0x1, R10
    \   0000D2   FA3F         JMP     ??IOT_config_6
-     81            i = POSIT_0;
+     84            i = POSIT_0;
    \                     ??IOT_config_18:
    \   0000D4   0A43         MOV.W   #0x0, R10
-     82            X_Seconds_Delay(POSIT_1); 
+     85            X_Seconds_Delay(POSIT_1); 
    \   0000D6   1C43         MOV.W   #0x1, R12
    \   0000D8   ........     CALLA   #X_Seconds_Delay
-     83            
-     84            //----------Get network mode-------------------------------------------------- 
-     85            Get_NetM(); 
-   \   0000DC   ........     CALLA   #Get_NetM
      86            
-     87            // Waiting until "OK" is received 
-     88            while(IOT_Char_Rx[i] != 'O')i++;
+     87            //----------Get network mode-------------------------------------------------- 
+     88            Get_NetM(); 
+   \   0000DC   ........     CALLA   #Get_NetM
+     89            
+     90            // Waiting until "OK" is received 
+     91            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_7:
    \   0000E0   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   0000E6   0224         JEQ     ??IOT_config_19
    \   0000E8   1A53         ADD.W   #0x1, R10
    \   0000EA   FA3F         JMP     ??IOT_config_7
-     89            i = POSIT_0;
+     92            i = POSIT_0;
    \                     ??IOT_config_19:
    \   0000EC   0A43         MOV.W   #0x0, R10
-     90            X_Seconds_Delay(POSIT_1); 
+     93            X_Seconds_Delay(POSIT_1); 
    \   0000EE   1C43         MOV.W   #0x1, R12
    \   0000F0   ........     CALLA   #X_Seconds_Delay
-     91            
-     92            //----------Save settings on flash module-------------------------------------
-     93            Save_All(); 
-   \   0000F4   ........     CALLA   #Save_All
      94            
-     95            // Waiting until "OK" is received 
-     96            while(IOT_Char_Rx[i] != 'O')i++;
+     95            //----------Save settings on flash module-------------------------------------
+     96            Save_All(); 
+   \   0000F4   ........     CALLA   #Save_All
+     97            
+     98            // Waiting until "OK" is received 
+     99            while(IOT_Char_Rx[i] != 'O')i++;
    \                     ??IOT_config_8:
    \   0000F8   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   0000FE   0224         JEQ     ??IOT_config_20
    \   000100   1A53         ADD.W   #0x1, R10
    \   000102   FA3F         JMP     ??IOT_config_8
-     97            i = POSIT_0;
+    100            i = POSIT_0;
    \                     ??IOT_config_20:
    \   000104   0A43         MOV.W   #0x0, R10
-     98            X_Seconds_Delay(POSIT_1); 
+    101            X_Seconds_Delay(POSIT_1); 
    \   000106   1C43         MOV.W   #0x1, R12
    \   000108   ........     CALLA   #X_Seconds_Delay
-     99            
-    100            //----------Reset module------------------------------------------------------
-    101            Reconnect(); 
-   \   00010C   ........     CALLA   #Reconnect
     102            
-    103            //---------Ping lab computer-------------------------------------------------- 
-    104            Ping(); 
+    103            //----------Reset module------------------------------------------------------
+    104            Reconnect(); 
+   \   00010C   ........     CALLA   #Reconnect
+    105            
+    106            //---------Ping lab computer-------------------------------------------------- 
+    107            Ping(); 
    \   000110   ........     CALLA   #Ping
-    105            cpu_rx_ring_wr = POSIT_0;
+    108            cpu_rx_ring_wr = POSIT_0;
    \   000114   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
-    106            i = POSIT_0;
+    109            i = POSIT_0;
    \   000118   0A43         MOV.W   #0x0, R10
-    107            X_Seconds_Delay(POSIT_1);
+    110            X_Seconds_Delay(POSIT_1);
    \   00011A   1C43         MOV.W   #0x1, R12
    \   00011C   ........     CALLA   #X_Seconds_Delay
-    108            
-    109            // Waiting until "OK" has been received 
-    110            i = POSIT_0;
+    111            
+    112            // Waiting until "OK" has been received 
+    113            i = POSIT_0;
    \   000120   0A43         MOV.W   #0x0, R10
-    111            while(IOT_Char_Rx[i] != 'O')i++; 
+    114            while(IOT_Char_Rx[i] != 'O')i++; 
    \                     ??IOT_config_9:
    \   000122   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   000128   0224         JEQ     ??IOT_config_21
    \   00012A   1A53         ADD.W   #0x1, R10
    \   00012C   FA3F         JMP     ??IOT_config_9
-    112            X_Seconds_Delay(POSIT_1);
+    115            X_Seconds_Delay(POSIT_1);
    \                     ??IOT_config_21:
    \   00012E   1C43         MOV.W   #0x1, R12
    \   000130   ........     CALLA   #X_Seconds_Delay
-    113            i = POSIT_0;
+    116            i = POSIT_0;
    \   000134   0A43         MOV.W   #0x0, R10
-    114            
-    115            //---------Opening Socket-Server Connection-----------------------------------
-    116            Socket(); 
-   \   000136   ........     CALLA   #Socket
     117            
-    118            // Waiting until "OK" has been received 
-    119            i = POSIT_0;
+    118            //---------Opening Socket-Server Connection-----------------------------------
+    119            Socket(); 
+   \   000136   ........     CALLA   #Socket
+    120            
+    121            // Waiting until "OK" has been received 
+    122            i = POSIT_0;
    \   00013A   0A43         MOV.W   #0x0, R10
-    120            while(IOT_Char_Rx[i] != 'O')i++; 
+    123            while(IOT_Char_Rx[i] != 'O')i++; 
    \                     ??IOT_config_10:
    \   00013C   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   000142   0224         JEQ     ??IOT_config_22
    \   000144   1A53         ADD.W   #0x1, R10
    \   000146   FA3F         JMP     ??IOT_config_10
-    121            X_Seconds_Delay(POSIT_1);
+    124            X_Seconds_Delay(POSIT_1);
    \                     ??IOT_config_22:
    \   000148   1C43         MOV.W   #0x1, R12
    \   00014A   ........     CALLA   #X_Seconds_Delay
-    122            i = POSIT_0;
+    125            i = POSIT_0;
    \   00014E   0A43         MOV.W   #0x0, R10
-    123            
-    124            while(!i){
+    126            
+    127            while(!i){
    \                     ??IOT_config_11:
    \   000150   0A93         CMP.W   #0x0, R10
    \   000152   0720         JNE     ??IOT_config_23
-    125              if (!(P4IN & SW2)){
+    128              if (!(P4IN & SW2)){
    \   000154   E2B32102     BIT.B   #0x2, &0x221
    \   000158   FB2F         JC      ??IOT_config_11
-    126                i = POSIT_1; 
+    129                i = POSIT_1; 
    \   00015A   1A43         MOV.W   #0x1, R10
-    127                Switches_Process(); 
+    130                Switches_Process(); 
    \   00015C   ........     CALLA   #Switches_Process
    \   000160   F73F         JMP     ??IOT_config_11
-    128              }
-    129            }
-    130          }
+    131              }
+    132            }
+    133          }
    \                     ??IOT_config_23:
    \   000162   3A41         POP.W   R10
    \   000164   1001         RETA
    \   000166                REQUIRE _A_PBIN_L
-    131          
-    132          //******************************************************************************
-    133          //      Function name: Listen
-    134          //      Description: Configuration for IOT device on ncsu wifi  
-    135          //      Global variables: IOT_Char_Rx
-    136          //      Local variables: inc, i, j, time, t, result
-    137          //      Return: VOID
-    138          //******************************************************************************
+    134          
+    135          //------------------------------------------------------------------------------
+    136          //      Function name: Listen
+    137          //      Description: Configuration for IOT device on ncsu wifi  
+    138          //      Global variables: IOT_Char_Rx
+    139          //      Local variables: inc, i, j, time, t, result
+    140          //      Return: VOID
+    141          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    139          void Listen(void){
+    142          void Listen(void){
    \                     Listen:
    \   000000   3B15         PUSHM.W #0x4, R11
-    140            int inc = POSIT_0;
+    143            int inc = POSIT_0;
    \   000002   0A43         MOV.W   #0x0, R10
-    141            char j = '1'; 
+    144            char j = '1'; 
    \   000004   7B403100     MOV.B   #0x31, R11
-    142            unsigned int t; 
-    143            _Bool result = POSIT_0;
+    145            unsigned int t; 
+    146            _Bool result = POSIT_0;
    \   000008   4943         MOV.B   #0x0, R9
-    144            
-    145            while(!result){
+    147            
+    148            while(!result){
    \                     ??Listen_0:
    \   00000A   4993         CMP.B   #0x0, R9
    \   00000C   0820         JNE     ??Listen_12
-    146              // Checks if command sequence identifier is seen. If seen, returns 1, else 0
-    147              result = Check_Str();
+    149              // Checks if command sequence identifier is seen. If seen, returns 1, else 0
+    150              result = Check_Str();
    \   00000E   ........     CALLA   #Check_Str
    \   000012   0C93         CMP.W   #0x0, R12
    \   000014   0224         JEQ     ??Listen_13
@@ -370,9 +373,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \                     ??Listen_13:
    \   00001A   4943         MOV.B   #0x0, R9
    \   00001C   F63F         JMP     ??Listen_0
-    148            }
-    149            
-    150            Out_To_LCD("Waiting",POSIT_0,"For",POSIT_0,"Input...",POSIT_0," ",POSIT_0);
+    151            }
+    152            
+    153            Out_To_LCD("Waiting",POSIT_0,"For",POSIT_0,"Input...",POSIT_0," ",POSIT_0);
    \                     ??Listen_12:
    \   00001E   0312         PUSH.W  #0x0
    \   000020   3012....     PUSH.W  #`?<Constant " ">`
@@ -383,25 +386,25 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000030   0D43         MOV.W   #0x0, R13
    \   000032   3C40....     MOV.W   #`?<Constant "Waiting">`, R12
    \   000036   ........     CALLA   #Out_To_LCD
-    151            Display_Process();
+    154            Display_Process();
    \   00003A   ........     CALLA   #Display_Process
-    152            Five_Msec_Delay(BIG_DELAY);
+    155            Five_Msec_Delay(BIG_DELAY);
    \   00003E   3C40F401     MOV.W   #0x1f4, R12
    \   000042   ........     CALLA   #Five_Msec_Delay
    \   000046   A1000800     ADDA    #0x8, SP
-    153            
-    154            // Continue to listen unless SW2 is pressed
-    155            while(P4IN & SW2){
+    156            
+    157            // Continue to listen unless SW2 is pressed
+    158            while(P4IN & SW2){
    \                     ??Listen_10:
    \   00004A   E2B32102     BIT.B   #0x2, &0x221
    \   00004E   2529         JNC     ??Listen_14
-    156              
-    157              // Turns off all motors (precaution) 
-    158              All_Off(); 
-   \   000050   ........     CALLA   #All_Off
     159              
-    160              // re-initializing receive buffer
-    161              for(int j1=POSIT_0; j1<SMALL_RING_SIZE; j1++)IOT_Char_Rx[j1]='1';
+    160              // Turns off all motors (precaution) 
+    161              All_Off(); 
+   \   000050   ........     CALLA   #All_Off
+    162              
+    163              // re-initializing receive buffer
+    164              for(int j1=POSIT_0; j1<SMALL_RING_SIZE; j1++)IOT_Char_Rx[j1]='1';
    \   000054   0F43         MOV.W   #0x0, R15
    \                     ??Listen_1:
    \   000056   3F902800     CMP.W   #0x28, R15
@@ -409,23 +412,23 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00005C   FF403100.... MOV.B   #0x31, IOT_Char_Rx(R15)
    \   000062   1F53         ADD.W   #0x1, R15
    \   000064   F83F         JMP     ??Listen_1
-    162              
-    163              // default driving time for each command 
-    164              t = 65;
+    165              
+    166              // default driving time for each command 
+    167              t = 65;
    \                     ??Listen_15:
    \   000066   38404100     MOV.W   #0x41, R8
-    165              
-    166              // re-initializing variables 
-    167              j = '1'; 
+    168              
+    169              // re-initializing variables 
+    170              j = '1'; 
    \   00006A   7B403100     MOV.B   #0x31, R11
-    168              inc = POSIT_0; 
+    171              inc = POSIT_0; 
    \   00006E   0A43         MOV.W   #0x0, R10
-    169              
-    170              // going through array to find appropriate driving commands 
-    171              j = IOT_Char_Rx[inc];
-   \   000070   5B4A....     MOV.B   IOT_Char_Rx(R10), R11
     172              
-    173              switch(j){
+    173              // going through array to find appropriate driving commands 
+    174              j = IOT_Char_Rx[inc];
+   \   000070   5B4A....     MOV.B   IOT_Char_Rx(R10), R11
+    175              
+    176              switch(j){
    \   000074   4E4B         MOV.B   R11, R14
    \   000076   7E804100     SUB.B   #0x41, R14
    \   00007A   7424         JEQ     ??Listen_16
@@ -444,10 +447,10 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000096   7E800300     SUB.B   #0x3, R14
    \   00009A   BF24         JEQ     ??Listen_23
    \   00009C   F73C         JMP     ??Listen_11
-    174                
-    175              //---------Forward motion--------------------------------------------------- 
-    176              case 'W': 
-    177                Out_To_LCD(" ",POSIT_0,"Forward",POSIT_0," ",POSIT_0," ",POSIT_0);
+    177                
+    178              //---------Forward motion--------------------------------------------------- 
+    179              case 'W': 
+    180                Out_To_LCD(" ",POSIT_0,"Forward",POSIT_0," ",POSIT_0," ",POSIT_0);
    \                     ??Listen_22:
    \   00009E   0312         PUSH.W  #0x0
    \   0000A0   3012....     PUSH.W  #`?<Constant " ">`
@@ -458,38 +461,38 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0000B0   0D43         MOV.W   #0x0, R13
    \   0000B2   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   0000B6   ........     CALLA   #Out_To_LCD
-    178                Display_Process();
+    181                Display_Process();
    \   0000BA   ........     CALLA   #Display_Process
-    179                
-    180                // Reset timer for timer interrupt 
-    181                Time_Sequence = POSIT_0;
+    182                
+    183                // Reset timer for timer interrupt 
+    184                Time_Sequence = POSIT_0;
    \   0000BE   8243....     MOV.W   #0x0, &Time_Sequence
    \   0000C2   A1000800     ADDA    #0x8, SP
-    182                
-    183                // Count up to time unit 
-    184                while(Time_Sequence < t){  
+    185                
+    186                // Count up to time unit 
+    187                while(Time_Sequence < t){  
    \                     ??Listen_2:
    \   0000C6   8298....     CMP.W   R8, &Time_Sequence
    \   0000CA   052C         JC      ??Listen_24
-    185                  Left_Forward_On();
+    188                  Left_Forward_On();
    \   0000CC   ........     CALLA   #Left_Forward_On
-    186                  Right_Forward_On();
+    189                  Right_Forward_On();
    \   0000D0   ........     CALLA   #Right_Forward_On
    \   0000D4   F83F         JMP     ??Listen_2
-    187                }
-    188                
-    189                // Turning off after reached time unit 
-    190                Left_Forward_Off();
+    190                }
+    191                
+    192                // Turning off after reached time unit 
+    193                Left_Forward_Off();
    \                     ??Listen_24:
    \   0000D6   ........     CALLA   #Left_Forward_Off
-    191                Right_Forward_Off();
+    194                Right_Forward_Off();
    \   0000DA   ........     CALLA   #Right_Forward_Off
-    192                break; 
+    195                break; 
    \   0000DE   D63C         JMP     ??Listen_11
-    193                
-    194              //---------Reverse motion--------------------------------------------------- 
-    195              case 'S':  
-    196                Out_To_LCD(" ",POSIT_0,"Reverse",POSIT_0," ",POSIT_0," ",POSIT_0);
+    196                
+    197              //---------Reverse motion--------------------------------------------------- 
+    198              case 'S':  
+    199                Out_To_LCD(" ",POSIT_0,"Reverse",POSIT_0," ",POSIT_0," ",POSIT_0);
    \                     ??Listen_21:
    \   0000E0   0312         PUSH.W  #0x0
    \   0000E2   3012....     PUSH.W  #`?<Constant " ">`
@@ -500,38 +503,38 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0000F2   0D43         MOV.W   #0x0, R13
    \   0000F4   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   0000F8   ........     CALLA   #Out_To_LCD
-    197                Display_Process();
+    200                Display_Process();
    \   0000FC   ........     CALLA   #Display_Process
-    198                
-    199                // Reset timer for timer interrupt
-    200                Time_Sequence = POSIT_0;
+    201                
+    202                // Reset timer for timer interrupt
+    203                Time_Sequence = POSIT_0;
    \   000100   8243....     MOV.W   #0x0, &Time_Sequence
    \   000104   A1000800     ADDA    #0x8, SP
-    201                
-    202                // Count up to time unit
-    203                while(Time_Sequence < t){
+    204                
+    205                // Count up to time unit
+    206                while(Time_Sequence < t){
    \                     ??Listen_3:
    \   000108   8298....     CMP.W   R8, &Time_Sequence
    \   00010C   052C         JC      ??Listen_25
-    204                  Left_Reverse_On();
+    207                  Left_Reverse_On();
    \   00010E   ........     CALLA   #Left_Reverse_On
-    205                  Right_Reverse_On();
+    208                  Right_Reverse_On();
    \   000112   ........     CALLA   #Right_Reverse_On
    \   000116   F83F         JMP     ??Listen_3
-    206                }
-    207                
-    208                // Turning off after reached time unit
-    209                Left_Reverse_Off();
+    209                }
+    210                
+    211                // Turning off after reached time unit
+    212                Left_Reverse_Off();
    \                     ??Listen_25:
    \   000118   ........     CALLA   #Left_Reverse_Off
-    210                Right_Reverse_Off();
+    213                Right_Reverse_Off();
    \   00011C   ........     CALLA   #Right_Reverse_Off
-    211                break; 
+    214                break; 
    \   000120   B53C         JMP     ??Listen_11
-    212                
-    213              //---------Clockwise motion-------------------------------------------------  
-    214              case 'D': 
-    215                Out_To_LCD(" ",POSIT_0,"CW",POSIT_0," ",POSIT_0," ",POSIT_0);
+    215                
+    216              //---------Clockwise motion-------------------------------------------------  
+    217              case 'D': 
+    218                Out_To_LCD(" ",POSIT_0,"CW",POSIT_0," ",POSIT_0," ",POSIT_0);
    \                     ??Listen_18:
    \   000122   0312         PUSH.W  #0x0
    \   000124   3012....     PUSH.W  #`?<Constant " ">`
@@ -542,38 +545,38 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000134   0D43         MOV.W   #0x0, R13
    \   000136   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   00013A   ........     CALLA   #Out_To_LCD
-    216                Display_Process();
+    219                Display_Process();
    \   00013E   ........     CALLA   #Display_Process
-    217                
-    218                // Reset timer for timer interrupt
-    219                Time_Sequence = POSIT_0;
+    220                
+    221                // Reset timer for timer interrupt
+    222                Time_Sequence = POSIT_0;
    \   000142   8243....     MOV.W   #0x0, &Time_Sequence
    \   000146   A1000800     ADDA    #0x8, SP
-    220                
-    221                // Count up to time unit
-    222                while(Time_Sequence < t){
+    223                
+    224                // Count up to time unit
+    225                while(Time_Sequence < t){
    \                     ??Listen_4:
    \   00014A   8298....     CMP.W   R8, &Time_Sequence
    \   00014E   052C         JC      ??Listen_26
-    223                  Left_Forward_On();
+    226                  Left_Forward_On();
    \   000150   ........     CALLA   #Left_Forward_On
-    224                  Right_Reverse_On();
+    227                  Right_Reverse_On();
    \   000154   ........     CALLA   #Right_Reverse_On
    \   000158   F83F         JMP     ??Listen_4
-    225                }
-    226                
-    227                // Turning off after reached time unit
-    228                Left_Forward_Off();
+    228                }
+    229                
+    230                // Turning off after reached time unit
+    231                Left_Forward_Off();
    \                     ??Listen_26:
    \   00015A   ........     CALLA   #Left_Forward_Off
-    229                Right_Reverse_Off();
+    232                Right_Reverse_Off();
    \   00015E   ........     CALLA   #Right_Reverse_Off
-    230                break; 
+    233                break; 
    \   000162   943C         JMP     ??Listen_11
-    231                
-    232              //---------Counterclockwise motion------------------------------------------        
-    233              case 'A':  
-    234                Out_To_LCD(" ",POSIT_0,"CCW",POSIT_0," ",POSIT_0," ",POSIT_0);
+    234                
+    235              //---------Counterclockwise motion------------------------------------------        
+    236              case 'A':  
+    237                Out_To_LCD(" ",POSIT_0,"CCW",POSIT_0," ",POSIT_0," ",POSIT_0);
    \                     ??Listen_16:
    \   000164   0312         PUSH.W  #0x0
    \   000166   3012....     PUSH.W  #`?<Constant " ">`
@@ -584,37 +587,37 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000176   0D43         MOV.W   #0x0, R13
    \   000178   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   00017C   ........     CALLA   #Out_To_LCD
-    235                Display_Process();
+    238                Display_Process();
    \   000180   ........     CALLA   #Display_Process
-    236                
-    237                // Reset timer for timer interrupt
-    238                Time_Sequence = POSIT_0;
+    239                
+    240                // Reset timer for timer interrupt
+    241                Time_Sequence = POSIT_0;
    \   000184   8243....     MOV.W   #0x0, &Time_Sequence
    \   000188   A1000800     ADDA    #0x8, SP
-    239                
-    240                // Count up to time unit
-    241                while(Time_Sequence < t){
+    242                
+    243                // Count up to time unit
+    244                while(Time_Sequence < t){
    \                     ??Listen_5:
    \   00018C   8298....     CMP.W   R8, &Time_Sequence
    \   000190   052C         JC      ??Listen_27
-    242                  Left_Reverse_On();
+    245                  Left_Reverse_On();
    \   000192   ........     CALLA   #Left_Reverse_On
-    243                  Right_Forward_On();
+    246                  Right_Forward_On();
    \   000196   ........     CALLA   #Right_Forward_On
    \   00019A   F83F         JMP     ??Listen_5
-    244                }
-    245                // Turning off after reached time unit
-    246                Left_Reverse_Off();
+    247                }
+    248                // Turning off after reached time unit
+    249                Left_Reverse_Off();
    \                     ??Listen_27:
    \   00019C   ........     CALLA   #Left_Reverse_Off
-    247                Right_Forward_Off();
+    250                Right_Forward_Off();
    \   0001A0   ........     CALLA   #Right_Forward_Off
-    248                break; 
+    251                break; 
    \   0001A4   733C         JMP     ??Listen_11
-    249                
-    250              //--------Left Turn (forward)-----------------------------------------------       
-    251              case 'Q':  
-    252                Out_To_LCD(" ",POSIT_0,"Left",POSIT_0,"Turn",POSIT_0," ",POSIT_0);
+    252                
+    253              //--------Left Turn (forward)-----------------------------------------------       
+    254              case 'Q':  
+    255                Out_To_LCD(" ",POSIT_0,"Left",POSIT_0,"Turn",POSIT_0," ",POSIT_0);
    \                     ??Listen_20:
    \   0001A6   0312         PUSH.W  #0x0
    \   0001A8   3012....     PUSH.W  #`?<Constant " ">`
@@ -625,33 +628,33 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0001B8   0D43         MOV.W   #0x0, R13
    \   0001BA   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   0001BE   ........     CALLA   #Out_To_LCD
-    253                Display_Process();
+    256                Display_Process();
    \   0001C2   ........     CALLA   #Display_Process
-    254                
-    255                // Reset timer for timer interrupt
-    256                Time_Sequence = POSIT_0;
+    257                
+    258                // Reset timer for timer interrupt
+    259                Time_Sequence = POSIT_0;
    \   0001C6   8243....     MOV.W   #0x0, &Time_Sequence
    \   0001CA   A1000800     ADDA    #0x8, SP
-    257                
-    258                // Count up to time unit
-    259                while(Time_Sequence < t){
+    260                
+    261                // Count up to time unit
+    262                while(Time_Sequence < t){
    \                     ??Listen_6:
    \   0001CE   8298....     CMP.W   R8, &Time_Sequence
    \   0001D2   032C         JC      ??Listen_28
-    260                  Right_Forward_On();
+    263                  Right_Forward_On();
    \   0001D4   ........     CALLA   #Right_Forward_On
    \   0001D8   FA3F         JMP     ??Listen_6
-    261                }
-    262                // Turning off after reached time unit
-    263                Right_Forward_Off();
+    264                }
+    265                // Turning off after reached time unit
+    266                Right_Forward_Off();
    \                     ??Listen_28:
    \   0001DA   ........     CALLA   #Right_Forward_Off
-    264                break; 
+    267                break; 
    \   0001DE   563C         JMP     ??Listen_11
-    265                
-    266              //---------Right Turn (forward)---------------------------------------------        
-    267              case 'E': 
-    268                Out_To_LCD(" ",POSIT_0,"Right",POSIT_0,"Turn",POSIT_0," ",POSIT_0);
+    268                
+    269              //---------Right Turn (forward)---------------------------------------------        
+    270              case 'E': 
+    271                Out_To_LCD(" ",POSIT_0,"Right",POSIT_0,"Turn",POSIT_0," ",POSIT_0);
    \                     ??Listen_19:
    \   0001E0   0312         PUSH.W  #0x0
    \   0001E2   3012....     PUSH.W  #`?<Constant " ">`
@@ -662,33 +665,33 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0001F2   0D43         MOV.W   #0x0, R13
    \   0001F4   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   0001F8   ........     CALLA   #Out_To_LCD
-    269                Display_Process();
+    272                Display_Process();
    \   0001FC   ........     CALLA   #Display_Process
-    270                
-    271                // Reset timer for timer interrupt
-    272                Time_Sequence = POSIT_0;
+    273                
+    274                // Reset timer for timer interrupt
+    275                Time_Sequence = POSIT_0;
    \   000200   8243....     MOV.W   #0x0, &Time_Sequence
    \   000204   A1000800     ADDA    #0x8, SP
-    273                
-    274                // Count up to time unit
-    275                while(Time_Sequence < t){
+    276                
+    277                // Count up to time unit
+    278                while(Time_Sequence < t){
    \                     ??Listen_7:
    \   000208   8298....     CMP.W   R8, &Time_Sequence
    \   00020C   032C         JC      ??Listen_29
-    276                  Left_Forward_On();
+    279                  Left_Forward_On();
    \   00020E   ........     CALLA   #Left_Forward_On
    \   000212   FA3F         JMP     ??Listen_7
-    277                }
-    278                // Turning off after reached time unit
-    279                Left_Forward_Off();
+    280                }
+    281                // Turning off after reached time unit
+    282                Left_Forward_Off();
    \                     ??Listen_29:
    \   000214   ........     CALLA   #Left_Forward_Off
-    280                break; 
+    283                break; 
    \   000218   393C         JMP     ??Listen_11
-    281                
-    282              //---------Left Turn (backward)---------------------------------------------        
-    283              case 'Z': 
-    284                Out_To_LCD(" ",POSIT_0,"Left",POSIT_0,"Turn",POSIT_0,"R",POSIT_0);
+    284                
+    285              //---------Left Turn (backward)---------------------------------------------        
+    286              case 'Z': 
+    287                Out_To_LCD(" ",POSIT_0,"Left",POSIT_0,"Turn",POSIT_0,"R",POSIT_0);
    \                     ??Listen_23:
    \   00021A   0312         PUSH.W  #0x0
    \   00021C   3012....     PUSH.W  #`?<Constant "R">`
@@ -699,33 +702,33 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00022C   0D43         MOV.W   #0x0, R13
    \   00022E   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   000232   ........     CALLA   #Out_To_LCD
-    285                Display_Process();
+    288                Display_Process();
    \   000236   ........     CALLA   #Display_Process
-    286                
-    287                // Reset timer for timer interrupt
-    288                Time_Sequence = POSIT_0;
+    289                
+    290                // Reset timer for timer interrupt
+    291                Time_Sequence = POSIT_0;
    \   00023A   8243....     MOV.W   #0x0, &Time_Sequence
    \   00023E   A1000800     ADDA    #0x8, SP
-    289                
-    290                // Count up to time unit
-    291                while(Time_Sequence < t){
+    292                
+    293                // Count up to time unit
+    294                while(Time_Sequence < t){
    \                     ??Listen_8:
    \   000242   8298....     CMP.W   R8, &Time_Sequence
    \   000246   032C         JC      ??Listen_30
-    292                  Right_Reverse_On();
+    295                  Right_Reverse_On();
    \   000248   ........     CALLA   #Right_Reverse_On
    \   00024C   FA3F         JMP     ??Listen_8
-    293                }
-    294                // Turning off after reached time unit
-    295                Right_Reverse_Off();
+    296                }
+    297                // Turning off after reached time unit
+    298                Right_Reverse_Off();
    \                     ??Listen_30:
    \   00024E   ........     CALLA   #Right_Reverse_Off
-    296                break; 
+    299                break; 
    \   000252   1C3C         JMP     ??Listen_11
-    297                
-    298              //---------Right Turn (backward)--------------------------------------------
-    299              case 'C': // Turn reverse right
-    300                Out_To_LCD(" ",POSIT_0,"Right",POSIT_0,"Turn",POSIT_0,"R",POSIT_0);
+    300                
+    301              //---------Right Turn (backward)--------------------------------------------
+    302              case 'C': // Turn reverse right
+    303                Out_To_LCD(" ",POSIT_0,"Right",POSIT_0,"Turn",POSIT_0,"R",POSIT_0);
    \                     ??Listen_17:
    \   000254   0312         PUSH.W  #0x0
    \   000256   3012....     PUSH.W  #`?<Constant "R">`
@@ -736,74 +739,74 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000266   0D43         MOV.W   #0x0, R13
    \   000268   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   00026C   ........     CALLA   #Out_To_LCD
-    301                Display_Process();
+    304                Display_Process();
    \   000270   ........     CALLA   #Display_Process
-    302                
-    303                // Reset timer for timer interrupt
-    304                Time_Sequence = POSIT_0;
+    305                
+    306                // Reset timer for timer interrupt
+    307                Time_Sequence = POSIT_0;
    \   000274   8243....     MOV.W   #0x0, &Time_Sequence
    \   000278   A1000800     ADDA    #0x8, SP
-    305                
-    306                // Count up to time unit
-    307                while(Time_Sequence < t){
+    308                
+    309                // Count up to time unit
+    310                while(Time_Sequence < t){
    \                     ??Listen_9:
    \   00027C   8298....     CMP.W   R8, &Time_Sequence
    \   000280   032C         JC      ??Listen_31
-    308                  Left_Reverse_On();
+    311                  Left_Reverse_On();
    \   000282   ........     CALLA   #Left_Reverse_On
    \   000286   FA3F         JMP     ??Listen_9
-    309                }
-    310                // Turning off after reached time unit
-    311                Left_Reverse_Off();
+    312                }
+    313                // Turning off after reached time unit
+    314                Left_Reverse_Off();
    \                     ??Listen_31:
    \   000288   ........     CALLA   #Left_Reverse_Off
-    312                break; 
-    313              default: break; 
-    314              }
-    315              
-    316              if(inc == (SMALL_RING_SIZE-POSIT_1)){
+    315                break; 
+    316              default: break; 
+    317              }
+    318              
+    319              if(inc == (SMALL_RING_SIZE-POSIT_1)){
    \                     ??Listen_11:
    \   00028C   3A902700     CMP.W   #0x27, R10
    \   000290   0220         JNE     ??Listen_32
-    317                inc = POSIT_0;
+    320                inc = POSIT_0;
    \   000292   0A43         MOV.W   #0x0, R10
    \   000294   DA3E         JMP     ??Listen_10
-    318              }else{
-    319                inc++;
+    321              }else{
+    322                inc++;
    \                     ??Listen_32:
    \   000296   1A53         ADD.W   #0x1, R10
    \   000298   D83E         JMP     ??Listen_10
-    320              } 
-    321            }
-    322          }
+    323              } 
+    324            }
+    325          }
    \                     ??Listen_14:
    \   00029A   3817         POPM.W  #0x4, R11
    \   00029C   1001         RETA
    \   00029E                REQUIRE _A_PBIN_L
-    323          
-    324          //*****************************************************************************
-    325          //      Function name: Set_SSID 
-    326          //      Description: Setting SSID 
-    327          //      Global variables: 
-    328          //      Local variables:  
-    329          //      Return: VOID
-    330          //*****************************************************************************
+    326          
+    327          //------------------------------------------------------------------------------
+    328          //      Function name: Set_SSID 
+    329          //      Description: Setting SSID 
+    330          //      Global variables: 
+    331          //      Local variables:  
+    332          //      Return: VOID
+    333          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    331          void Set_SSID(void){
+    334          void Set_SSID(void){
    \                     Set_SSID:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    332            int i = POSIT_0;
+    335            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    333            char sSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT=ncsu\r"; 
+    336            char sSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT=ncsu\r"; 
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SSIDTXT=ncsu\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    334            
-    335            // initializing receive buffer
-    336            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    337            
+    338            // initializing receive buffer
+    339            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Set_SSID_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -811,9 +814,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Set_SSID_0
-    337            
-    338            // Updating display 
-    339            Out_To_LCD("Set SSID", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    340            
+    341            // Updating display 
+    342            Out_To_LCD("Set SSID", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Set_SSID_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -824,13 +827,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Set SSID">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    340            Display_Process();
+    343            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    341            
-    342            // Transmitting commands
-    343            while(ALWAYS){
-    344              UCA1TXBUF = UCA0TXBUF = sSSID[i]; 
+    344            
+    345            // Transmitting commands
+    346            while(ALWAYS){
+    347              UCA1TXBUF = UCA0TXBUF = sSSID[i]; 
    \                     ??Set_SSID_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -838,18 +841,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    345              if(sSSID[i] == CAR_RET)break; 
+    348              if(sSSID[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Set_SSID_4
-    346              Five_Msec_Delay(POSIT_1); 
-    347              i++;
-    348            }
-    349            Five_Msec_Delay(POSIT_5);
+    349              Five_Msec_Delay(POSIT_1); 
+    350              i++;
+    351            }
+    352            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    350          }
+    353          }
    \   00006E   053C         JMP     ??Set_SSID_2
    \                     ??Set_SSID_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -862,30 +865,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    351          
-    352          //*****************************************************************************
-    353          //      Function name: Get_SSID
-    354          //      Description: Getting SSID 
-    355          //      Global variables: 
-    356          //      Local variables:  
-    357          //      Return: VOID
-    358          //*****************************************************************************
+    354          
+    355          //------------------------------------------------------------------------------
+    356          //      Function name: Get_SSID
+    357          //      Description: Getting SSID 
+    358          //      Global variables: 
+    359          //      Local variables:  
+    360          //      Return: VOID
+    361          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    359          void Get_SSID(void){
+    362          void Get_SSID(void){
    \                     Get_SSID:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    360            int i = POSIT_0;
+    363            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    361            char gSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT\r"; 
+    364            char gSSID[SMALL_RING_SIZE] = "AT+S.SSIDTXT\r"; 
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SSIDTXT\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    362            
-    363            // initializing receive buffer
-    364            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    365            
+    366            // initializing receive buffer
+    367            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Get_SSID_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -893,9 +896,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Get_SSID_0
-    365            
-    366            // Updating display 
-    367            Out_To_LCD("Get SSID", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    368            
+    369            // Updating display 
+    370            Out_To_LCD("Get SSID", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Get_SSID_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -906,13 +909,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Get SSID">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    368            Display_Process();
+    371            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    369            
-    370            // Transmitting commands 
-    371            while(ALWAYS){
-    372              UCA1TXBUF = UCA0TXBUF = gSSID[i]; 
+    372            
+    373            // Transmitting commands 
+    374            while(ALWAYS){
+    375              UCA1TXBUF = UCA0TXBUF = gSSID[i]; 
    \                     ??Get_SSID_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -920,18 +923,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    373              if(gSSID[i] == CAR_RET)break; 
+    376              if(gSSID[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0420         JNE     ??Get_SSID_4
-    374              Five_Msec_Delay(POSIT_1); 
-    375              i++;
-    376            }
-    377            Five_Msec_Delay(POSIT_2);
+    377              Five_Msec_Delay(POSIT_1); 
+    378              i++;
+    379            }
+    380            Five_Msec_Delay(POSIT_2);
    \   000066   2C43         MOV.W   #0x2, R12
    \   000068   ........     CALLA   #Five_Msec_Delay
-    378          }
+    381          }
    \   00006C   053C         JMP     ??Get_SSID_2
    \                     ??Get_SSID_4:
    \   00006E   1C43         MOV.W   #0x1, R12
@@ -944,30 +947,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00007E   1001         RETA
    \   000080                REQUIRE _A_UCA1TXBUF_L
    \   000080                REQUIRE _A_UCA0TXBUF_L
-    379          
-    380          //*****************************************************************************
-    381          //      Function name: Set_HostN
-    382          //      Description: Sets host name 
-    383          //      Global variables: 
-    384          //      Local variables:  
-    385          //      Return: VOID
-    386          //*****************************************************************************
+    382          
+    383          //------------------------------------------------------------------------------
+    384          //      Function name: Set_HostN
+    385          //      Description: Sets host name 
+    386          //      Global variables: 
+    387          //      Local variables:  
+    388          //      Return: VOID
+    389          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    387          void Set_HostN(void){
+    390          void Set_HostN(void){
    \                     Set_HostN:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    388            int i = POSIT_0;
+    391            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    389            char sHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname,ECE-306_02_R\r";
+    392            char sHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname,ECE-306_02_R\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=ip_hostname...">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    390            
-    391            // initializing receive buffer
-    392            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    393            
+    394            // initializing receive buffer
+    395            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Set_HostN_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -975,9 +978,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Set_HostN_0
-    393            
-    394            // Updating display 
-    395            Out_To_LCD("Set", POSIT_0, "hostname", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    396            
+    397            // Updating display 
+    398            Out_To_LCD("Set", POSIT_0, "hostname", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Set_HostN_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -988,13 +991,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Set">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    396            Display_Process();
+    399            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    397            
-    398            // Transmitting commands 
-    399            while(ALWAYS){
-    400              UCA1TXBUF = UCA0TXBUF = sHostN[i]; 
+    400            
+    401            // Transmitting commands 
+    402            while(ALWAYS){
+    403              UCA1TXBUF = UCA0TXBUF = sHostN[i]; 
    \                     ??Set_HostN_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1002,18 +1005,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    401              if(sHostN[i] == CAR_RET)break; 
+    404              if(sHostN[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Set_HostN_4
-    402              Five_Msec_Delay(POSIT_1); 
-    403              i++;
-    404            }
-    405            Five_Msec_Delay(POSIT_5);
+    405              Five_Msec_Delay(POSIT_1); 
+    406              i++;
+    407            }
+    408            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    406          } 
+    409          } 
    \   00006E   053C         JMP     ??Set_HostN_2
    \                     ??Set_HostN_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1026,30 +1029,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    407          
-    408          //*****************************************************************************
-    409          //      Function name: Get_HostN
-    410          //      Description: Gets host name 
-    411          //      Global variables: 
-    412          //      Local variables:  
-    413          //      Return: VOID
-    414          //*****************************************************************************
+    410          
+    411          //------------------------------------------------------------------------------
+    412          //      Function name: Get_HostN
+    413          //      Description: Gets host name 
+    414          //      Global variables: 
+    415          //      Local variables:  
+    416          //      Return: VOID
+    417          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    415          void Get_HostN(void){
+    418          void Get_HostN(void){
    \                     Get_HostN:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    416            int i = POSIT_0;
+    419            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    417            char gHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname\r";  
+    420            char gHostN[SMALL_RING_SIZE] = "AT+S.SCFG=ip_hostname\r";  
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=ip_hostname\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    418            
-    419            // initializing receive buffer
-    420            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    421            
+    422            // initializing receive buffer
+    423            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Get_HostN_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1057,9 +1060,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Get_HostN_0
-    421            
-    422            // Updating display 
-    423            Out_To_LCD("Get", POSIT_0, "hostname", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    424            
+    425            // Updating display 
+    426            Out_To_LCD("Get", POSIT_0, "hostname", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Get_HostN_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1070,13 +1073,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Get">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    424            Display_Process();
+    427            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    425            
-    426            // Transmitting commands 
-    427            while(ALWAYS){
-    428              UCA1TXBUF = UCA0TXBUF = gHostN[i]; 
+    428            
+    429            // Transmitting commands 
+    430            while(ALWAYS){
+    431              UCA1TXBUF = UCA0TXBUF = gHostN[i]; 
    \                     ??Get_HostN_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1084,18 +1087,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    429              if(gHostN[i] == CAR_RET)break; 
+    432              if(gHostN[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Get_HostN_4
-    430              Five_Msec_Delay(POSIT_1); 
-    431              i++;
-    432            }
-    433            Five_Msec_Delay(POSIT_5);
+    433              Five_Msec_Delay(POSIT_1); 
+    434              i++;
+    435            }
+    436            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    434          }
+    437          }
    \   00006E   053C         JMP     ??Get_HostN_2
    \                     ??Get_HostN_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1108,30 +1111,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    435          
-    436          //*****************************************************************************
-    437          //      Function name: Set_NetP
-    438          //      Description: Setting network privacy mode 
-    439          //      Global variables: 
-    440          //      Local variables:  
-    441          //      Return: VOID
-    442          //*****************************************************************************
+    438          
+    439          //------------------------------------------------------------------------------
+    440          //      Function name: Set_NetP
+    441          //      Description: Setting network privacy mode 
+    442          //      Global variables: 
+    443          //      Local variables:  
+    444          //      Return: VOID
+    445          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    443          void Set_NetP(void){
+    446          void Set_NetP(void){
    \                     Set_NetP:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    444            int i = POSIT_0;
+    447            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    445            char sNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode,0\r";
+    448            char sNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode,0\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_priv_m...">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    446            
-    447            // initializing receive buffer
-    448            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    449            
+    450            // initializing receive buffer
+    451            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Set_NetP_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1139,9 +1142,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Set_NetP_0
-    449            
-    450            // Updating display 
-    451            Out_To_LCD("Set", POSIT_0, "network", POSIT_0, "privacy", POSIT_0, "", POSIT_0); 
+    452            
+    453            // Updating display 
+    454            Out_To_LCD("Set", POSIT_0, "network", POSIT_0, "privacy", POSIT_0, "", POSIT_0); 
    \                     ??Set_NetP_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1152,13 +1155,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Set">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    452            Display_Process();
+    455            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    453            
-    454            // Transmitting commands 
-    455            while(ALWAYS){
-    456              UCA1TXBUF = UCA0TXBUF = sNetP[i]; 
+    456            
+    457            // Transmitting commands 
+    458            while(ALWAYS){
+    459              UCA1TXBUF = UCA0TXBUF = sNetP[i]; 
    \                     ??Set_NetP_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1166,18 +1169,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    457              if(sNetP[i] == CAR_RET)break; 
+    460              if(sNetP[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Set_NetP_4
-    458              Five_Msec_Delay(POSIT_1); 
-    459              i++;
-    460            }
-    461            Five_Msec_Delay(POSIT_5);
+    461              Five_Msec_Delay(POSIT_1); 
+    462              i++;
+    463            }
+    464            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    462          } 
+    465          } 
    \   00006E   053C         JMP     ??Set_NetP_2
    \                     ??Set_NetP_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1190,30 +1193,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    463          
-    464          //*****************************************************************************
-    465          //      Function name: Get_NetP
-    466          //      Description: Get network privacy mode  
-    467          //      Global variables: 
-    468          //      Local variables:  
-    469          //      Return: VOID
-    470          //*****************************************************************************
+    466          
+    467          //------------------------------------------------------------------------------
+    468          //      Function name: Get_NetP
+    469          //      Description: Get network privacy mode  
+    470          //      Global variables: 
+    471          //      Local variables:  
+    472          //      Return: VOID
+    473          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    471          void Get_NetP(void){
+    474          void Get_NetP(void){
    \                     Get_NetP:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    472            int i = POSIT_0;
+    475            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    473            char gNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode\r";
+    476            char gNetP[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_priv_mode\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_priv_m...">_1`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    474            
-    475            // initializing receive buffer
-    476            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    477            
+    478            // initializing receive buffer
+    479            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Get_NetP_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1221,9 +1224,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Get_NetP_0
-    477            
-    478            // Updating display 
-    479            Out_To_LCD("Get", POSIT_0, "network", POSIT_0, "privacy", POSIT_0, "", POSIT_0); 
+    480            
+    481            // Updating display 
+    482            Out_To_LCD("Get", POSIT_0, "network", POSIT_0, "privacy", POSIT_0, "", POSIT_0); 
    \                     ??Get_NetP_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1234,13 +1237,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Get">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    480            Display_Process();
+    483            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    481            
-    482            // Transmitting commands 
-    483            while(ALWAYS){
-    484              UCA1TXBUF = UCA0TXBUF = gNetP[i]; 
+    484            
+    485            // Transmitting commands 
+    486            while(ALWAYS){
+    487              UCA1TXBUF = UCA0TXBUF = gNetP[i]; 
    \                     ??Get_NetP_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1248,18 +1251,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    485              if(gNetP[i] == CAR_RET)break; 
+    488              if(gNetP[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Get_NetP_4
-    486              Five_Msec_Delay(POSIT_1); 
-    487              i++;
-    488            }
-    489            Five_Msec_Delay(POSIT_5);
+    489              Five_Msec_Delay(POSIT_1); 
+    490              i++;
+    491            }
+    492            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    490          } 
+    493          } 
    \   00006E   053C         JMP     ??Get_NetP_2
    \                     ??Get_NetP_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1272,30 +1275,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    491          
-    492          //*****************************************************************************
-    493          //      Function name: Set_NetM
-    494          //      Description: Setting network mode 
-    495          //      Global variables: 
-    496          //      Local variables:  
-    497          //      Return: VOID
-    498          //*****************************************************************************
+    494          
+    495          //------------------------------------------------------------------------------
+    496          //      Function name: Set_NetM
+    497          //      Description: Setting network mode 
+    498          //      Global variables: 
+    499          //      Local variables:  
+    500          //      Return: VOID
+    501          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    499          void Set_NetM(void){
+    502          void Set_NetM(void){
    \                     Set_NetM:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    500            int i = POSIT_0;
+    503            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    501            char sNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode,1\r";
+    504            char sNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode,1\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_mode,1\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    502            
-    503            // initializing receive buffer
-    504            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    505            
+    506            // initializing receive buffer
+    507            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Set_NetM_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1303,9 +1306,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Set_NetM_0
-    505            
-    506            // Updating display 
-    507            Out_To_LCD("Set", POSIT_0, "network", POSIT_0, "mode", POSIT_0, "", POSIT_0); 
+    508            
+    509            // Updating display 
+    510            Out_To_LCD("Set", POSIT_0, "network", POSIT_0, "mode", POSIT_0, "", POSIT_0); 
    \                     ??Set_NetM_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1316,13 +1319,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Set">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    508            Display_Process();
+    511            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    509            
-    510            // Transmitting commands 
-    511            while(ALWAYS){
-    512              UCA1TXBUF = UCA0TXBUF = sNetM[i]; 
+    512            
+    513            // Transmitting commands 
+    514            while(ALWAYS){
+    515              UCA1TXBUF = UCA0TXBUF = sNetM[i]; 
    \                     ??Set_NetM_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1330,18 +1333,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    513              if(sNetM[i] == CAR_RET)break; 
+    516              if(sNetM[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Set_NetM_4
-    514              Five_Msec_Delay(POSIT_1); 
-    515              i++;
-    516            }
-    517            Five_Msec_Delay(POSIT_5);
+    517              Five_Msec_Delay(POSIT_1); 
+    518              i++;
+    519            }
+    520            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    518          } 
+    521          } 
    \   00006E   053C         JMP     ??Set_NetM_2
    \                     ??Set_NetM_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1354,30 +1357,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    519          
-    520          //*****************************************************************************
-    521          //      Function name: Get_NetM
-    522          //      Description: Getting network mode 
-    523          //      Global variables: 
-    524          //      Local variables:  
-    525          //      Return: VOID
-    526          //*****************************************************************************
+    522          
+    523          //------------------------------------------------------------------------------
+    524          //      Function name: Get_NetM
+    525          //      Description: Getting network mode 
+    526          //      Global variables: 
+    527          //      Local variables:  
+    528          //      Return: VOID
+    529          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    527          void Get_NetM(void){
+    530          void Get_NetM(void){
    \                     Get_NetM:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    528            int i = POSIT_0;
+    531            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    529            char gNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode\r";
+    532            char gNetM[SMALL_RING_SIZE] = "AT+S.SCFG=wifi_mode\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SCFG=wifi_mode\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    530            
-    531            // initializing receive buffer
-    532            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    533            
+    534            // initializing receive buffer
+    535            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Get_NetM_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1385,9 +1388,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Get_NetM_0
-    533            
-    534            // Updating display 
-    535            Out_To_LCD("Get", POSIT_0, "network", POSIT_0, "mode", POSIT_0, "", POSIT_0); 
+    536            
+    537            // Updating display 
+    538            Out_To_LCD("Get", POSIT_0, "network", POSIT_0, "mode", POSIT_0, "", POSIT_0); 
    \                     ??Get_NetM_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1398,13 +1401,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Get">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    536            Display_Process();
+    539            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    537            
-    538            // Transmitting commands 
-    539            while(ALWAYS){
-    540              UCA1TXBUF = UCA0TXBUF = gNetM[i]; 
+    540            
+    541            // Transmitting commands 
+    542            while(ALWAYS){
+    543              UCA1TXBUF = UCA0TXBUF = gNetM[i]; 
    \                     ??Get_NetM_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1412,18 +1415,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    541              if(gNetM[i] == CAR_RET)break; 
+    544              if(gNetM[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Get_NetM_4
-    542              Five_Msec_Delay(POSIT_1); 
-    543              i++;
-    544            }
-    545            Five_Msec_Delay(POSIT_5);
+    545              Five_Msec_Delay(POSIT_1); 
+    546              i++;
+    547            }
+    548            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    546          } 
+    549          } 
    \   00006E   053C         JMP     ??Get_NetM_2
    \                     ??Get_NetM_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1436,30 +1439,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    547          
-    548          //*****************************************************************************
-    549          //      Function name: Save_All
-    550          //      Description: Save the settings on the flash memory   
-    551          //      Global variables: 
-    552          //      Local variables:  
-    553          //      Return: VOID
-    554          //*****************************************************************************
+    550          
+    551          //------------------------------------------------------------------------------
+    552          //      Function name: Save_All
+    553          //      Description: Save the settings on the flash memory   
+    554          //      Global variables: 
+    555          //      Local variables:  
+    556          //      Return: VOID
+    557          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    555          void Save_All(void){
+    558          void Save_All(void){
    \                     Save_All:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    556            int i = POSIT_0;
+    559            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    557            char save[SMALL_RING_SIZE] = "AT&W\r";
+    560            char save[SMALL_RING_SIZE] = "AT&W\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT&W\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    558            
-    559            // initializing receive buffer
-    560            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    561            
+    562            // initializing receive buffer
+    563            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Save_All_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1467,9 +1470,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Save_All_0
-    561            
-    562            // Updating display 
-    563            Out_To_LCD("Save", POSIT_0, "settings", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    564            
+    565            // Updating display 
+    566            Out_To_LCD("Save", POSIT_0, "settings", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Save_All_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1480,13 +1483,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Save">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    564            Display_Process();
+    567            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    565            
-    566            // Transmitting commands 
-    567            while(ALWAYS){
-    568              UCA1TXBUF = UCA0TXBUF = save[i]; 
+    568            
+    569            // Transmitting commands 
+    570            while(ALWAYS){
+    571              UCA1TXBUF = UCA0TXBUF = save[i]; 
    \                     ??Save_All_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1494,18 +1497,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    569              if(save[i] == CAR_RET)break; 
+    572              if(save[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Save_All_4
-    570              Five_Msec_Delay(POSIT_1); 
-    571              i++;
-    572            }
-    573            Five_Msec_Delay(POSIT_5);
+    573              Five_Msec_Delay(POSIT_1); 
+    574              i++;
+    575            }
+    576            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    574          } 
+    577          } 
    \   00006E   053C         JMP     ??Save_All_2
    \                     ??Save_All_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1518,30 +1521,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    575          
-    576          //*****************************************************************************
-    577          //      Function name: Reset_All 
-    578          //      Description: Resets the module 
-    579          //      Global variables: 
-    580          //      Local variables:  
-    581          //      Return: VOID
-    582          //*****************************************************************************
+    578          
+    579          //------------------------------------------------------------------------------
+    580          //      Function name: Reset_All 
+    581          //      Description: Resets the module 
+    582          //      Global variables: 
+    583          //      Local variables:  
+    584          //      Return: VOID
+    585          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    583          void Reset_All(void){
+    586          void Reset_All(void){
    \                     Reset_All:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    584            int i = POSIT_0;
+    587            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    585            char reset[SMALL_RING_SIZE] = "AT+CFUN=1\r";
+    588            char reset[SMALL_RING_SIZE] = "AT+CFUN=1\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+CFUN=1\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    586            
-    587            // initializing receive buffer
-    588            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    589            
+    590            // initializing receive buffer
+    591            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Reset_All_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1549,9 +1552,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Reset_All_0
-    589            
-    590            // Updating display 
-    591            Out_To_LCD("Reset", POSIT_0, "module", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    592            
+    593            // Updating display 
+    594            Out_To_LCD("Reset", POSIT_0, "module", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Reset_All_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1562,13 +1565,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Reset">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    592            Display_Process();
+    595            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    593            
-    594            // Transmitting commands 
-    595            while(ALWAYS){
-    596              UCA1TXBUF = UCA0TXBUF = reset[i]; 
+    596            
+    597            // Transmitting commands 
+    598            while(ALWAYS){
+    599              UCA1TXBUF = UCA0TXBUF = reset[i]; 
    \                     ??Reset_All_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1576,18 +1579,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    597              if(reset[i] == CAR_RET)break; 
+    600              if(reset[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Reset_All_4
-    598              Five_Msec_Delay(POSIT_1); 
-    599              i++;
-    600            }
-    601            Five_Msec_Delay(POSIT_5);
+    601              Five_Msec_Delay(POSIT_1); 
+    602              i++;
+    603            }
+    604            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    602          } 
+    605          } 
    \   00006E   053C         JMP     ??Reset_All_2
    \                     ??Reset_All_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1600,30 +1603,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    603          
-    604          //*****************************************************************************
-    605          //      Function name: Roam
-    606          //      Description: Sets up roaming for wifi 
-    607          //      Global variables: 
-    608          //      Local variables:  
-    609          //      Return: VOID
-    610          //*****************************************************************************
+    606          
+    607          //------------------------------------------------------------------------------
+    608          //      Function name: Roam
+    609          //      Description: Sets up roaming for wifi 
+    610          //      Global variables: 
+    611          //      Local variables:  
+    612          //      Return: VOID
+    613          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    611          void Roam(void){
+    614          void Roam(void){
    \                     Roam:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    612            int i = POSIT_0;
+    615            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    613            char roam[SMALL_RING_SIZE] = "AT+S.ROAM\r";
+    616            char roam[SMALL_RING_SIZE] = "AT+S.ROAM\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.ROAM\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    614            
-    615            // initializing receive buffer
-    616            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    617            
+    618            // initializing receive buffer
+    619            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Roam_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1631,9 +1634,9 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Roam_0
-    617            
-    618            // Updating display 
-    619            Out_To_LCD("Roaming...", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    620            
+    621            // Updating display 
+    622            Out_To_LCD("Roaming...", POSIT_0, "", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \                     ??Roam_3:
    \   000026   0312         PUSH.W  #0x0
    \   000028   3012....     PUSH.W  #`?<Constant "">`
@@ -1644,13 +1647,13 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000038   0D43         MOV.W   #0x0, R13
    \   00003A   3C40....     MOV.W   #`?<Constant "Roaming...">`, R12
    \   00003E   ........     CALLA   #Out_To_LCD
-    620            Display_Process();
+    623            Display_Process();
    \   000042   ........     CALLA   #Display_Process
    \   000046   A1000800     ADDA    #0x8, SP
-    621            
-    622            // Transmitting commands 
-    623            while(ALWAYS){
-    624              UCA1TXBUF = UCA0TXBUF = roam[i]; 
+    624            
+    625            // Transmitting commands 
+    626            while(ALWAYS){
+    627              UCA1TXBUF = UCA0TXBUF = roam[i]; 
    \                     ??Roam_1:
    \   00004A   0F4A         MOV.W   R10, R15
    \   00004C   0F51         ADD.W   SP, R15
@@ -1658,18 +1661,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000050   4E4E         MOV.B   R14, R14
    \   000052   824ECE05     MOV.W   R14, &0x5ce
    \   000056   824EEE05     MOV.W   R14, &0x5ee
-    625              if(roam[i] == CAR_RET)break; 
+    628              if(roam[i] == CAR_RET)break; 
    \   00005A   0F4A         MOV.W   R10, R15
    \   00005C   0F51         ADD.W   SP, R15
    \   00005E   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000064   0520         JNE     ??Roam_4
-    626              Five_Msec_Delay(POSIT_1); 
-    627              i++;
-    628            }
-    629            Five_Msec_Delay(POSIT_5);
+    629              Five_Msec_Delay(POSIT_1); 
+    630              i++;
+    631            }
+    632            Five_Msec_Delay(POSIT_5);
    \   000066   3C400500     MOV.W   #0x5, R12
    \   00006A   ........     CALLA   #Five_Msec_Delay
-    630          }
+    633          }
    \   00006E   053C         JMP     ??Roam_2
    \                     ??Roam_4:
    \   000070   1C43         MOV.W   #0x1, R12
@@ -1682,30 +1685,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000080   1001         RETA
    \   000082                REQUIRE _A_UCA1TXBUF_L
    \   000082                REQUIRE _A_UCA0TXBUF_L
-    631          
-    632          //*****************************************************************************
-    633          //      Function name: Check_Status
-    634          //      Description: Gets ip address  
-    635          //      Global variables: 
-    636          //      Local variables:  
-    637          //      Return: VOID
-    638          //*****************************************************************************
+    634          
+    635          //------------------------------------------------------------------------------
+    636          //      Function name: Check_Status
+    637          //      Description: Gets ip address  
+    638          //      Global variables: 
+    639          //      Local variables:  
+    640          //      Return: VOID
+    641          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    639          void Check_Status(void){
+    642          void Check_Status(void){
    \                     Check_Status:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    640            int i = POSIT_0;
+    643            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    641            char check[SMALL_RING_SIZE] = "AT+S.STS=ip_ipaddr\r";
+    644            char check[SMALL_RING_SIZE] = "AT+S.STS=ip_ipaddr\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.STS=ip_ipaddr\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    642            
-    643            // initializing receive buffer
-    644            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    645            
+    646            // initializing receive buffer
+    647            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Check_Status_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1713,10 +1716,10 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Check_Status_0
-    645            
-    646            // Transmitting commands 
-    647            while(ALWAYS){
-    648              UCA1TXBUF = UCA0TXBUF = check[i]; 
+    648            
+    649            // Transmitting commands 
+    650            while(ALWAYS){
+    651              UCA1TXBUF = UCA0TXBUF = check[i]; 
    \                     ??Check_Status_1:
    \   000026   0F4A         MOV.W   R10, R15
    \   000028   0F51         ADD.W   SP, R15
@@ -1724,18 +1727,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00002C   4E4E         MOV.B   R14, R14
    \   00002E   824ECE05     MOV.W   R14, &0x5ce
    \   000032   824EEE05     MOV.W   R14, &0x5ee
-    649              if(check[i] == CAR_RET)break; 
+    652              if(check[i] == CAR_RET)break; 
    \   000036   0F4A         MOV.W   R10, R15
    \   000038   0F51         ADD.W   SP, R15
    \   00003A   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000040   0520         JNE     ??Check_Status_3
-    650              Five_Msec_Delay(POSIT_1); 
-    651              i++;
-    652            }
-    653            Five_Msec_Delay(POSIT_5);
+    653              Five_Msec_Delay(POSIT_1); 
+    654              i++;
+    655            }
+    656            Five_Msec_Delay(POSIT_5);
    \   000042   3C400500     MOV.W   #0x5, R12
    \   000046   ........     CALLA   #Five_Msec_Delay
-    654          }
+    657          }
    \   00004A   053C         JMP     ??Check_Status_2
    \                     ??Check_Status_3:
    \   00004C   1C43         MOV.W   #0x1, R12
@@ -1748,30 +1751,30 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00005C   1001         RETA
    \   00005E                REQUIRE _A_UCA1TXBUF_L
    \   00005E                REQUIRE _A_UCA0TXBUF_L
-    655          
-    656          //*****************************************************************************
-    657          //      Function name: Ping
-    658          //      Description: Pings lab computer   
-    659          //      Global variables: 
-    660          //      Local variables:  
-    661          //      Return: VOID
-    662          //*****************************************************************************
+    658          
+    659          //------------------------------------------------------------------------------
+    660          //      Function name: Ping
+    661          //      Description: Pings lab computer   
+    662          //      Global variables: 
+    663          //      Local variables:  
+    664          //      Return: VOID
+    665          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    663          void Ping(void){
+    666          void Ping(void){
    \                     Ping:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    664            int i = POSIT_0;
+    667            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    665            char ping[SMALL_RING_SIZE] = "AT+S.PING= 152.14.99.126\r";
+    668            char ping[SMALL_RING_SIZE] = "AT+S.PING= 152.14.99.126\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.PING= 152.14.99....">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    666            
-    667            // initializing receive buffer
-    668            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    669            
+    670            // initializing receive buffer
+    671            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Ping_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -1779,10 +1782,10 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Ping_0
-    669            
-    670            // Transmitting commands 
-    671            while(ALWAYS){
-    672              UCA1TXBUF = UCA0TXBUF = ping[i]; 
+    672            
+    673            // Transmitting commands 
+    674            while(ALWAYS){
+    675              UCA1TXBUF = UCA0TXBUF = ping[i]; 
    \                     ??Ping_1:
    \   000026   0F4A         MOV.W   R10, R15
    \   000028   0F51         ADD.W   SP, R15
@@ -1790,18 +1793,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00002C   4E4E         MOV.B   R14, R14
    \   00002E   824ECE05     MOV.W   R14, &0x5ce
    \   000032   824EEE05     MOV.W   R14, &0x5ee
-    673              if(ping[i] == CAR_RET)break; 
+    676              if(ping[i] == CAR_RET)break; 
    \   000036   0F4A         MOV.W   R10, R15
    \   000038   0F51         ADD.W   SP, R15
    \   00003A   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000040   0520         JNE     ??Ping_3
-    674              Five_Msec_Delay(POSIT_1); 
-    675              i++;
-    676            }
-    677            Five_Msec_Delay(POSIT_5);
+    677              Five_Msec_Delay(POSIT_1); 
+    678              i++;
+    679            }
+    680            Five_Msec_Delay(POSIT_5);
    \   000042   3C400500     MOV.W   #0x5, R12
    \   000046   ........     CALLA   #Five_Msec_Delay
-    678          }
+    681          }
    \   00004A   053C         JMP     ??Ping_2
    \                     ??Ping_3:
    \   00004C   1C43         MOV.W   #0x1, R12
@@ -1814,27 +1817,27 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00005C   1001         RETA
    \   00005E                REQUIRE _A_UCA1TXBUF_L
    \   00005E                REQUIRE _A_UCA0TXBUF_L
-    679          
-    680          //*****************************************************************************
-    681          //      Function name: Check_Str
-    682          //      Description: Checks to see if string is allowed to be received  
-    683          //      Global variables: 
-    684          //      Local variables:  
-    685          //      Return: VOID
-    686          //*****************************************************************************
+    682          
+    683          //------------------------------------------------------------------------------
+    684          //      Function name: Check_Str
+    685          //      Description: Checks to see if string is allowed to be received  
+    686          //      Global variables: 
+    687          //      Local variables:  
+    688          //      Return: VOID
+    689          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    687          int Check_Str(void){
+    690          int Check_Str(void){
    \                     Check_Str:
    \   000000   1B15         PUSHM.W #0x2, R11
    \   000002   B1000400     SUBA    #0x4, SP
-    688            int inc = POSIT_0; 
+    691            int inc = POSIT_0; 
    \   000006   0A43         MOV.W   #0x0, R10
-    689            int i = POSIT_0;
+    692            int i = POSIT_0;
    \   000008   0B43         MOV.W   #0x0, R11
-    690            char pin[POSIT_4];
-    691            
-    692            Out_To_LCD(" ",POSIT_0,"Checking",POSIT_0,"Pin...",POSIT_0," ",POSIT_0);
+    693            char pin[POSIT_4];
+    694            
+    695            Out_To_LCD(" ",POSIT_0,"Checking",POSIT_0,"Pin...",POSIT_0," ",POSIT_0);
    \   00000A   0312         PUSH.W  #0x0
    \   00000C   3012....     PUSH.W  #`?<Constant " ">`
    \   000010   0312         PUSH.W  #0x0
@@ -1844,43 +1847,43 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001C   0D43         MOV.W   #0x0, R13
    \   00001E   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   000022   ........     CALLA   #Out_To_LCD
-    693            lcd_4line();
+    696            lcd_4line();
    \   000026   ........     CALLA   #lcd_4line
-    694            Display_Process();
+    697            Display_Process();
    \   00002A   ........     CALLA   #Display_Process
-    695            X_Seconds_Delay(POSIT_1);
+    698            X_Seconds_Delay(POSIT_1);
    \   00002E   1C43         MOV.W   #0x1, R12
    \   000030   ........     CALLA   #X_Seconds_Delay
-    696            
-    697            // Pin to be recognized 
-    698            pin[POSIT_0] = '0';
+    699            
+    700            // Pin to be recognized 
+    701            pin[POSIT_0] = '0';
    \   000034   F14030000800 MOV.B   #0x30, 0x8(SP)
-    699            pin[POSIT_1] = '1';
+    702            pin[POSIT_1] = '1';
    \   00003A   F14031000900 MOV.B   #0x31, 0x9(SP)
-    700            pin[POSIT_2] = '2';
+    703            pin[POSIT_2] = '2';
    \   000040   F14032000A00 MOV.B   #0x32, 0xa(SP)
-    701            pin[POSIT_3] = '4';
+    704            pin[POSIT_3] = '4';
    \   000046   F14034000B00 MOV.B   #0x34, 0xb(SP)
-    702            
-    703            Five_Msec_Delay(BIG_DELAY); 
+    705            
+    706            Five_Msec_Delay(BIG_DELAY); 
    \   00004C   3C40F401     MOV.W   #0x1f4, R12
    \   000050   ........     CALLA   #Five_Msec_Delay
    \   000054   A1000800     ADDA    #0x8, SP
-    704            
-    705            // Checking for '*'
-    706            while(ALWAYS){
-    707              if(IOT_Char_Rx[inc] == '*')break; 
+    707            
+    708            // Checking for '*'
+    709            while(ALWAYS){
+    710              if(IOT_Char_Rx[inc] == '*')break; 
    \                     ??Check_Str_0:
    \   000058   FA902A00.... CMP.B   #0x2a, IOT_Char_Rx(R10)
    \   00005E   0620         JNE     ??Check_Str_3
-    708              if(inc >= SMALL_RING_SIZE)inc=POSIT_0;
-    709              inc++;
-    710            }
-    711            inc = POSIT_0;
+    711              if(inc >= SMALL_RING_SIZE)inc=POSIT_0;
+    712              inc++;
+    713            }
+    714            inc = POSIT_0;
    \   000060   0A43         MOV.W   #0x0, R10
-    712            
-    713            // Examining for unique pin
-    714            Five_Msec_Delay(BIG_DELAY); 
+    715            
+    716            // Examining for unique pin
+    717            Five_Msec_Delay(BIG_DELAY); 
    \   000062   3C40F401     MOV.W   #0x1f4, R12
    \   000066   ........     CALLA   #Five_Msec_Delay
    \   00006A   063C         JMP     ??Check_Str_1
@@ -1891,24 +1894,24 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \                     ??Check_Str_4:
    \   000074   1A53         ADD.W   #0x1, R10
    \   000076   F03F         JMP     ??Check_Str_0
-    715            while(ALWAYS){
-    716              if(i)break;
+    718            while(ALWAYS){
+    719              if(i)break;
    \                     ??Check_Str_1:
    \   000078   0B93         CMP.W   #0x0, R11
    \   00007A   1924         JEQ     ??Check_Str_5
-    717              if(inc >= SMALL_RING_SIZE)inc=POSIT_0;
-    718              if(IOT_Char_Rx[inc] == pin[POSIT_0]){
-    719                if(IOT_Char_Rx[inc+POSIT_1] == pin[POSIT_1]){
-    720                  if(IOT_Char_Rx[inc+POSIT_2] == pin[POSIT_2]){
-    721                    if(IOT_Char_Rx[inc+POSIT_3] == pin[POSIT_3]){
-    722                      i = ALWAYS;
-    723                    }
-    724                  }
-    725                }
-    726              }
-    727              inc++;
-    728            }
-    729            Out_To_LCD(" ",POSIT_0,"Pin",POSIT_0,"Approved",POSIT_0," ",POSIT_0);
+    720              if(inc >= SMALL_RING_SIZE)inc=POSIT_0;
+    721              if(IOT_Char_Rx[inc] == pin[POSIT_0]){
+    722                if(IOT_Char_Rx[inc+POSIT_1] == pin[POSIT_1]){
+    723                  if(IOT_Char_Rx[inc+POSIT_2] == pin[POSIT_2]){
+    724                    if(IOT_Char_Rx[inc+POSIT_3] == pin[POSIT_3]){
+    725                      i = ALWAYS;
+    726                    }
+    727                  }
+    728                }
+    729              }
+    730              inc++;
+    731            }
+    732            Out_To_LCD(" ",POSIT_0,"Pin",POSIT_0,"Approved",POSIT_0," ",POSIT_0);
    \   00007C   0312         PUSH.W  #0x0
    \   00007E   3012....     PUSH.W  #`?<Constant " ">`
    \   000082   0312         PUSH.W  #0x0
@@ -1918,14 +1921,14 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00008E   0D43         MOV.W   #0x0, R13
    \   000090   3C40....     MOV.W   #`?<Constant " ">`, R12
    \   000094   ........     CALLA   #Out_To_LCD
-    730            lcd_4line();
+    733            lcd_4line();
    \   000098   ........     CALLA   #lcd_4line
-    731            Display_Process();
+    734            Display_Process();
    \   00009C   ........     CALLA   #Display_Process
-    732            X_Seconds_Delay(POSIT_1);
+    735            X_Seconds_Delay(POSIT_1);
    \   0000A0   1C43         MOV.W   #0x1, R12
    \   0000A2   ........     CALLA   #X_Seconds_Delay
-    733            return i; 
+    736            return i; 
    \   0000A6   0C4B         MOV.W   R11, R12
    \   0000A8   A1000800     ADDA    #0x8, SP
    \   0000AC   163C         JMP     ??Check_Str_2
@@ -1950,44 +1953,44 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0000DA   A1000400     ADDA    #0x4, SP
    \   0000DE   1A17         POPM.W  #0x2, R11
    \   0000E0   1001         RETA
-    734          }
-    735          
-    736          //*****************************************************************************
-    737          //      Function name: Reconnect
-    738          //      Description: Reconnects to Wifi   
-    739          //      Global variables: 
-    740          //      Local variables:  
-    741          //      Return: VOID
-    742          //*****************************************************************************
+    737          }
+    738          
+    739          //------------------------------------------------------------------------------
+    740          //      Function name: Reconnect
+    741          //      Description: Reconnects to Wifi   
+    742          //      Global variables: 
+    743          //      Local variables:  
+    744          //      Return: VOID
+    745          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    743          void Reconnect(void){
+    746          void Reconnect(void){
    \                     Reconnect:
    \   000000   3B15         PUSHM.W #0x4, R11
-    744              int i; 
-    745              int j; 
-    746              int k; 
-    747              Reset_All();
+    747              int i; 
+    748              int j; 
+    749              int k; 
+    750              Reset_All();
    \   000002   ........     CALLA   #Reset_All
-    748            
-    749            // Reset, delayed for one second, brought back
-    750            PJOUT |= RESET;
+    751            
+    752            // Reset, delayed for one second, brought back
+    753            PJOUT |= RESET;
    \   000006   B2D22203     BIS.W   #0x8, &0x322
-    751            X_Seconds_Delay(POSIT_1); 
+    754            X_Seconds_Delay(POSIT_1); 
    \   00000A   1C43         MOV.W   #0x1, R12
    \   00000C   ........     CALLA   #X_Seconds_Delay
-    752            PJOUT &= ~RESET;
+    755            PJOUT &= ~RESET;
    \   000010   B2C22203     BIC.W   #0x8, &0x322
-    753            
-    754            // Another 1 second delay, then re-initialize LCD 
-    755            X_Seconds_Delay(POSIT_1); 
+    756            
+    757            // Another 1 second delay, then re-initialize LCD 
+    758            X_Seconds_Delay(POSIT_1); 
    \   000014   1C43         MOV.W   #0x1, R12
    \   000016   ........     CALLA   #X_Seconds_Delay
-    756            Init_LCD(); 
+    759            Init_LCD(); 
    \   00001A   ........     CALLA   #Init_LCD
-    757            
-    758            // Clearing LCD 
-    759            Out_To_LCD("Reset", POSIT_0, "Complete", POSIT_0, "", POSIT_0, "", POSIT_0); 
+    760            
+    761            // Clearing LCD 
+    762            Out_To_LCD("Reset", POSIT_0, "Complete", POSIT_0, "", POSIT_0, "", POSIT_0); 
    \   00001E   0312         PUSH.W  #0x0
    \   000020   3012....     PUSH.W  #`?<Constant "">`
    \   000024   0312         PUSH.W  #0x0
@@ -1997,15 +2000,15 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000030   0D43         MOV.W   #0x0, R13
    \   000032   3C40....     MOV.W   #`?<Constant "Reset">`, R12
    \   000036   ........     CALLA   #Out_To_LCD
-    760            Display_Process();
+    763            Display_Process();
    \   00003A   ........     CALLA   #Display_Process
-    761            X_Seconds_Delay(POSIT_2);
+    764            X_Seconds_Delay(POSIT_2);
    \   00003E   2C43         MOV.W   #0x2, R12
    \   000040   ........     CALLA   #X_Seconds_Delay
-    762            
-    763            //----------Connecting to network---------------------------------------------
-    764            Out_To_LCD("Connecting", POSIT_0, "to", POSIT_0, "network...", POSIT_0, "",
-    765                       POSIT_0);
+    765            
+    766            //----------Connecting to network---------------------------------------------
+    767            Out_To_LCD("Connecting", POSIT_0, "to", POSIT_0, "network...", POSIT_0, "",
+    768                       POSIT_0);
    \   000044   0312         PUSH.W  #0x0
    \   000046   3012....     PUSH.W  #`?<Constant "">`
    \   00004A   0312         PUSH.W  #0x0
@@ -2015,34 +2018,34 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000056   0D43         MOV.W   #0x0, R13
    \   000058   3C40....     MOV.W   #`?<Constant "Connecting">`, R12
    \   00005C   ........     CALLA   #Out_To_LCD
-    766            Display_Process();
+    769            Display_Process();
    \   000060   ........     CALLA   #Display_Process
-    767            Five_Msec_Delay(FITTY); 
+    770            Five_Msec_Delay(FITTY); 
    \   000064   3C403200     MOV.W   #0x32, R12
    \   000068   ........     CALLA   #Five_Msec_Delay
-    768            
-    769            // Checking if connection is successful by looking out for "Handshake" 
-    770            i = POSIT_0;
+    771            
+    772            // Checking if connection is successful by looking out for "Handshake" 
+    773            i = POSIT_0;
    \   00006C   0A43         MOV.W   #0x0, R10
-    771            cpu_rx_ring_wr = POSIT_0;
+    774            cpu_rx_ring_wr = POSIT_0;
    \   00006E   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
    \   000072   A1001000     ADDA    #0x10, SP
-    772            while(ALWAYS){
-    773              if(i)break; 
+    775            while(ALWAYS){
+    776              if(i)break; 
    \                     ??Reconnect_0:
    \   000076   0A93         CMP.W   #0x0, R10
    \   000078   1E24         JEQ     ??Reconnect_5
-    774              if(IOT_Char_Rx[cpu_rx_ring_wr]== 'H'){
-    775                if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_1]== 'a'){
-    776                  if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_2]== 'n'){
-    777                    i = ALWAYS;
-    778                  }
-    779                }
-    780              }
-    781            }
-    782              
-    783            Out_To_LCD("Successful", POSIT_0, "connection", POSIT_0, "", POSIT_0, "",
-    784                       POSIT_0);
+    777              if(IOT_Char_Rx[cpu_rx_ring_wr]== 'H'){
+    778                if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_1]== 'a'){
+    779                  if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_2]== 'n'){
+    780                    i = ALWAYS;
+    781                  }
+    782                }
+    783              }
+    784            }
+    785              
+    786            Out_To_LCD("Successful", POSIT_0, "connection", POSIT_0, "", POSIT_0, "",
+    787                       POSIT_0);
    \   00007A   0312         PUSH.W  #0x0
    \   00007C   3012....     PUSH.W  #`?<Constant "">`
    \   000080   0312         PUSH.W  #0x0
@@ -2052,24 +2055,24 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00008C   0D43         MOV.W   #0x0, R13
    \   00008E   3C40....     MOV.W   #`?<Constant "Successful">`, R12
    \   000092   ........     CALLA   #Out_To_LCD
-    785            Display_Process(); 
+    788            Display_Process(); 
    \   000096   ........     CALLA   #Display_Process
-    786            X_Seconds_Delay(POSIT_2);
+    789            X_Seconds_Delay(POSIT_2);
    \   00009A   2C43         MOV.W   #0x2, R12
    \   00009C   ........     CALLA   #X_Seconds_Delay
-    787            
-    788            //----------Roaming----------------------------------------------------------- 
-    789            //  Roam(); 
-    790            //  Five_Msec_Delay(POSIT_10);
-    791            
-    792            //---------Get SSID and display to LCD----------------------------------------
-    793            Get_SSID(); 
+    790            
+    791            //----------Roaming----------------------------------------------------------- 
+    792            //  Roam(); 
+    793            //  Five_Msec_Delay(POSIT_10);
+    794            
+    795            //---------Get SSID and display to LCD----------------------------------------
+    796            Get_SSID(); 
    \   0000A0   ........     CALLA   #Get_SSID
-    794            cpu_rx_ring_wr = POSIT_0;
+    797            cpu_rx_ring_wr = POSIT_0;
    \   0000A4   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
-    795            i = POSIT_0;
+    798            i = POSIT_0;
    \   0000A8   0A43         MOV.W   #0x0, R10
-    796            X_Seconds_Delay(POSIT_1);
+    799            X_Seconds_Delay(POSIT_1);
    \   0000AA   1C43         MOV.W   #0x1, R12
    \   0000AC   ........     CALLA   #X_Seconds_Delay
    \   0000B0   A1000800     ADDA    #0x8, SP
@@ -2086,123 +2089,123 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0000D8   CE23         JNE     ??Reconnect_0
    \   0000DA   1A43         MOV.W   #0x1, R10
    \   0000DC   CC3F         JMP     ??Reconnect_0
-    797            
-    798            // Parsing through Rx array until "ncsu" is reached 
-    799            while(ALWAYS){
-    800              if(i)break;
+    800            
+    801            // Parsing through Rx array until "ncsu" is reached 
+    802            while(ALWAYS){
+    803              if(i)break;
    \                     ??Reconnect_1:
    \   0000DE   0A93         CMP.W   #0x0, R10
    \   0000E0   8124         JEQ     ??Reconnect_6
-    801              
-    802              // Finds "u" first and then backtracks to "n"
-    803              if(IOT_Char_Rx[cpu_rx_ring_wr] == 'u'){
-    804                if(IOT_Char_Rx[cpu_rx_ring_wr - POSIT_1] == 's'){
-    805                  i = ALWAYS;
-    806                }
-    807              }
-    808              // Keeping value of IOT_Char_Rx counter 
-    809              k = cpu_rx_ring_wr;
-    810              cpu_rx_ring_wr++;
-    811            }
-    812            
-    813            // Output SSID to LCD 
-    814            display_1[POSIT_0] = ' '; 
+    804              
+    805              // Finds "u" first and then backtracks to "n"
+    806              if(IOT_Char_Rx[cpu_rx_ring_wr] == 'u'){
+    807                if(IOT_Char_Rx[cpu_rx_ring_wr - POSIT_1] == 's'){
+    808                  i = ALWAYS;
+    809                }
+    810              }
+    811              // Keeping value of IOT_Char_Rx counter 
+    812              k = cpu_rx_ring_wr;
+    813              cpu_rx_ring_wr++;
+    814            }
+    815            
+    816            // Output SSID to LCD 
+    817            display_1[POSIT_0] = ' '; 
    \   0000E2   1F42....     MOV.W   &display_1, R15
    \   0000E6   FF4020000000 MOV.B   #0x20, 0(R15)
-    815            display_1[POSIT_1] = ' ';
+    818            display_1[POSIT_1] = ' ';
    \   0000EC   1F42....     MOV.W   &display_1, R15
    \   0000F0   FF4020000100 MOV.B   #0x20, 0x1(R15)
-    816            display_1[POSIT_2] = ' ';
+    819            display_1[POSIT_2] = ' ';
    \   0000F6   1F42....     MOV.W   &display_1, R15
    \   0000FA   FF4020000200 MOV.B   #0x20, 0x2(R15)
-    817            display_1[POSIT_3] = IOT_Char_Rx[k-POSIT_3];
+    820            display_1[POSIT_3] = IOT_Char_Rx[k-POSIT_3];
    \   000100   1F42....     MOV.W   &display_1, R15
    \   000104   DF48....0300 MOV.B   LWRD(IOT_Char_Rx + 65533)(R8), 0x3(R15)
-    818            display_1[POSIT_4] = IOT_Char_Rx[k-POSIT_2];
+    821            display_1[POSIT_4] = IOT_Char_Rx[k-POSIT_2];
    \   00010A   1F42....     MOV.W   &display_1, R15
    \   00010E   DF48....0400 MOV.B   LWRD(IOT_Char_Rx + 65534)(R8), 0x4(R15)
-    819            display_1[POSIT_5] = IOT_Char_Rx[k-POSIT_1];
+    822            display_1[POSIT_5] = IOT_Char_Rx[k-POSIT_1];
    \   000114   1F42....     MOV.W   &display_1, R15
    \   000118   DF48....0500 MOV.B   LWRD(IOT_Char_Rx + 65535)(R8), 0x5(R15)
-    820            display_1[POSIT_6] = IOT_Char_Rx[k];
+    823            display_1[POSIT_6] = IOT_Char_Rx[k];
    \   00011E   1F42....     MOV.W   &display_1, R15
    \   000122   DF48....0600 MOV.B   IOT_Char_Rx(R8), 0x6(R15)
-    821            display_1[POSIT_7] = ' ';
+    824            display_1[POSIT_7] = ' ';
    \   000128   1F42....     MOV.W   &display_1, R15
    \   00012C   FF4020000700 MOV.B   #0x20, 0x7(R15)
-    822            display_1[POSIT_8] = ' ';
+    825            display_1[POSIT_8] = ' ';
    \   000132   1F42....     MOV.W   &display_1, R15
    \   000136   FF4020000800 MOV.B   #0x20, 0x8(R15)
-    823            display_1[POSIT_9] = ' ';
+    826            display_1[POSIT_9] = ' ';
    \   00013C   1F42....     MOV.W   &display_1, R15
    \   000140   FF4020000900 MOV.B   #0x20, 0x9(R15)
-    824            Display_Process();
+    827            Display_Process();
    \   000146   ........     CALLA   #Display_Process
-    825            
-    826            // Re-initializing values 
-    827            cpu_rx_ring_wr = POSIT_0;
+    828            
+    829            // Re-initializing values 
+    830            cpu_rx_ring_wr = POSIT_0;
    \   00014A   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
-    828            k = POSIT_0;
+    831            k = POSIT_0;
    \   00014E   0843         MOV.W   #0x0, R8
-    829            Five_Msec_Delay(BIG_DELAY);
+    832            Five_Msec_Delay(BIG_DELAY);
    \   000150   3C40F401     MOV.W   #0x1f4, R12
    \   000154   ........     CALLA   #Five_Msec_Delay
-    830            
-    831            
-    832            //---------Get ip address-----------------------------------------------------
-    833            display_2 = "          ";
+    833            
+    834            
+    835            //---------Get ip address-----------------------------------------------------
+    836            display_2 = "          ";
    \   000158   B240........ MOV.W   #`?<Constant "          ">`, &display_2
-    834            display_2[POSIT_0] = ' '; 
+    837            display_2[POSIT_0] = ' '; 
    \   00015E   1F42....     MOV.W   &display_2, R15
    \   000162   FF4020000000 MOV.B   #0x20, 0(R15)
-    835            display_2[POSIT_1] = ' ';
+    838            display_2[POSIT_1] = ' ';
    \   000168   1F42....     MOV.W   &display_2, R15
    \   00016C   FF4020000100 MOV.B   #0x20, 0x1(R15)
-    836            display_2[POSIT_2] = 'i';
+    839            display_2[POSIT_2] = 'i';
    \   000172   1F42....     MOV.W   &display_2, R15
    \   000176   FF4069000200 MOV.B   #0x69, 0x2(R15)
-    837            display_2[POSIT_3] = 'p';
+    840            display_2[POSIT_3] = 'p';
    \   00017C   1F42....     MOV.W   &display_2, R15
    \   000180   FF4070000300 MOV.B   #0x70, 0x3(R15)
-    838            display_2[POSIT_4] = 'a';
+    841            display_2[POSIT_4] = 'a';
    \   000186   1F42....     MOV.W   &display_2, R15
    \   00018A   FF4061000400 MOV.B   #0x61, 0x4(R15)
-    839            display_2[POSIT_5] = 'd';
+    842            display_2[POSIT_5] = 'd';
    \   000190   1F42....     MOV.W   &display_2, R15
    \   000194   FF4064000500 MOV.B   #0x64, 0x5(R15)
-    840            display_2[POSIT_6] = 'd';
+    843            display_2[POSIT_6] = 'd';
    \   00019A   1F42....     MOV.W   &display_2, R15
    \   00019E   FF4064000600 MOV.B   #0x64, 0x6(R15)
-    841            display_2[POSIT_7] = 'r';
+    844            display_2[POSIT_7] = 'r';
    \   0001A4   1F42....     MOV.W   &display_2, R15
    \   0001A8   FF4072000700 MOV.B   #0x72, 0x7(R15)
-    842            display_2[POSIT_8] = ' ';
+    845            display_2[POSIT_8] = ' ';
    \   0001AE   1F42....     MOV.W   &display_2, R15
    \   0001B2   FF4020000800 MOV.B   #0x20, 0x8(R15)
-    843            display_2[POSIT_9] = ' ';
+    846            display_2[POSIT_9] = ' ';
    \   0001B8   1F42....     MOV.W   &display_2, R15
    \   0001BC   FF4020000900 MOV.B   #0x20, 0x9(R15)
-    844            Display_Process(); 
+    847            Display_Process(); 
    \   0001C2   ........     CALLA   #Display_Process
-    845            X_Seconds_Delay(POSIT_2);
+    848            X_Seconds_Delay(POSIT_2);
    \   0001C6   2C43         MOV.W   #0x2, R12
    \   0001C8   ........     CALLA   #X_Seconds_Delay
-    846            
-    847            // Function to get ip address 
-    848            Check_Status(); 
+    849            
+    850            // Function to get ip address 
+    851            Check_Status(); 
    \   0001CC   ........     CALLA   #Check_Status
-    849            Five_Msec_Delay(BOOT_DELAY);
+    852            Five_Msec_Delay(BOOT_DELAY);
    \   0001D0   3C401900     MOV.W   #0x19, R12
    \   0001D4   ........     CALLA   #Five_Msec_Delay
-    850            
-    851            // Reset ring buffer increment 
-    852            cpu_rx_ring_wr = POSIT_0;
+    853            
+    854            // Reset ring buffer increment 
+    855            cpu_rx_ring_wr = POSIT_0;
    \   0001D8   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
-    853            i = POSIT_0;
+    856            i = POSIT_0;
    \   0001DC   0A43         MOV.W   #0x0, R10
-    854            
-    855            // Disabling RX interrupt
-    856            UCA1IE &= ~UCRXIE;             
+    857            
+    858            // Disabling RX interrupt
+    859            UCA1IE &= ~UCRXIE;             
    \   0001DE   92C3FA05     BIC.W   #0x1, &0x5fa
    \   0001E2   123C         JMP     ??Reconnect_2
    \                     ??Reconnect_6:
@@ -2217,36 +2220,36 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   0001FE   1842....     MOV.W   &cpu_rx_ring_wr, R8
    \   000202   9253....     ADD.W   #0x1, &cpu_rx_ring_wr
    \   000206   6B3F         JMP     ??Reconnect_1
-    857            
-    858            // Parsing through Rx array until ip_addr is reached 
-    859            while(ALWAYS){
-    860              if(i)break; 
+    860            
+    861            // Parsing through Rx array until ip_addr is reached 
+    862            while(ALWAYS){
+    863              if(i)break; 
    \                     ??Reconnect_2:
    \   000208   0A93         CMP.W   #0x0, R10
    \   00020A   0824         JEQ     ??Reconnect_8
-    861              if(IOT_Char_Rx[cpu_rx_ring_wr] == 'i'){
-    862                if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_1] == 'p'){
-    863                  if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_2] == 'a'){
-    864                    i = ALWAYS; 
-    865                    j = cpu_rx_ring_wr; 
-    866                    Display_Process(); 
-    867                    Five_Msec_Delay(WAIT_TIME);
-    868                  }
-    869                } 
-    870              }
-    871              cpu_rx_ring_wr++;
-    872            }
-    873            cpu_rx_ring_wr = POSIT_0;
+    864              if(IOT_Char_Rx[cpu_rx_ring_wr] == 'i'){
+    865                if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_1] == 'p'){
+    866                  if(IOT_Char_Rx[cpu_rx_ring_wr+POSIT_2] == 'a'){
+    867                    i = ALWAYS; 
+    868                    j = cpu_rx_ring_wr; 
+    869                    Display_Process(); 
+    870                    Five_Msec_Delay(WAIT_TIME);
+    871                  }
+    872                } 
+    873              }
+    874              cpu_rx_ring_wr++;
+    875            }
+    876            cpu_rx_ring_wr = POSIT_0;
    \   00020C   8243....     MOV.W   #0x0, &cpu_rx_ring_wr
-    874            
-    875            // Offset increment by 9 to get to start of ip address (from ip_addr) in array 
-    876            k = j + POSIT_9;
+    877            
+    878            // Offset increment by 9 to get to start of ip address (from ip_addr) in array 
+    879            k = j + POSIT_9;
    \   000210   0F4B         MOV.W   R11, R15
    \   000212   3F500900     ADD.W   #0x9, R15
    \   000216   084F         MOV.W   R15, R8
-    877            
-    878            // Clearing array to prepare for new data 
-    879            for(int inc=POSIT_0; inc<=POSIT_9; inc++)display_3[inc] = ' '; 
+    880            
+    881            // Clearing array to prepare for new data 
+    882            for(int inc=POSIT_0; inc<=POSIT_9; inc++)display_3[inc] = ' '; 
    \   000218   0F43         MOV.W   #0x0, R15
    \   00021A   1E3C         JMP     ??Reconnect_3
    \                     ??Reconnect_8:
@@ -2275,134 +2278,134 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   000264   FE4020000000 MOV.B   #0x20, 0(R14)
    \   00026A   1F53         ADD.W   #0x1, R15
    \   00026C   F53F         JMP     ??Reconnect_3
-    880            Display_Process(); 
+    883            Display_Process(); 
    \                     ??Reconnect_10:
    \   00026E   ........     CALLA   #Display_Process
-    881            X_Seconds_Delay(POSIT_2);
+    884            X_Seconds_Delay(POSIT_2);
    \   000272   2C43         MOV.W   #0x2, R12
    \   000274   ........     CALLA   #X_Seconds_Delay
-    882            
-    883            // Output ip address to LCD 
-    884            display_3[POSIT_0] = ' '; 
+    885            
+    886            // Output ip address to LCD 
+    887            display_3[POSIT_0] = ' '; 
    \   000278   1F42....     MOV.W   &display_3, R15
    \   00027C   FF4020000000 MOV.B   #0x20, 0(R15)
-    885            display_3[POSIT_1] = ' ';
+    888            display_3[POSIT_1] = ' ';
    \   000282   1F42....     MOV.W   &display_3, R15
    \   000286   FF4020000100 MOV.B   #0x20, 0x1(R15)
-    886            display_3[POSIT_2] = IOT_Char_Rx[k];
+    889            display_3[POSIT_2] = IOT_Char_Rx[k];
    \   00028C   1F42....     MOV.W   &display_3, R15
    \   000290   DF48....0200 MOV.B   IOT_Char_Rx(R8), 0x2(R15)
-    887            display_3[POSIT_3] = IOT_Char_Rx[k+POSIT_1];
+    890            display_3[POSIT_3] = IOT_Char_Rx[k+POSIT_1];
    \   000296   1F42....     MOV.W   &display_3, R15
    \   00029A   DF48....0300 MOV.B   IOT_Char_Rx + 1(R8), 0x3(R15)
-    888            display_3[POSIT_4] = IOT_Char_Rx[k+POSIT_2];
+    891            display_3[POSIT_4] = IOT_Char_Rx[k+POSIT_2];
    \   0002A0   1F42....     MOV.W   &display_3, R15
    \   0002A4   DF48....0400 MOV.B   IOT_Char_Rx + 2(R8), 0x4(R15)
-    889            display_3[POSIT_5] = IOT_Char_Rx[k+POSIT_3];
+    892            display_3[POSIT_5] = IOT_Char_Rx[k+POSIT_3];
    \   0002AA   1F42....     MOV.W   &display_3, R15
    \   0002AE   DF48....0500 MOV.B   IOT_Char_Rx + 3(R8), 0x5(R15)
-    890            display_3[POSIT_6] = IOT_Char_Rx[k+POSIT_4];
+    893            display_3[POSIT_6] = IOT_Char_Rx[k+POSIT_4];
    \   0002B4   1F42....     MOV.W   &display_3, R15
    \   0002B8   DF48....0600 MOV.B   IOT_Char_Rx + 4(R8), 0x6(R15)
-    891            display_3[POSIT_7] = IOT_Char_Rx[k+POSIT_5];
+    894            display_3[POSIT_7] = IOT_Char_Rx[k+POSIT_5];
    \   0002BE   1F42....     MOV.W   &display_3, R15
    \   0002C2   DF48....0700 MOV.B   IOT_Char_Rx + 5(R8), 0x7(R15)
-    892            display_3[POSIT_8] = ' ';
+    895            display_3[POSIT_8] = ' ';
    \   0002C8   1F42....     MOV.W   &display_3, R15
    \   0002CC   FF4020000800 MOV.B   #0x20, 0x8(R15)
-    893            display_3[POSIT_9] = ' '; 
+    896            display_3[POSIT_9] = ' '; 
    \   0002D2   1F42....     MOV.W   &display_3, R15
    \   0002D6   FF4020000900 MOV.B   #0x20, 0x9(R15)
-    894            Display_Process();
+    897            Display_Process();
    \   0002DC   ........     CALLA   #Display_Process
-    895            X_Seconds_Delay(POSIT_2); 
+    898            X_Seconds_Delay(POSIT_2); 
    \   0002E0   2C43         MOV.W   #0x2, R12
    \   0002E2   ........     CALLA   #X_Seconds_Delay
-    896            Five_Msec_Delay(BIG_DELAY);
+    899            Five_Msec_Delay(BIG_DELAY);
    \   0002E6   3C40F401     MOV.W   #0x1f4, R12
    \   0002EA   ........     CALLA   #Five_Msec_Delay
-    897            
-    898            display_4 = "          ";
+    900            
+    901            display_4 = "          ";
    \   0002EE   B240........ MOV.W   #`?<Constant "          ">`, &display_4
-    899            display_4[POSIT_0] = ' '; 
+    902            display_4[POSIT_0] = ' '; 
    \   0002F4   1F42....     MOV.W   &display_4, R15
    \   0002F8   FF4020000000 MOV.B   #0x20, 0(R15)
-    900            display_4[POSIT_1] = ' ';
+    903            display_4[POSIT_1] = ' ';
    \   0002FE   1F42....     MOV.W   &display_4, R15
    \   000302   FF4020000100 MOV.B   #0x20, 0x1(R15)
-    901            display_4[POSIT_2] = IOT_Char_Rx[k+POSIT_6];
+    904            display_4[POSIT_2] = IOT_Char_Rx[k+POSIT_6];
    \   000308   1F42....     MOV.W   &display_4, R15
    \   00030C   DF48....0200 MOV.B   IOT_Char_Rx + 6(R8), 0x2(R15)
-    902            display_4[POSIT_3] = IOT_Char_Rx[k+POSIT_7];
+    905            display_4[POSIT_3] = IOT_Char_Rx[k+POSIT_7];
    \   000312   1F42....     MOV.W   &display_4, R15
    \   000316   DF48....0300 MOV.B   IOT_Char_Rx + 7(R8), 0x3(R15)
-    903            display_4[POSIT_4] = IOT_Char_Rx[k+POSIT_8];
+    906            display_4[POSIT_4] = IOT_Char_Rx[k+POSIT_8];
    \   00031C   1F42....     MOV.W   &display_4, R15
    \   000320   DF48....0400 MOV.B   IOT_Char_Rx + 8(R8), 0x4(R15)
-    904            display_4[POSIT_5] = IOT_Char_Rx[k+POSIT_9];
+    907            display_4[POSIT_5] = IOT_Char_Rx[k+POSIT_9];
    \   000326   1F42....     MOV.W   &display_4, R15
    \   00032A   DF48....0500 MOV.B   IOT_Char_Rx + 9(R8), 0x5(R15)
-    905            display_4[POSIT_6] = IOT_Char_Rx[k+POSIT_10];
+    908            display_4[POSIT_6] = IOT_Char_Rx[k+POSIT_10];
    \   000330   1F42....     MOV.W   &display_4, R15
    \   000334   DF48....0600 MOV.B   IOT_Char_Rx + 10(R8), 0x6(R15)
-    906            display_4[POSIT_7] = IOT_Char_Rx[k+POSIT_11];
+    909            display_4[POSIT_7] = IOT_Char_Rx[k+POSIT_11];
    \   00033A   1F42....     MOV.W   &display_4, R15
    \   00033E   DF48....0700 MOV.B   IOT_Char_Rx + 11(R8), 0x7(R15)
-    907            display_4[POSIT_8] = IOT_Char_Rx[k+POSIT_12];
+    910            display_4[POSIT_8] = IOT_Char_Rx[k+POSIT_12];
    \   000344   1F42....     MOV.W   &display_4, R15
    \   000348   DF48....0800 MOV.B   IOT_Char_Rx + 12(R8), 0x8(R15)
-    908            display_4[POSIT_9] = ' ';
+    911            display_4[POSIT_9] = ' ';
    \   00034E   1F42....     MOV.W   &display_4, R15
    \   000352   FF4020000900 MOV.B   #0x20, 0x9(R15)
-    909            Display_Process();
+    912            Display_Process();
    \   000358   ........     CALLA   #Display_Process
-    910            
-    911            // Re-enable RX interrupt
-    912            UCA1IE |= UCRXIE;                 
+    913            
+    914            // Re-enable RX interrupt
+    915            UCA1IE |= UCRXIE;                 
    \   00035C   92D3FA05     BIS.W   #0x1, &0x5fa
-    913            Five_Msec_Delay(BIG_DELAY);
+    916            Five_Msec_Delay(BIG_DELAY);
    \   000360   3C40F401     MOV.W   #0x1f4, R12
    \   000364   ........     CALLA   #Five_Msec_Delay
-    914            
-    915            // Waiting until "OK" has been received 
-    916            i = POSIT_0;
+    917            
+    918            // Waiting until "OK" has been received 
+    919            i = POSIT_0;
    \   000368   0A43         MOV.W   #0x0, R10
-    917            while(IOT_Char_Rx[i] != 'O')i++; 
+    920            while(IOT_Char_Rx[i] != 'O')i++; 
    \                     ??Reconnect_4:
    \   00036A   FA904F00.... CMP.B   #0x4f, IOT_Char_Rx(R10)
    \   000370   0224         JEQ     ??Reconnect_11
    \   000372   1A53         ADD.W   #0x1, R10
    \   000374   FA3F         JMP     ??Reconnect_4
-    918          }
+    921          }
    \                     ??Reconnect_11:
    \   000376   3817         POPM.W  #0x4, R11
    \   000378   1001         RETA
    \   00037A                REQUIRE _A_PJOUT_L
    \   00037A                REQUIRE _A_UCA1IE_L
-    919          
-    920          //*****************************************************************************
-    921          //      Function name: Socket
-    922          //      Description: Socket-Server connection    
-    923          //      Global variables: 
-    924          //      Local variables:  
-    925          //      Return: VOID
-    926          //*****************************************************************************
+    922          
+    923          //------------------------------------------------------------------------------
+    924          //      Function name: Socket
+    925          //      Description: Socket-Server connection    
+    926          //      Global variables: 
+    927          //      Local variables:  
+    928          //      Return: VOID
+    929          //------------------------------------------------------------------------------
 
    \                                 In  segment CODE, align 2
-    927          void Socket(void){
+    930          void Socket(void){
    \                     Socket:
    \   000000   0A12         PUSH.W  R10
    \   000002   B1002800     SUBA    #0x28, SP
-    928            int i = POSIT_0;
+    931            int i = POSIT_0;
    \   000006   0A43         MOV.W   #0x0, R10
-    929            char socket[SMALL_RING_SIZE] = "AT+S.SOCKD=9001\r";
+    932            char socket[SMALL_RING_SIZE] = "AT+S.SOCKD=9001\r";
    \   000008   0C41         MOV.W   SP, R12
    \   00000A   3E40....     MOV.W   #`?<Constant "AT+S.SOCKD=9001\\r">`, R14
    \   00000E   3D402800     MOV.W   #0x28, R13
    \   000012   ........     CALLA   #?CopyMemoryBytes
-    930            
-    931            // initializing receive buffer
-    932            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
+    933            
+    934            // initializing receive buffer
+    935            for(int j=POSIT_0; j<SMALL_RING_SIZE; j++)IOT_Char_Rx[j]=POSIT_0;
    \   000016   0F43         MOV.W   #0x0, R15
    \                     ??Socket_0:
    \   000018   3F902800     CMP.W   #0x28, R15
@@ -2410,10 +2413,10 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00001E   CF43....     MOV.B   #0x0, IOT_Char_Rx(R15)
    \   000022   1F53         ADD.W   #0x1, R15
    \   000024   F93F         JMP     ??Socket_0
-    933            
-    934            // Transmitting commands 
-    935            while(ALWAYS){
-    936              UCA1TXBUF = UCA0TXBUF = socket[i]; 
+    936            
+    937            // Transmitting commands 
+    938            while(ALWAYS){
+    939              UCA1TXBUF = UCA0TXBUF = socket[i]; 
    \                     ??Socket_1:
    \   000026   0F4A         MOV.W   R10, R15
    \   000028   0F51         ADD.W   SP, R15
@@ -2421,18 +2424,18 @@ C:\Users\rache\Desktop\BareMetal_IoTCar\IOT.c
    \   00002C   4E4E         MOV.B   R14, R14
    \   00002E   824ECE05     MOV.W   R14, &0x5ce
    \   000032   824EEE05     MOV.W   R14, &0x5ee
-    937              if(socket[i] == CAR_RET)break; 
+    940              if(socket[i] == CAR_RET)break; 
    \   000036   0F4A         MOV.W   R10, R15
    \   000038   0F51         ADD.W   SP, R15
    \   00003A   FF900D000000 CMP.B   #0xd, 0(R15)
    \   000040   0520         JNE     ??Socket_3
-    938              Five_Msec_Delay(POSIT_1); 
-    939              i++;
-    940            }
-    941            Five_Msec_Delay(POSIT_5);
+    941              Five_Msec_Delay(POSIT_1); 
+    942              i++;
+    943            }
+    944            Five_Msec_Delay(POSIT_5);
    \   000042   3C400500     MOV.W   #0x5, R12
    \   000046   ........     CALLA   #Five_Msec_Delay
-    942          }
+    945          }
    \   00004A   053C         JMP     ??Socket_2
    \                     ??Socket_3:
    \   00004C   1C43         MOV.W   #0x1, R12

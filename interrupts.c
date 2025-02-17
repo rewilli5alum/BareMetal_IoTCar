@@ -1,23 +1,30 @@
 //******************************************************************************
-//      Title: interrupts.c
-//      Description: This file contains initialization and configuration for
-//                   all interrupts
-//      Rachel Williams
-//      October 2015
-//      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
-//******************************************************************************
+//   Name: interrupts.c
+//   Author: Rachel E. Williams
+//   Date Created: September 9 2015 (9/9/2015)
+//   Last Updated: 2/17/2025
+//   Description: This file contains configuration and initialization for all
+//                interrupts
+//   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+//   Updated revisions built with IAR Embedded Workbench - MSP430 V8.10.3
+//******************************************************************************  
 
-#include  "msp430.h"
-#include  "functions.h"
+// #includes 
+#include "msp430.h"
+#include "functions.h"
 #include "macros.h"
 
-//******************************************************************************
+// Global Variables 
+
+// Constant Variables 
+
+//------------------------------------------------------------------------------
 //      Function name: TIMER0_A0_VECTOR 
 //      Description: Sets up timer
 //      Global variables: milli_counter, milli_counter2
 //      Local variables: NONE
 //      Return: VOID
-//******************************************************************************
+//------------------------------------------------------------------------------
 #pragma vector = TIMER0_A0_VECTOR 
 __interrupt void Timer0_A0_ISR(void){  
   if(milli_counter >= MAX_MILLI){
@@ -34,13 +41,13 @@ __interrupt void Timer0_A0_ISR(void){
                                // same # of counts b/w interrupts 
 }
 
-//******************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: ADC10_ISR 
 //      Description: Sets up ADC for overall system 
 //      Global variables: ADC_Left_Detector, ADC_Right_Detector, ADC_Thumb_Wheel
 //      Local variables: NONE
 //      Return: VOID
-//******************************************************************************
+//------------------------------------------------------------------------------
 #pragma vector=ADC10_VECTOR
 __interrupt void ADC10_ISR(void){
   switch(__even_in_range(ADC10IV,POSIT_12)) {
@@ -74,13 +81,13 @@ __interrupt void ADC10_ISR(void){
   }
 }
 
-//******************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: USCI_A0_ISR
 //      Description: Transmission and reception interrupt for USCI_A0
 //      Global variables: usb_rx_ring_wr, temp, USB_Char_Rx[] 
 //      Local variables: NONE
 //      Return: VOID
-//******************************************************************************
+//------------------------------------------------------------------------------
 #pragma vector=USCI_A0_VECTOR
 __interrupt void USCI_A0_ISR(void){
   unsigned int temp;
@@ -100,13 +107,13 @@ __interrupt void USCI_A0_ISR(void){
   }
 }
 
-//******************************************************************************
+//------------------------------------------------------------------------------
 //      Function name: USCI_A1_ISR
 //      Description: Transmission and reception interrupt for USCI_A1
 //      Global variables: cpu_rx_ring_wr, temp, temp1 
 //      Local variables: NONE
 //      Return: VOID
-//******************************************************************************
+//------------------------------------------------------------------------------
 #pragma vector=USCI_A1_VECTOR
 __interrupt void USCI_A1_ISR(void){
   switch(__even_in_range(UCA1IV,UCA1IV_DFLT)){

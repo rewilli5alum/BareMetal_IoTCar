@@ -2,7 +2,7 @@
 //   Name: main.c
 //   Author: Rachel E. Williams
 //   Date Created: September 9 2015 (9/9/2015)
-//   Last Updated: 2/15/2025
+//   Last Updated: 2/17/2025
 //   Description: This file contains the main routine to run the entire project
 //                using while(1) "Super Loop" architecture
 //   
@@ -93,12 +93,7 @@ void main(void)
     tens_num = NUM_BASE;
     hundreds_num = NUM_BASE;
     menu_type = ORIGINAL;
-    //lcd_BIG_mid();
-    
-    // Initializing pointers used for updating the display 
-    //display_1 = 
-    
-    
+    lcd_BIG_mid();
    
     // Initial display 
     display_1 = "Rachel";
@@ -114,43 +109,11 @@ void main(void)
 // Begining of the While "Super Loop" Operating System
 //------------------------------------------------------------------------------
     while(ALWAYS) 
-    {                            // Can the Operating system run
-      switch(Time_Sequence)
-      {
-        case 250:                               // 1000 msec  
-          /*if(one_time){
-          Init_LEDs();                        // Initialize LEDs
-          one_time = 0;
-          }
-          Time_Sequence = 0;*/                    // 
-        case 200:                               // 1000 msec  
-          /*if(one_time){
-          PJOUT |= LED4;                      // Change State of LED 4
-          P3OUT |= LED5;                      // Change State of LED 5
-          one_time = 0;
-          }*/
-        case 150:                               // 750 msec  
-          /*if(one_time){
-          PJOUT |= LED3;                      // Change State of LED 3
-          P3OUT |= LED6;                      // Change State of LED 6
-          one_time = 0;
-          }*/
-        case 100:                               // 500 msec  
-          /*if(one_time){
-          PJOUT |= LED2;                      // Change State of LED 2
-           P3OUT |= LED7;                      // Change State of LED 7
-           one_time = 0;
-          }*/
-        case  50:                               // 250 msec  
-          /*if(one_time){
-          PJOUT |= LED1;                      // Change State of LED 1
-          P3OUT |= LED8;                      // Change State of LED 8
-          one_time = 0;
-          }*/
-           break;                                // 
-        default: break; 
-      }
-      Switches_Process();                       // Check for switch state change 
+    {  
+      // After initialization, waiting for state change of switches--SW1 or SW2
+      Switches_Process(); 
+      
+      // Resetting the Time_Sequence counter 
       if(Time_Sequence > 250)
       {
         Time_Sequence = 0;

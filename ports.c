@@ -1,22 +1,25 @@
-//***********************************************************************
-//      Title: ports.c 
-//      Description: This file contains all port definitions 
-//      Rachel Williams
-//      September 2015
-//      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
-//***********************************************************************
+//******************************************************************************
+//   Name: ports.c
+//   Author: Rachel E. Williams
+//   Date Created: September 9 2015 (9/9/2015)
+//   Last Updated: 2/17/2025
+//   Description: This file contains configuration and initalization for all 
+//                port on the board (Port1,2,3,4, and J)
+//   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+//   Updated revisions built with IAR Embedded Workbench - MSP430 V8.10.3
+//******************************************************************************  
 
-#include  "msp430.h"
-#include  "functions.h"
+#include "msp430.h"
+#include "functions.h"
 #include "macros.h"
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_Ports
-//      Description: Initializes all port functions 
+//      Description: Initializes all ports 
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_Ports(void){
 	Init_Port1();
         Init_Port2();
@@ -26,13 +29,13 @@ void Init_Ports(void){
         Init_ADC();
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_Port_1 
 //      Description: Initializes Port 1
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_Port1(void){
   //---------------------------------------------------------------------
   // Pin Name   Function        P1DIR.x P1SEL1.x        P1SEL0.x
@@ -93,68 +96,68 @@ void Init_Port1(void){
   //            TA1.0           1       1               1  
   //---------------------------------------------------------------------
   //Configure Port 1
-  // V_DETECT_R (0x01) //
-  // V_DETECT_L (0x02) //
-  // IR_LED (0x04) //
-  // V_THUMB (0x08) //
-  // SPI_CS_LCD (0x10) // LCD Chip Select
-  // RS_LCD (0x20) // LCD SA0 H/L Slave Address
-  // SIMO_B (0x40) // SPI mode - slave in/master out of USCI_B0
-  // SOMI_B (0x80) // SPI mode - slave out/master in of USCI_B0
+  //   V_DETECT_R      (0x01) 
+  //   V_DETECT_L      (0x02) 
+  //   IR_LED          (0x04) 
+  //   V_THUMB         (0x08) 
+  //   SPI_CS_LCD      (0x10) // LCD Chip Select
+  //   RS_LCD          (0x20) // LCD SA0 H/L Slave Address
+  //   SIMO_B          (0x40) // SPI mode - slave in/master out of USCI_B0
+  //   SOMI_B          (0x80) // SPI mode - slave out/master in of USCI_B0
   //----------------------------------------------------------------------
-  P1SEL0 = CLEAR_REGISTER; // P1 set as I/0
-  P1SEL1 = CLEAR_REGISTER; // P1 set as I/0
-  P1DIR = CLEAR_REGISTER; // Set P1 direction to input
+  P1SEL0 = CLEAR_REGISTER;   // P1 set as I/0
+  P1SEL1 = CLEAR_REGISTER;   // P1 set as I/0
+  P1DIR = CLEAR_REGISTER;    // Set P1 direction to input
   
-  P1SEL0 |= V_DETECT_R; // V_DETECT_R selected
-  P1SEL1 |= V_DETECT_R; // V_DETECT_R selected
-  P1OUT &= ~V_DETECT_R; // Output is 0 
-  P1DIR &= ~V_DETECT_R; // DIR is 0
+  P1SEL0 |= V_DETECT_R;      // V_DETECT_R selected
+  P1SEL1 |= V_DETECT_R;      // V_DETECT_R selected
+  P1OUT &= ~V_DETECT_R;      // Output is 0 
+  P1DIR &= ~V_DETECT_R;      // DIR is 0
   
-  P1SEL0 |= V_DETECT_L; // V_DETECT_L selected
-  P1SEL1 |= V_DETECT_L; // V_DETECT_L selected
-  P1OUT &= ~V_DETECT_L; // Output is 0 
-  P1DIR &= ~V_DETECT_L;  // DIR is 0
+  P1SEL0 |= V_DETECT_L;     // V_DETECT_L selected
+  P1SEL1 |= V_DETECT_L;     // V_DETECT_L selected
+  P1OUT &= ~V_DETECT_L;     // Output is 0 
+  P1DIR &= ~V_DETECT_L;     // DIR is 0
   
-  P1SEL0 &= ~IR_LED; // IR_LED GPI/O selected
-  P1SEL1 &= ~IR_LED; // IR_LED GPI/O selected
-  P1OUT |= IR_LED; // P1 IR_LED Port Pin set low
-  P1DIR |= IR_LED; // Set P1 IR_LED direction to output
+  P1SEL0 &= ~IR_LED;        // IR_LED GPI/O selected
+  P1SEL1 &= ~IR_LED;        // IR_LED GPI/O selected
+  P1OUT |= IR_LED;          // P1 IR_LED Port Pin set low
+  P1DIR |= IR_LED;          // Set P1 IR_LED direction to output
   
-  P1SEL0 |= V_THUMB; // V_THUMB selected
-  P1SEL1 |= V_THUMB; // V_THUMB selected
-  P1OUT &= ~V_THUMB; // Output is 0 
-  P1DIR &= ~V_THUMB; // DIR is 0 
+  P1SEL0 |= V_THUMB;        // V_THUMB selected
+  P1SEL1 |= V_THUMB;        // V_THUMB selected
+  P1OUT &= ~V_THUMB;        // Output is 0 
+  P1DIR &= ~V_THUMB;        // DIR is 0 
   
-  P1SEL0 &= ~SPI_CS_LCD; // SPI_CS_LCD GPI/O selected
-  P1SEL1 &= ~SPI_CS_LCD; // SPI_CS_LCD GPI/O selected
-  P1OUT |= SPI_CS_LCD; // P1 SPI_CS_LCD Port Pin set high
-  P1DIR |= SPI_CS_LCD; // Set SPI_CS_LCD output direction
+  P1SEL0 &= ~SPI_CS_LCD;    // SPI_CS_LCD GPI/O selected
+  P1SEL1 &= ~SPI_CS_LCD;    // SPI_CS_LCD GPI/O selected
+  P1OUT |= SPI_CS_LCD;      // P1 SPI_CS_LCD Port Pin set high
+  P1DIR |= SPI_CS_LCD;      // Set SPI_CS_LCD output direction
   
-  P1SEL0 &= ~RS_LCD; // RS_LCD GPI/O selected
-  P1SEL1 &= ~RS_LCD; // RS_LCD GPI/O selected  
-  P1OUT &= ~RS_LCD; // P1 SA0_LCD Port Pin set low
-  P1DIR |= RS_LCD; // Set SA0_LCD output direction
+  P1SEL0 &= ~RS_LCD;        // RS_LCD GPI/O selected
+  P1SEL1 &= ~RS_LCD;        // RS_LCD GPI/O selected  
+  P1OUT &= ~RS_LCD;         // P1 SA0_LCD Port Pin set low
+  P1DIR |= RS_LCD;          // Set SA0_LCD output direction
   
-  P1SEL0 &= ~SPI_SIMO; // SIMO_B selected
-  P1SEL1 |= SPI_SIMO; // SIMO_B selected
-  P1OUT &= ~SPI_SIMO; // Output is 0
-  P1DIR |= SPI_SIMO; // SIMO_B set to Output
+  P1SEL0 &= ~SPI_SIMO;      // SIMO_B selected
+  P1SEL1 |= SPI_SIMO;       // SIMO_B selected
+  P1OUT &= ~SPI_SIMO;       // Output is 0
+  P1DIR |= SPI_SIMO;        // SIMO_B set to Output
   
-  P1SEL0 &= ~SPI_SOMI; // SOMI_B is used on the LCD
-  P1SEL1 |= SPI_SOMI; // SOMI_B is used on the LCD
-  P1OUT &= ~SPI_SOMI; // SOMI_B is not set to output 
-  P1DIR &= ~SPI_SOMI; // SOMI_B set to Input
-  P1REN |= SPI_SOMI; // Enable pullup resistor
+  P1SEL0 &= ~SPI_SOMI;      // SOMI_B is used on the LCD
+  P1SEL1 |= SPI_SOMI;       // SOMI_B is used on the LCD
+  P1OUT &= ~SPI_SOMI;       // SOMI_B is not set to output 
+  P1DIR &= ~SPI_SOMI;       // SOMI_B set to Input
+  P1REN |= SPI_SOMI;         // Enable pullup resistor
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_Port_2 
 //      Description: Initializes Port 2
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_Port2(void){
   //---------------------------------------------------------------------
   // Pin Name   Function        P2DIR.x    P2SEL1.x        P2SEL0.x
@@ -259,13 +262,13 @@ void Init_Port2(void){
   P2REN &= ~UNK_P27; 
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_Port_3 
 //      Description: Initializes Port 3
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_Port3(void){
   //---------------------------------------------------------------------
   // Pin Name   Function        P3DIR.x P3SEL1.x        P3SEL0.x
@@ -355,13 +358,13 @@ void Init_Port3(void){
   P3DIR |= LED8;
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_Port_4 
 //      Description: Initializes Port 4
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_Port4(void){
   //---------------------------------------------------------------------
   // Pin Name   Function        P4DIR.x P4SEL1.x        P4SEL0.x
@@ -373,46 +376,48 @@ void Init_Port4(void){
   // Configure PORT 4
   // Port 4 has only two pins
   // Port 4 Pins
-  // SW1 (0x01) // Switch 1
-  // SW2 (0x02) // Switch 2
+  // SW1         (0x01)        // Switch 1
+  // SW2         (0x02)        // Switch 2
   //---------------------------------------------------------------------
-  P4SEL0 = 0x00; // P4 set as I/0
-  P4SEL1 = 0x00; // P4 set as I/0
-  P4DIR = 0x00; // Set P4 direction to input
-  P4OUT = 0x00;
+  P4SEL0 = CLEAR_REGISTER;     // P4 set as I/0
+  P4SEL1 = CLEAR_REGISTER;     // P4 set as I/0
+  P4DIR = CLEAR_REGISTER;      // Set P4 direction to input
+  P4OUT = CLEAR_REGISTER; 
   
-  // SW1
-  P4SEL0 &= ~SW1; // SW1 set as I/0
-  P4SEL1 &= ~SW1; // SW1 set as I/0
-  P4OUT |= SW1; // Configure pullup resistor
-  P4DIR &= ~SW1; // Direction = input
-  P4REN |= SW1; // Enable pullup resistor
+  // Switch1 (SW1)
+  P4SEL0 &= ~SW1;              // SW1 set as I/0
+  P4SEL1 &= ~SW1;              // SW1 set as I/0
+  P4OUT |= SW1;                // Configure pullup resistor
+  P4DIR &= ~SW1;               // Direction = input
+  P4REN |= SW1;                // Enable pullup resistor
   
-  // SW2
-  P4SEL0 &= ~SW2; // SW2 set as I/0
-  P4SEL1 &= ~SW2; // SW2 set as I/0
-  P4OUT |= SW2; // Configure pullup resistor
-  P4DIR &= ~SW2; // Direction = input
-  P4REN |= SW2; // Enable pullup resistor
-  
+  // Switch2 (SW2)
+  P4SEL0 &= ~SW2;              // SW2 set as I/0
+  P4SEL1 &= ~SW2;              // SW2 set as I/0
+  P4OUT |= SW2;                // Configure pullup resistor
+  P4DIR &= ~SW2;               // Direction = input
+  P4REN |= SW2;                // Enable pullup resistor
+
+/*  
   // Interrupt Configuration
-//  P4IES |= SW1; // SW1 Hi/Lo edge interrupt
-//  P4IES |= SW2; // SW2 Hi/Lo edge interrupt
- // P4IFG &= ~SW1; // IFG SW1 cleared 
-  //P4IFG &= ~SW2; // IFG SW2 cleared 
-//  
-//  // Enabling Interrupt 
-  //P4IE |= SW1;  // SW1 interrupt enabled   
-  //P4IE |= SW2;  // SW2 interrupt enabled 
+  //  P4IES |= SW1; // SW1 Hi/Lo edge interrupt
+  //  P4IES |= SW2; // SW2 Hi/Lo edge interrupt
+  //  P4IFG &= ~SW1; // IFG SW1 cleared 
+  //  P4IFG &= ~SW2; // IFG SW2 cleared 
+
+  // Enabling Interrupt 
+  //  P4IE |= SW1;  // SW1 interrupt enabled   
+  //  P4IE |= SW2;  // SW2 interrupt enabled 
+*/
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_Port_J 
 //      Description: Initializes Port J
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_PortJ(void){
   //----------------------------------------------------------------------
   // Pin Name   Function        PJDIR.x PJSEL1.x        PJSEL0.x
@@ -436,37 +441,37 @@ void Init_PortJ(void){
   //            CD9             X       1               1       
   //----------------------------------------------------------------------
   // Port J Pins
-  // LED1 (0x01) 
-  // LED2 (0x02) 
-  // LED3 (0x04) 
-  // LED4 (0x08) 
-  // XINR (0x10) // XINR
-  // XOUTR (0x20) // XOUTR
+  // LED1       (0x01) 
+  // LED2       (0x02) 
+  // LED3       (0x04) 
+  // LED4       (0x08) 
+  // XINR       (0x10)
+  // XOUTR      (0x20)
   //----------------------------------------------------------------------
-  PJSEL0 = CLEAR_REGISTER; // PJ set as I/0
-  PJSEL1 = CLEAR_REGISTER; // PJ set as I/0
+  PJSEL0 = CLEAR_REGISTER;       // PJ set as I/0
+  PJSEL1 = CLEAR_REGISTER;       // PJ set as I/0
   PJOUT = CLEAR_REGISTER; 
-  PJDIR = CLEAR_REGISTER; // Set PJ direction to output
+  PJDIR = CLEAR_REGISTER;        // Set PJ direction to output
   
   PJSEL0 &= ~IOT_FACTORY;
   PJSEL1 &= ~IOT_FACTORY;
   PJOUT &= ~IOT_FACTORY;
-  PJDIR |= IOT_FACTORY; // Set PJ Pin 1 direction to output
+  PJDIR |= IOT_FACTORY;          // Set PJ Pin 1 direction to output
   
   PJSEL0 &= ~IOT_WAKEUP;
   PJSEL1 &= ~IOT_WAKEUP;
   PJOUT &= ~IOT_WAKEUP;
-  PJDIR |= IOT_WAKEUP; // Set PJ Pin 2 direction to output
+  PJDIR |= IOT_WAKEUP;           // Set PJ Pin 2 direction to output
   
   PJSEL0 &= ~IOT_STA_MINIAP;
   PJSEL1 &= ~IOT_STA_MINIAP;
   PJOUT &= ~IOT_STA_MINIAP;
-  PJDIR |= IOT_STA_MINIAP; // Set PJ Pin 3 direction to output
+  PJDIR |= IOT_STA_MINIAP;       // Set PJ Pin 3 direction to output
   
   PJSEL0 &= ~RESET;
   PJSEL1 &= ~RESET;
   PJOUT &= ~RESET;
-  PJDIR |= RESET; // Set P3 Pin 4 direction to output
+  PJDIR |= RESET;               // Set P3 Pin 4 direction to output
   
   // XT1 Setup
   PJSEL0 |= XINR;
@@ -477,13 +482,13 @@ void Init_PortJ(void){
   PJOUT &= ~RESET;
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: Init_ADC 
 //      Description: Initializes ADC Configuration 
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_ADC(void){
    ADC10CTL0 = CLEAR_REGISTER; // Clear ADC10CTL0
    ADC10CTL0 |= ADC10SHT_2;    // 16 ADC clocks

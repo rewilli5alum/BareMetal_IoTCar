@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>1212545046</Checksum>
+        <Checksum>1700717357</Checksum>
     </DebugChecksum>
     <Disassembly>
         <MixedMode>1</MixedMode>
@@ -42,10 +42,7 @@
         <Category2>_ 2</Category2>
     </LogFile>
     <Breakpoints2>
-        <Bp0>_ 0 "STD_CODE2" "{$PROJ_DIR$\main.c}.106.5" 0 0 1 "" 0 ""</Bp0>
-        <Bp1>_ 1 "STD_CODE2" "{$PROJ_DIR$\switch.c}.28.1" 0 0 1 "" 0 ""</Bp1>
-        <Bp2>_ 1 "STD_CODE2" "{$PROJ_DIR$\switch.c}.55.1" 0 0 1 "" 0 ""</Bp2>
-        <Count>3</Count>
+        <Count>0</Count>
     </Breakpoints2>
     <FET>
         <Clock_mode>46</Clock_mode>

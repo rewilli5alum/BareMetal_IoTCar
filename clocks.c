@@ -1,34 +1,42 @@
-//***********************************************************************
-//      Title: clocks.c 
-//      Description: This file contains the clock initializations 
-//      Rachel Williams
-//      September 2015
-//      Built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
-//***********************************************************************
-#include  "msp430.h"
-#include  "functions.h"
-#include  "macros.h"
+//******************************************************************************
+//   Name: clocks.c
+//   Author: Rachel E. Williams
+//   Date Created: September 9 2015 (9/9/2015)
+//   Last Updated: 2/17/2025
+//   Description: This file contains clock configuration and initialization
+//   Originally built with IAR Embedded Workbench Version: V4.10A/W32 (5.40.1)
+//   Updated revision built with IAR Embedded Workbench - MSP430 V8.10.3
+//******************************************************************************  
 
-//***********************************************************************
+// #inclues 
+#include "msp430.h"
+#include "functions.h"
+#include "macros.h"
+
+// Global Variables 
+
+// Constant Variables 
+
+//------------------------------------------------------------------------------
 //      Function name: Five_Msec_Delay
-//      Description: Creates a delay 
+//      Description: Creates a delay of five (5) milliseconds 
 //      Global variables: milli_counter
 //      Local variables: fivemsec
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Five_Msec_Delay(unsigned int fivemsec){
   milli_counter = ORIGINAL;
   while(milli_counter < (fivemsec*FIVE_MSEC));
   milli_counter = ORIGINAL;
 }
 
-//***********************************************************************
+//------------------------------------------------------------------------------
 //      Function name: X_Seconds_Delay
 //      Description: Creates a delay in 1 second intervals  
 //      Global variables: milli_counter
 //      Local variables: sec
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void X_Seconds_Delay(unsigned int sec){
   if(sec < POSIT_10){
     milli_counter = ORIGINAL;
@@ -36,7 +44,8 @@ void X_Seconds_Delay(unsigned int sec){
   }
   milli_counter = ORIGINAL;
 }
-//***********************************************************************
+
+//------------------------------------------------------------------------------
 //      Function name: Init_Clocks
 //      Description: Clock configurations; clock initialization for the 
 //                   program; initial clock configuration, runs 
@@ -47,7 +56,7 @@ void X_Seconds_Delay(unsigned int sec){
 //      Global variables: NONE
 //      Local variables: NONE
 //      Return: VOID
-//***********************************************************************
+//------------------------------------------------------------------------------
 void Init_Clocks(void){
   WDTCTL = WDTPW | WDTHOLD;  // Disable watchdog
 //  PJSEL0 |= XINR;
