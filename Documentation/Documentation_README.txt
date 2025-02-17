@@ -1,0 +1,1 @@
+The datasheets and user manuals are owned by Texas Instruments and STMicroelectronics. The only piece of original work created by myself and teammates is the document titled, "ECE306_WriteUp_Original". 
